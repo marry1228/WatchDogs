@@ -45,30 +45,26 @@ public class BLoginCheckDao {
 			preparedStatement.setString(2, inputPW);
 			resultSet = preparedStatement.executeQuery();
 			
-			while(resultSet.next()) {
-				String bId = resultSet.getString("userid"); 
-				String bTel = resultSet.getString("usertel"); 
-				String bEmail = resultSet.getString("useremail");
-				String bName = resultSet.getString("username"); 
-				Timestamp bDate = resultSet.getTimestamp("userdate"); 
-				
-				bLCDto = new BLoginCheckDto(bId, bTel, bEmail, bName, bDate);
-			}
+			System.out.println("resultset = " + resultSet);
 			
-			String ID = bLCDto.getBname();
-			// 로그인 체크
-			System.out.println(ID); // 임시 디버그용
-			
-			if(ID.trim().equals("")) {
+			if(query.equals("")) {
 				System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
+				System.out.println("bLCDto = " + bLCDto);
 			}else {
-				System.out.println(ID + " 님 로그인 되었습니다. ");
-			}
+				while(resultSet.next()) {
+					String bId = resultSet.getString("userid"); 
+					String bTel = resultSet.getString("usertel"); 
+					String bEmail = resultSet.getString("useremail");
+					String bName = resultSet.getString("username"); 
+					Timestamp bDate = resultSet.getTimestamp("userdate"); 
+					
+					bLCDto = new BLoginCheckDto(bId, bTel, bEmail, bName, bDate);
+				}				
+				System.out.println(bLCDto.getbId() + " 님 로그인 되었습니다. ");
+			}						
 			
 		} catch (Exception e) {
 			System.out.println("에러코드1");
-			
-
 			e.printStackTrace();
 		}finally { // 메모리에서 정리 
 			try {

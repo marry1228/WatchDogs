@@ -34,6 +34,11 @@
 						</span>
 						<input class="w3-input" id="pw" name="pw" type="password" required>
 					</p>
+					<p>
+						<div style="color : red">
+						아이디 또는 비밀번호가 일치하지 않습니다.
+						</div>
+					</p>
 					<p class="w3-center">
 						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Log in</button>
 						<button type="button" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round" onclick="history.go(-1)">Cancel</button>
