@@ -1,12 +1,12 @@
-package com.jsplec.bbs.command;
+package com.watchdogs.command.home;
 
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jsplec.bbs.dao.BDao;
-import com.jsplec.bbs.dto.BDto;
+import com.jsplec.bbs.dao.BListDao;
+import com.jsplec.bbs.dto.BListDto;
 
 public class BListCommand implements BCommand {
 
@@ -14,10 +14,9 @@ public class BListCommand implements BCommand {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// DB에서 전체정보 읽어서 attribute로 jsp에 전달하기
 
-			BDao bDao = new BDao();
-			ArrayList<BDto> dtos = bDao.list();
+			BListDao bDao = new BListDao();
+			ArrayList<BListDto> dtos = bDao.list();
 			
-			System.out.println(" Id = " + dtos); // 테스트 용
 			request.setAttribute("list", dtos);
 			
 	}

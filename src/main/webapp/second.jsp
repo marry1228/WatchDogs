@@ -19,7 +19,7 @@
 		</tr>
 		</c:forEach>
 		<tr>
-			<td colspan="4"><a href="home.WDogs">두번 째 화면</a></td>
+			<td colspan="4"><a href="home.wd">홈 화면</a></td>
 		</tr>
 			
 	</table>

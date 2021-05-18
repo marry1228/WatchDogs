@@ -2,19 +2,21 @@ package com.jsplec.bbs.dto;
 
 import java.sql.Timestamp;
 
-public class BDto { // 자바에서 Bin 역할. MVC 에서는 Dto
+public class BListDto { // 자바에서 Bin 역할. MVC 에서는 Dto
 	String bId;
 
 	
-	public BDto() {
+	public BListDto() {
 		// TODO Auto-generated constructor stub
 	}
 
 	// Generate constructor using fields 사용했음! ; 오버로드
-	public BDto(String bId) {
+	public BListDto(String bId) {
 		super();
 		this.bId = bId;
 	}
+	
+	
 
 	public String getbId() {
 		return bId;

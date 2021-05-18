@@ -10,13 +10,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.jsplec.bbs.dto.BDto;
+import com.jsplec.bbs.dto.BListDto;
 
-public class BDao {
+public class BListDao {
 
 	DataSource dataSource;
 	
-	public BDao() {
+	public BListDao() {
 		try {
 			Context context = new InitialContext();
 			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/mvc");
@@ -25,8 +25,8 @@ public class BDao {
 		}
 	}
 	
-	public ArrayList<BDto> list() {
-		ArrayList<BDto> dtos = new ArrayList<BDto>();
+	public ArrayList<BListDto> list() {
+		ArrayList<BListDto> dtos = new ArrayList<BListDto>();
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -44,7 +44,7 @@ public class BDao {
 
 				System.out.println(" Id = " + bId); // 테스트 용
 				
-				BDto dto = new BDto(bId);
+				BListDto dto = new BListDto(bId);
 				dtos.add(dto);
 				
 				

@@ -1,4 +1,4 @@
-package com.jsplec.bbs.command;
+package com.watchdogs.command.home;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

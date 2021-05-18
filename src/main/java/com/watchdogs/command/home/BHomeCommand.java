@@ -1,4 +1,4 @@
-package com.jsplec.bbs.command;
+package com.watchdogs.command.home;
 
 import java.util.ArrayList;
 

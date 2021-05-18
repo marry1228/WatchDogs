@@ -10,6 +10,8 @@
 </head>
 <body>
 	<h3>메인 페이지 입니다!</h3>
-		<a href="list.WDogs">첫 화면!</a>
+		<a href="list.wd">첫 화면!</a>
+		<br>
+		<a href="login.wd">로그인 화면!</a>
 </body>
 </html>
