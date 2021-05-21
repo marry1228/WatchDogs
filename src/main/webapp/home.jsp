@@ -42,6 +42,7 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
 <body>
 
 <div id="hello_wrap">
+
 <!-- 상단 시작 { -->
 <div id="hd">
 
@@ -183,6 +184,7 @@ $(document).ready(function() {
     });
     </script>
 </div>
+
 
 	<!-- 중간 내용 시작 -->
 <div id="wrapper">

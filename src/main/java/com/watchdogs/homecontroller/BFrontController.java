@@ -70,7 +70,7 @@ public class BFrontController extends HttpServlet {
 				viewPage ="home.jsp";
 				break; 
 				
-	      case("/login.wd"):  // 로그인 화면
+	      case("/login.wd"):  // 로그인 화면 + 회원가입 포함
 				command = new BLoginCommand();
 				command.execute(request, response);
 				viewPage ="login.jsp";
@@ -86,10 +86,7 @@ public class BFrontController extends HttpServlet {
 	      case("/loginfailure.wd"):  // 로그인 실패 시 화면 
 	    	  	viewPage ="loginfailure.jsp";
 	      		break;
-	      		
-	      case("/signup.wd"):  // 회원가입 페이지
-				viewPage ="signup.jsp";
-				break;		
+	
 	      case("/lookupid.wd"):  // 아이디 찾기 페이지
 	    	  viewPage ="lookupid.jsp";
 	      		break;		
@@ -97,7 +94,7 @@ public class BFrontController extends HttpServlet {
 	    	  viewPage ="lookuppw.jsp";
 	      		break;	
 	      		
-	      case("/adopt.wd"):  // 비밀번호 찾기 페이지
+	      case("/adopt.wd"):  // 입양 페이지
 	    	  viewPage ="adoptpage.jsp";
 	      break;		
 	      }
