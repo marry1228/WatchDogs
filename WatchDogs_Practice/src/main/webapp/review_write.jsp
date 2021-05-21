@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +23,7 @@
 		}
 		form.submit();
 	}
+	
 </script>
 </head>
 <body>
@@ -28,7 +31,7 @@
 	<div style="width: 677px; height: 50px; background-color: orange;"></div>
 	
 	 <table  border="0" style="background-color: #eeeeee; text-align: center;">
-		<form name="writeForm"  action="review_write.wd" method="post">
+		<form name="writeForm"  action="review_write.wd" method="post" enctype="multipart/form-data">
 			<thead>
 				<tr>
 					<th colspan="2" style="background-color: #FFEBCD; text-align: center;">후기글 작성</th>
@@ -65,7 +68,7 @@
 				<td>파일 첨부 : </td>
 				<td><input type="file" name="file"> 
 				<!-- 사용자가 전송한(업로드한) 파일이 name명 대로 (file) 전송됨 -->
-				<input type="button"  value="파일첨부" onclick="location.href='fileupload.jsp'"><br></td>
+				<input type="button"  value="파일첨부" ><br></td>
 			</tr>
 			<!-- 입력이 안됐을때 첫 화면으로 돌아가게 하기 위해서 하이퍼 링크 달아주기 -->
 			<tr>
@@ -79,11 +82,11 @@
 	</table>
 		
 	
-	<form action="fileupload.jsp"  method="post" enctype="multipart/form-data">
+	<!-- <form action="fileupload.jsp"  method="post" enctype="multipart/form-data">
 		파일 첨부 : <input type="file" name="file"> <br>  
-				<!-- 사용자가 전송한(업로드한) 파일이 name명 대로 (file) 전송됨 -->
+				사용자가 전송한(업로드한) 파일이 name명 대로 (file) 전송됨
 				<input type="submit"  value="파일첨부" ><br>
-	</form>
+	</form> -->
 
 
 

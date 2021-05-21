@@ -36,7 +36,7 @@ public class ReviewDao {
 	 * 2021.05.17 17:45 완성
 	 */
 	
-	public void reviewWrite(int docid,String doctitle, String doccontent) { //여기 메소드에서 아이디는  사용할 필요는 없다
+	public void reviewWrite(String docid,String doctitle, String doccontent ,String file) { //여기 메소드에서 아이디는  사용할 필요는 없다
 		// 입력해둔 아이디가 하나있고, 그 아이디와 같아야 입력됨! (임시아이디)
 		String user_userid = "he"; 
 		
@@ -47,7 +47,7 @@ public class ReviewDao {
 		try { 
 			connection = dataSource.getConnection();
 			
-			String query = "insert into document (doctitle, doccontent, docdate, user_userid) values (?, ?, now(), ?)";
+			String query = "insert into document (doctitle, doccontent, docdate, user_userid, filepath) values (?, ?, now(), ?, ?)";
 			
 			preparedStatement = connection.prepareStatement(query);
 			
@@ -55,7 +55,7 @@ public class ReviewDao {
 			preparedStatement.setString(1, doctitle);
 			preparedStatement.setString(2, doccontent);
 			preparedStatement.setString(3, user_userid);
-//			preparedStatement.setString(4, filename);
+			preparedStatement.setString(4, file);
 //			preparedStatement.setString(5, filerealname);
 			
 			

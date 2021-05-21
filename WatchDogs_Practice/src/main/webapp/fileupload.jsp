@@ -9,7 +9,7 @@
 	
     // 파일이 저장되는 경로
     String path = request.getSession().getServletContext().getRealPath("fileFolder"); 
-
+	System.out.println("path");
   // String path = request.getRealPath("fileUpload");
   //String path = request.getRealPath("save");
   	
@@ -22,15 +22,20 @@
     // 실제 파일 업로드하는 과정
     try{
         MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
-    
 		//실제 path, max size, defaulFileRenamePolicy : 오리지날파일 어떻게 하겠느냐 : 파일뒤에 1,2 3 붙음 (덮어씌우기 방지 )
-       
+		//값 받아와보기
+		String docid = multi.getParameter("docid") ;
+		String doctitle = multi.getParameter("doctitle");
+		String doccontent = request.getParameter("doccontent");
+		
+		
 		//파일 이름 가져오기
         Enumeration<String> files = multi.getFileNames();
         String str = (String)files.nextElement(); // 파일 이름을 받아와 string으로 저장
 
         file = multi.getFilesystemName(str); // 업로드 된 파일 이름 가져옴
         originalFile = multi.getOriginalFileName(str); // 원래의 파일이름 가져옴
+		session.setAttribute("file", file);
 
     } catch (Exception e) {
         e.printStackTrace();
@@ -42,19 +47,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
 
-</head>
+	function WinClose()
+	 {
+	   window.open('','_self').close();     
+	}
+</script>
 <body>
-	<h3>파일 업로드 성공</h3>
+
 	
-	사용자 : <input name="user" value="사용자"><br/> 
-	문서제목 : <input name="title" value="문서 제목"><br/>
+	<h3>파일 업로드 성공</h3>
+	번호 : <input name="user" value="사용자"><br/> 
+	제목 : 
 
 	<form action="fileupload.jsp"  method="post" enctype="multipart/form-data">
 		파일 첨부 : <input type="file" name="file"> <br>  
 		<!-- 사용자가 전송한(업로드한) 파일이 name명 대로 (file) 전송됨 -->
-		<input type="submit"  value="파일첨부" accept="image*" ><br>
+		<input type="submit"  value="파일첨부" ><br>
 	</form>
-	<input type="button" value="확인" onclick="window.open("about:blank", "_self").close()">
+	<input type="button" value="확인" onclick="window.close()">
 </body>
 </html>
