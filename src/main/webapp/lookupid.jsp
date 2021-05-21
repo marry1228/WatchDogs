@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>404 에러 페이지</title>
+<title>아이디 찾기</title>
 </head>
 <body>
-<h1> 404에러 발생 시 이동할 페이지 입니다. </h1>	
+<h1> 아이디 찾기</h1>	
 </body>
 </html>

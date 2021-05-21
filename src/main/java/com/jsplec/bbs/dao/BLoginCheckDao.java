@@ -28,8 +28,9 @@ public class BLoginCheckDao {
 		}
 	}
 	
-	public BLoginCheckDto login(String inputID, String inputPW) {
-		BLoginCheckDto bLCDto = null;
+	public String logincheck(String inputID, String inputPW) {
+		String bPW = "";
+		String result = "";
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -37,34 +38,27 @@ public class BLoginCheckDao {
 		
 		try {
 			connection = dataSource.getConnection();
-
-			String query = "select userid, usertel, useremail, username, userdate from user where userid = ? and userPw = ? " ;
+			String query = "select userpw from user where userid = ?" ;
 			
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, inputID);
-			preparedStatement.setString(2, inputPW);
 			resultSet = preparedStatement.executeQuery();
 			
-			System.out.println("resultset = " + resultSet);
+			while(resultSet.next()) {
+				bPW = resultSet.getString("userpw"); 
+			}
+		
+			System.out.println("입력한 비밀번호 = " + inputPW +" 그리고 받은 비밀번호 = " + bPW );	
 			
-			if(query.equals("")) {
-				System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
-				System.out.println("bLCDto = " + bLCDto);
+			if(inputPW.equals(bPW)) {
+				result = "success";
 			}else {
-				while(resultSet.next()) {
-					String bId = resultSet.getString("userid"); 
-					String bTel = resultSet.getString("usertel"); 
-					String bEmail = resultSet.getString("useremail");
-					String bName = resultSet.getString("username"); 
-					Timestamp bDate = resultSet.getTimestamp("userdate"); 
-					
-					bLCDto = new BLoginCheckDto(bId, bTel, bEmail, bName, bDate);
-				}				
-				System.out.println(bLCDto.getbId() + " 님 로그인 되었습니다. ");
-			}						
+				result = "failure";
+			}
 			
 		} catch (Exception e) {
 			System.out.println("에러코드1");
+			result = "fail";
 			e.printStackTrace();
 		}finally { // 메모리에서 정리 
 			try {
@@ -75,6 +69,6 @@ public class BLoginCheckDao {
 				e.printStackTrace();
 			}
 		}
-		return bLCDto;
+		return result;
 	}
 }

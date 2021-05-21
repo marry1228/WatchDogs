@@ -41,13 +41,9 @@ public class BListDao {
 			
 			while(resultSet.next()) {
 				String bId = resultSet.getString("userid"); // 속성 명에 유의! 
-
-				System.out.println(" Id = " + bId); // 테스트 용
-				
 				BListDto dto = new BListDto(bId);
 				dtos.add(dto);
-				
-				
+
 			}
 			
 		} catch (Exception e) {

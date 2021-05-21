@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>MVC 게시판</title>
+<link rel="stylesheet" href="./style.css"> <!-- 외부 css 선언 -->
 </head>
 <body>
 	<%

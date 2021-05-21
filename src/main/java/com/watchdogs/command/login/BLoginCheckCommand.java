@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jsplec.bbs.dao.BListDao;
 import com.jsplec.bbs.dao.BLoginCheckDao;
 import com.jsplec.bbs.dto.BListDto;
 import com.jsplec.bbs.dto.BLoginCheckDto;
+import com.mysql.cj.Session;
 import com.watchdogs.command.home.BCommand;
 
 public class BLoginCheckCommand implements BCommand {
@@ -21,9 +23,11 @@ public class BLoginCheckCommand implements BCommand {
 		String inputPW = request.getParameter("pw");
 		
 		BLoginCheckDao bLCDao = new BLoginCheckDao();
-		BLoginCheckDto bLCDto =  bLCDao.login(inputID, inputPW);
+		String result =  bLCDao.logincheck(inputID, inputPW);
 		
-		request.setAttribute("content_view", bLCDto);
+		System.out.println("result = " + result);
+		
+		HttpSession hSession = request.getSession(true); // Test2
+		hSession.setAttribute("result", result);
 	}
-
 }

@@ -1,4 +1,4 @@
-package com.jsplec.bbs.homecontroller;
+package com.watchdogs.homecontroller;
 
 import java.io.IOException;
 
@@ -59,32 +59,50 @@ public class BFrontController extends HttpServlet {
 	      String viewPage = null;
 	      BCommand command = null;
 	      
-	      System.out.println(uri);
-	      System.out.println(conPath);
-	      System.out.println(com); // 체크 용 
+	      System.out.println("getRequestURI = " + uri);
+	      System.out.println("getContextPath = " + conPath);
+	      System.out.println("URI - Path" + com); // 체크 용 
 	      
 	      switch(com) {
-	      case("/home.wd"):  // 첫 화면
+	      case("/home.wd"):  // 첫 화면, 메인 페이지
 				command = new BHomeCommand();
 				command.execute(request, response);
 				viewPage ="home.jsp";
 				break; 
-	      case("/list.wd"):  // 두번 째 화면 (DB에서 ID 출력)
-				command = new BListCommand();
-				command.execute(request, response);
-				viewPage ="second.jsp";
-				break;
+				
 	      case("/login.wd"):  // 로그인 화면
 				command = new BLoginCommand();
 				command.execute(request, response);
 				viewPage ="login.jsp";
 				break;			
-	      case("/logincheck.wd"):  // 로그인 체크 화면 
+	      case("/logincheck.wd"):  // 로그인 중간 과정
 				command = new BLoginCheckCommand();
 				command.execute(request, response);
 				viewPage ="logincheck.jsp";
 				break;
+	      case("/loginsuccess.wd"):  // 로그인 성공 시 홈 화면으로
+	    	  	viewPage ="home.jsp";
+	      		break;
+	      case("/loginfailure.wd"):  // 로그인 실패 시 화면 
+	    	  	viewPage ="loginfailure.jsp";
+	      		break;
+	      		
+	      case("/signup.wd"):  // 회원가입 페이지
+				viewPage ="signup.jsp";
+				break;		
+	      case("/lookupid.wd"):  // 아이디 찾기 페이지
+	    	  viewPage ="lookupid.jsp";
+	      		break;		
+	      case("/lookuppw.wd"):  // 비밀번호 찾기 페이지
+	    	  viewPage ="lookuppw.jsp";
+	      		break;	
+	      		
+	      case("/adopt.wd"):  // 비밀번호 찾기 페이지
+	    	  viewPage ="adoptpage.jsp";
+	      break;		
 	      }
+	      
+	      
 	   
 	      RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 	      dispatcher.forward(request, response);
