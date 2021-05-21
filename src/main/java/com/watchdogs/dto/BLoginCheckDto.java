@@ -1,4 +1,4 @@
-package com.jsplec.bbs.dto;
+package com.watchdogs.dto;
 
 import java.sql.Timestamp;
 

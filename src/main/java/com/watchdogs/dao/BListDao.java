@@ -1,4 +1,4 @@
-package com.jsplec.bbs.dao;
+package com.watchdogs.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,16 +10,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.jsplec.bbs.dto.BListDto;
-import com.jsplec.bbs.dto.BLoginCheckDto;
+import com.watchdogs.dto.BListDto;
 
-public class BLoginCheckDao {
+public class BListDao {
 
 	DataSource dataSource;
 	
-	public BLoginCheckDao() {
-		// TODO Auto-generated constructor stub
-	
+	public BListDao() {
 		try {
 			Context context = new InitialContext();
 			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/mvc");
@@ -28,9 +25,8 @@ public class BLoginCheckDao {
 		}
 	}
 	
-	public String logincheck(String inputID, String inputPW) {
-		String bPW = "";
-		String result = "";
+	public ArrayList<BListDto> list() {
+		ArrayList<BListDto> dtos = new ArrayList<BListDto>();
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -38,27 +34,19 @@ public class BLoginCheckDao {
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "select userpw from user where userid = ?" ;
 			
+			String query = "select userid from user"; // 속성명에 유의! 
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, inputID);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
-				bPW = resultSet.getString("userpw"); 
-			}
-		
-			System.out.println("입력한 비밀번호 = " + inputPW +" 그리고 받은 비밀번호 = " + bPW );	
-			
-			if(inputPW.equals(bPW)) {
-				result = "success";
-			}else {
-				result = "failure";
+				String bId = resultSet.getString("userid"); // 속성 명에 유의! 
+				BListDto dto = new BListDto(bId);
+				dtos.add(dto);
+
 			}
 			
 		} catch (Exception e) {
-			System.out.println("에러코드1");
-			result = "fail";
 			e.printStackTrace();
 		}finally { // 메모리에서 정리 
 			try {
@@ -69,6 +57,7 @@ public class BLoginCheckDao {
 				e.printStackTrace();
 			}
 		}
-		return result;
+		return dtos;
+	
 	}
 }

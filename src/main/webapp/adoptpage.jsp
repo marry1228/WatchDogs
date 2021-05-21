@@ -51,7 +51,7 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
         <ul>                    
             <li><a href="login.wd"><b>로그인</b></a></li> 
             <!-- <li class="tnb_cart"><a href="http://dmshop.kr/shop/cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 참고용 장바구니?</a></li> -->
-            <li class="tnb_bookmark"><a href="/index.php" ><i class="fas fa-home"></i> HOME<span class="st_bg"></span></li>
+            <li class="tnb_bookmark"><a href="home.wd" ><i class="fas fa-home"></i> HOME<span class="st_bg"></span></li>
 		</ul>
     </div>
 

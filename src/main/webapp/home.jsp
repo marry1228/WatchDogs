@@ -104,22 +104,21 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
             <li><a href="" class="gnb_2da">목록3</a></li>
     </ul></div></div></li>
 <li class="gnb_1dli" style="z-index:997">
-    <a href="" class="gnb_1da gnb_1dam">훈련사 소개</a>
+    <a href="trainerlist.wd" class="gnb_1da gnb_1dam">훈련사 소개</a>
     <div class="gnb_2dul gnb_2dli" style="z-index:997"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">훈련사 소개</strong><ul>        
             <li><a href="" class="gnb_2da">목록1</a></li>
             <li><a href="" class="gnb_2da">목록2</a></li>
             <li><a href="" class="gnb_2da">목록3</a></li>
     </ul></div></div></li>
 <li class="gnb_1dli" style="z-index:996">
-    <a href="" class="gnb_1da gnb_1dam">게시판</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:996"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">게시판</strong><ul>        <li><a href="http://dmshop.kr/shop/list.php?ca_id=6010" class="gnb_2da">신발</a></li>
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
+    <a href="notice.wd" class="gnb_1da gnb_1dam">게시판</a>
+    <div class="gnb_2dul gnb_2dli" style="z-index:996"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">게시판</strong><ul>        
+            <li><a href="noticelist.wd" class="gnb_2da">공지</a></li>
+            <li><a href="reviewlist.wd" class="gnb_2da">후기</a></li>
     </ul></div></div></li>
 <li class="gnb_1dli" style="z-index:995">
-    <a href="" class="gnb_1da gnb_1dam">마이 페이지</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:995"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">마이 페이지</strong><ul>        <li><a href="http://dmshop.kr/shop/list.php?ca_id=7010" class="gnb_2da">가구</a></li>
+    <a href="admin.wd" class="gnb_1da gnb_1dam">마이 페이지 (임시 어드민)</a>
+    <div class="gnb_2dul gnb_2dli" style="z-index:995"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">마이 페이지</strong><ul>        
             <li><a href="" class="gnb_2da">목록1</a></li>
             <li><a href="" class="gnb_2da">목록2</a></li>
             <li><a href="" class="gnb_2da">목록3</a></li>

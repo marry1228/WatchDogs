@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jsplec.bbs.dao.BListDao;
-import com.jsplec.bbs.dto.BListDto;
+import com.watchdogs.dao.BListDao;
+import com.watchdogs.dto.BListDto;
 
 public class BListCommand implements BCommand {
 

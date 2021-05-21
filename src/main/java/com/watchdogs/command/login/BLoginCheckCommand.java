@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jsplec.bbs.dao.BListDao;
-import com.jsplec.bbs.dao.BLoginCheckDao;
-import com.jsplec.bbs.dto.BListDto;
-import com.jsplec.bbs.dto.BLoginCheckDto;
-import com.mysql.cj.Session;
+
 import com.watchdogs.command.home.BCommand;
+import com.watchdogs.dao.BListDao;
+import com.watchdogs.dao.BLoginCheckDao;
+import com.watchdogs.dto.BListDto;
+import com.watchdogs.dto.BLoginCheckDto;
 
 public class BLoginCheckCommand implements BCommand {
 
