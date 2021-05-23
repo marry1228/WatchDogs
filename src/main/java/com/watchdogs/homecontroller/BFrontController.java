@@ -26,6 +26,12 @@ import com.watchdogs.command.admin.UserDeleteCommand;
 import com.watchdogs.command.admin.UserInsertCommand;
 import com.watchdogs.command.admin.UserUpdateCommand;
 import com.watchdogs.command.admin.UserUpdateOpenCommand;
+import com.watchdogs.command.adopt.BAdoptcommand;
+import com.watchdogs.command.adopt.BAdoptcomplete_02coammand;
+import com.watchdogs.command.adopt.BAdoptcompletecoammand;
+import com.watchdogs.command.adopt.BAdoptproceeding_02command;
+import com.watchdogs.command.adopt.BAdoptproceedingcommand;
+import com.watchdogs.command.adopt.BAdoptwait_02command;
 import com.watchdogs.command.home.BCommand;
 import com.watchdogs.command.home.BHomeCommand;
 import com.watchdogs.command.home.BListCommand;
@@ -99,6 +105,8 @@ public class BFrontController extends HttpServlet {
 				viewPage ="home.jsp";
 				break; 
 				
+				
+				
 //			--로그인 기능 시작!			
 	      case("/login.wd"):  // 로그인 화면 + 회원가입 포함
 				command = new BLoginCommand();
@@ -124,13 +132,34 @@ public class BFrontController extends HttpServlet {
 	      		break;	
 //			--로그인 기능 끝!	 
 	      
+	      		
+	      		
 //			--메인 메뉴 리스트 시작!
-	      case("/adopt.wd"):  // 입양 페이지
-	    	  viewPage ="adoptpage.jsp";
-	      break;
+
+	      case("/adoptpage.wd"):  // 입양 페이지
+	    	  	viewPage ="adoptpage.jsp";
+	      		break;	      
+	      case("/trainerlist.wd"):  // 훈련사 리스트 페이지
+	    	  	command = new TrainerListOpenCommand();
+	      		command.execute(request, response);
+	      		viewPage ="trainerList.jsp";
+	      		break;	      		
 	      case("/notice.wd"):  // 게시판 페이지
 	    	  viewPage ="notice.jsp";
-	      break;
+	      break;	      
+	      case("/admin.wd"):  // admin 페이지
+	    	  	command = new AdminOpenCommand();
+	      		command.execute(request, response);
+				viewPage ="admin.jsp";
+				break;
+	     
+//				--메인 메뉴 리스트 끝!
+			
+				
+				
+				
+//				--게시판 페이지 시작!
+	      
 	      case("/reviewlist.wd"): // 게시판 후기 페이지
 			   command = new ReviewListCommand();
 			   command.execute(request, response);
@@ -182,21 +211,11 @@ public class BFrontController extends HttpServlet {
 				viewPage = "notice_detailview.jsp";
 				break;
 				
-	      case("/trainerlist.wd"):  // 트레이너 리스트 페이지
-	    	  	command = new TrainerListOpenCommand();
-	      		command.execute(request, response);
-	      		viewPage ="trainerList.jsp";
-	      		break;
-  			
-//			--메인 메뉴 리스트 끝! 
+//				--게시판 페이지 끝!
+				
 	      
 	      
-//			--어드민 페이지 시작!
-	      case("/admin.wd"):  
-	    	  	command = new AdminOpenCommand();
-	      		command.execute(request, response);
-				viewPage ="admin.jsp";
-				break;
+//			--트레이너 페이지 시작!
 
 	      case("/trainerUpdateOpen.wd"):  
 	    	  	command = new TrainerUpdateOpenCommand();
@@ -221,7 +240,12 @@ public class BFrontController extends HttpServlet {
 	      		command.execute(request, response);
     			viewPage ="admin.wd";
     			break;
+    			
+//    			--트레이너 페이지 끝!
+    			
+    			
 		
+//    			-- 어드민_강아지 관리 기능 시작! 			
 	      case("/dogUpdateOpen.wd"):  
 	    	  	command = new DogUpdateOpenCommand();
 	      		command.execute(request, response);
@@ -245,7 +269,10 @@ public class BFrontController extends HttpServlet {
 	      		command.execute(request, response);
 	      		viewPage ="admin.wd";
 	      		break;
+//    			-- 어드민_강아지 관리 기능 끝! 		      		
 	      		
+	      		
+//    			-- 어드민_게시판(공지, 리뷰) 관리 기능 시작! 		      		
 	      case("/documentUpdateOpen.wd"):  
 	    	  	command = new DocumentUpdateOpenCommand();
 	      		command.execute(request, response);
@@ -269,7 +296,11 @@ public class BFrontController extends HttpServlet {
 	      		command.execute(request, response);
 	      		viewPage ="admin.wd";
 	      		break;
+//    			-- 어드민_게시판(공지, 리뷰) 관리 기능 끝! 		       		
 	      		
+	      		
+	      		
+//    			-- 어드민_유저 관리 기능 시작! 		 
 	      case("/userUpdateOpen.wd"):  
 	    	  	command = new UserUpdateOpenCommand();
 	      		command.execute(request, response);
@@ -293,13 +324,50 @@ public class BFrontController extends HttpServlet {
 	      		command.execute(request, response);
 	      		viewPage ="admin.wd";
 	      		break;
-//				--어드민 페이지 끝!	      		
+//    			-- 어드민_유저 관리 기능 끝!      		
+	    
+
 	      		
-    			
+//	      		-- 입양 페이지 시작!
+	      case("/adopt.wd") :     // 입양 카테고리 대기 화면으로이동
+	      	  command = new BAdoptcommand() ;
+	      	  viewPage = "adoptwait.jsp";
+	          command.execute(request, response);
+	          break;	          
+	      case("/adoptwait_02.wd") :   // 입양카테고리 대기 강아지 상세정보
+		      command = new BAdoptwait_02command() ;
+		      viewPage = "adoptwait_02.jsp";
+		      command.execute(request, response);
+		      break;
+	      case("/adoptapply.wd") :    // 입양 신청시 대기에서 진행으로 바꿔주기
+		      command = new BAdoptcommand() ;
+		      viewPage = "adoptapply.jsp";
+		      command.execute(request, response);
+		      break;
+	      case("/adoptcomplete.wd") :                    // 입양카테고리 완료 강아지 상세정보
+	    	  command = new BAdoptcompletecoammand() ;
+		      viewPage = "adoptcomplete.jsp";
+		      command.execute(request, response);
+		      break;	      
+	      case("/adoptcomplete_02.wd") :   // 입양카테고리 완료 강아지 상세정보
+		      command = new BAdoptcomplete_02coammand() ;
+		      viewPage = "adoptcomplete_02.jsp";
+		      command.execute(request, response);
+		      break;
+	      case("/adoptproceeding.wd") :                 // 입양카테고리 진행 강아지 상세정보
+		      command = new BAdoptproceedingcommand() ;
+		      viewPage = "adoptproceeding.jsp";
+		      command.execute(request, response);
+		      break;
+	      case("/adoptproceeding_02.wd") :                 // 입양카테고리 진행 강아지 상세정보
+	    	  command = new BAdoptproceeding_02command() ;
+		      viewPage = "adoptproceeding_02.jsp";
+		      command.execute(request, response);
+		      break;	
+//	      		-- 입얍 페이지 끝!
+		    
 	      }
 	      
-	      
-	   
 	      RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 	      dispatcher.forward(request, response);
 	   }

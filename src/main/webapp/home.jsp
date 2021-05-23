@@ -79,55 +79,61 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
                 return true;
             }
             </script> -->
-     		
-        </div>		
-
-    </div>
-    <nav class="nav">
+            
+            
+        <nav class="nav">
         <div id="gnb">
             <h2>사이트 카테고리</h2>
             <ul id="gnb_1dul">
          
-<li class="gnb_1dli" style="z-index:999">
-    <a href="" class="gnb_1da gnb_1dam">소개</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:999"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">소개</strong><ul>       
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
-
-    </ul></div></div></li>
-<li class="gnb_1dli" style="z-index:998">
-    <a href="adopt.wd" class="gnb_1da gnb_1dam">입양</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:998"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">입양</strong><ul>      
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
-    </ul></div></div></li>
-<li class="gnb_1dli" style="z-index:997">
-    <a href="trainerlist.wd" class="gnb_1da gnb_1dam">훈련사 소개</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:997"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">훈련사 소개</strong><ul>        
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
-    </ul></div></div></li>
-<li class="gnb_1dli" style="z-index:996">
-    <a href="notice.wd" class="gnb_1da gnb_1dam">게시판</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:996"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">게시판</strong><ul>        
-            <li><a href="noticelist.wd" class="gnb_2da">공지</a></li>
-            <li><a href="reviewlist.wd" class="gnb_2da">후기</a></li>
-    </ul></div></div></li>
-<li class="gnb_1dli" style="z-index:995">
-    <a href="admin.wd" class="gnb_1da gnb_1dam">마이 페이지 (임시 어드민)</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:995"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">마이 페이지</strong><ul>        
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
-    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:999">
+			    <a href="" class="gnb_1da gnb_1dam">소개</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:999"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">소개</strong><ul>       
+			            <li><a href="" class="gnb_2da">목록1</a></li>
+			            <li><a href="" class="gnb_2da">목록2</a></li>
+			            <li><a href="" class="gnb_2da">목록3</a></li>
+			
+			    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:998">
+			    <a href="adoptpage.wd" class="gnb_1da gnb_1dam">입양</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:998"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">입양</strong><ul>      
+			            <li><a href="" class="gnb_2da">목록1</a></li>
+			            <li><a href="" class="gnb_2da">목록2</a></li>
+			            <li><a href="" class="gnb_2da">목록3</a></li>
+			    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:997">
+			    <a href="trainerlist.wd" class="gnb_1da gnb_1dam">훈련사 소개</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:997"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">훈련사 소개</strong><ul>        
+			            <li><a href="" class="gnb_2da">목록1</a></li>
+			            <li><a href="" class="gnb_2da">목록2</a></li>
+			            <li><a href="" class="gnb_2da">목록3</a></li>
+			    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:996">
+			    <a href="notice.wd" class="gnb_1da gnb_1dam">게시판</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:996"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">게시판</strong><ul>        
+			            <li><a href="noticelist.wd" class="gnb_2da">공지</a></li>
+			            <li><a href="reviewlist.wd" class="gnb_2da">후기</a></li>
+			    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:995">
+			    <a href="admin.wd" class="gnb_1da gnb_1dam">마이 페이지 (임시 어드민)</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:995"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">마이 페이지</strong><ul>        
+			            <li><a href="" class="gnb_2da">목록1</a></li>
+			            <li><a href="" class="gnb_2da">목록2</a></li>
+			            <li><a href="" class="gnb_2da">목록3</a></li>
+			    </ul></div></div></li>
 
             </ul>
         </div>
 
-    </nav>
+    	</nav>
+            
+    </div>
+        
+	
+        	
+
+    </div>
+    
 	
 	
 	<style>
@@ -140,9 +146,10 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
 	
 	<section id="must_read">
 	    <h3>※ 강조할 <strong>알림</strong>, 또는 <strong>공지사항</strong> 이 있을 경우 사용할 공간.</h3>
+
 	</section>
 	
-	 	
+	
 <script type="text/javascript" src="/js/jquery.touchSlider.js"></script>
 <script type="text/javascript">
 //<![CDATA[
@@ -190,9 +197,8 @@ $(document).ready(function() {
 
 
 	<div id="container">
-                
-	
-		내용 들어갈 곳
+   		<br>
+		<!-- 임시!!!!! --> <a href="adoptproceeding.jsp">정평 테스트 화면!</a>
 
 
 	</div>

@@ -42,9 +42,9 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
 <body>
 
 <div id="hello_wrap">
+
 <!-- 상단 시작 { -->
-<div id="hd">
-    
+<div id="hd">    
 
     <div id="tnb">
         <h3>메뉴</h3>
@@ -79,8 +79,8 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
                 return true;
             }
             </script> -->
-     		
-        </div>		
+        </div>
+        		
 
     </div>
     <nav class="nav">
@@ -88,42 +88,42 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
             <h2>사이트 카테고리</h2>
             <ul id="gnb_1dul">
          
-<li class="gnb_1dli" style="z-index:999">
-    <a href="" class="gnb_1da gnb_1dam">소개</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:999"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">소개</strong><ul>       
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
-
-    </ul></div></div></li>
-<li class="gnb_1dli" style="z-index:998">
-    <a href="adopt.wd" class="gnb_1da gnb_1dam">입양</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:998"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">입양</strong><ul>      
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
-    </ul></div></div></li>
-<li class="gnb_1dli" style="z-index:997">
-    <a href="" class="gnb_1da gnb_1dam">훈련사 소개</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:997"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">훈련사 소개</strong><ul>        
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
-    </ul></div></div></li>
-<li class="gnb_1dli" style="z-index:996">
-    <a href="" class="gnb_1da gnb_1dam">게시판</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:996"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">게시판</strong><ul>        <li><a href="http://dmshop.kr/shop/list.php?ca_id=6010" class="gnb_2da">신발</a></li>
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
-    </ul></div></div></li>
-<li class="gnb_1dli" style="z-index:995">
-    <a href="" class="gnb_1da gnb_1dam">마이 페이지</a>
-    <div class="gnb_2dul gnb_2dli" style="z-index:995"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">마이 페이지</strong><ul>        <li><a href="http://dmshop.kr/shop/list.php?ca_id=7010" class="gnb_2da">가구</a></li>
-            <li><a href="" class="gnb_2da">목록1</a></li>
-            <li><a href="" class="gnb_2da">목록2</a></li>
-            <li><a href="" class="gnb_2da">목록3</a></li>
-    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:999">
+			    <a href="" class="gnb_1da gnb_1dam">소개</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:999"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">소개</strong><ul>       
+			            <li><a href="" class="gnb_2da">목록1</a></li>
+			            <li><a href="" class="gnb_2da">목록2</a></li>
+			            <li><a href="" class="gnb_2da">목록3</a></li>
+			
+			    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:998">
+			    <a href="adopt.wd" class="gnb_1da gnb_1dam">입양</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:998"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">입양</strong><ul>      
+			            <li><a href="" class="gnb_2da">목록1</a></li>
+			            <li><a href="" class="gnb_2da">목록2</a></li>
+			            <li><a href="" class="gnb_2da">목록3</a></li>
+			    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:997">
+			    <a href="trainerlist.wd" class="gnb_1da gnb_1dam">훈련사 소개</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:997"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">훈련사 소개</strong><ul>        
+			            <li><a href="" class="gnb_2da">목록1</a></li>
+			            <li><a href="" class="gnb_2da">목록2</a></li>
+			            <li><a href="" class="gnb_2da">목록3</a></li>
+			    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:996">
+			    <a href="notice.wd" class="gnb_1da gnb_1dam">게시판</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:996"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">게시판</strong><ul>        <li><a href="http://dmshop.kr/shop/list.php?ca_id=6010" class="gnb_2da">신발</a></li>
+			            <li><a href="" class="gnb_2da">목록1</a></li>
+			            <li><a href="" class="gnb_2da">목록2</a></li>
+			            <li><a href="" class="gnb_2da">목록3</a></li>
+			    </ul></div></div></li>
+			<li class="gnb_1dli" style="z-index:995">
+			    <a href="" class="gnb_1da gnb_1dam">마이 페이지</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:995"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">마이 페이지</strong><ul>        <li><a href="http://dmshop.kr/shop/list.php?ca_id=7010" class="gnb_2da">가구</a></li>
+			            <li><a href="" class="gnb_2da">목록1</a></li>
+			            <li><a href="" class="gnb_2da">목록2</a></li>
+			            <li><a href="" class="gnb_2da">목록3</a></li>
+			    </ul></div></div></li>
 
             </ul>
         </div>
