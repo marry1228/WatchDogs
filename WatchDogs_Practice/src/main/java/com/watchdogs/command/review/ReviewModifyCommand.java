@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.watchdogs.command.home.BCommand;
 import com.watchdogs.dao.he.ReviewDao;
+import com.watchdogs.dto.he.ReviewDto;
 
 public class ReviewModifyCommand implements BCommand {
 
@@ -13,6 +14,8 @@ public class ReviewModifyCommand implements BCommand {
 		// TODO Auto-generated method stub
 		
 		System.out.println("ReviewModifyCommand 완료");
+		
+		
 
 		/*/
 		 * 2021.05.18 권효은
@@ -20,14 +23,19 @@ public class ReviewModifyCommand implements BCommand {
 		 * 수정을 위해 입력되어있는 값 가져오기
 		 */
 		//input tag에 있는 값들을 받아오기
-//		String user_userid = request.getParameter("user_userid");
-		String doctitle = request.getParameter("doctitle");
-//		String docdate = request.getParameter("docdate");
-		String doccontent = request.getParameter("doccontent");
-		String docid = request.getParameter("docid");
+		String retitle = request.getParameter("retitle");
+		String recontent = request.getParameter("recontent");
+		String reid = request.getParameter("reid");
+		
+
 		
 		ReviewDao dao = new ReviewDao();
-		dao.reviewModify(doctitle, doccontent, docid);
+		//2줄추가 다시 정보 불러오기
+		ReviewDto dto = dao.reviewDetail(reid);	
+		request.setAttribute("reviewdetail", dto);
+
+		dao.reviewModify(retitle, recontent, reid);
+		
 		
 		
 		

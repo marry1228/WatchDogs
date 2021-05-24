@@ -8,13 +8,13 @@ public class NoticeDto {
 	 * 공지사항 임시저장소 
 	 */
 	//-------------------------------------------Field
-	int noticeid;
-	int noticeviews;
+	int noid;
+	int nohit;
 	String userid;
 	String adid;
-	String noticetitle;
-	String noticecontent;
-	String noticedate;
+	String notitle;
+	String nocontent;
+	String nodate;
 	
 	
 	//-------------------------------------------Constructor
@@ -25,47 +25,33 @@ public class NoticeDto {
 	 * 2021.05.20 권효은
 	 * 공지 상세정보에 불러올 내용
 	 */
-	public NoticeDto(int noticeid, String noticetitle, String noticecontent, String noticedate, int noticeviews) {
+
+	
+	public NoticeDto(int noid,  String notitle, String nocontent, String nodate ,int nohit) {
 		super();
-		this.noticeid = noticeid;
-		this.noticetitle = noticetitle;
-		this.noticecontent = noticecontent;
-		this.noticedate = noticedate;
-		this.noticeviews = noticeviews;
-		
+		this.noid = noid;
+		this.notitle = notitle;
+		this.nocontent = nocontent;
+		this.nodate = nodate;
+		this.nohit = nohit;
 	}
-	/*
-	 * 2021.05.21 권효은
-	 * 모든 정보 불러외서 사용하기
-	 */
-		public NoticeDto(int noticeid, int noticeviews, String userid, String adid, String noticetitle,
-				String noticecontent, String noticedate) {
-			super();
-			this.noticeid = noticeid;
-			this.noticeviews = noticeviews;
-			this.userid = userid;
-			this.adid = adid;
-			this.noticetitle = noticetitle;
-			this.noticecontent = noticecontent;
-			this.noticedate = noticedate;
-		}
+	
 		
+		//-------------------------------------------Getter & Setter
+		//모든 getter /setter	
 		
-	//-------------------------------------------Getter & Setter
-	//모든 getter /setter	
-		
-		
-	public int getNoticeid() {
-		return noticeid;
+	
+	public int getNoid() {
+		return noid;
 	}
-	public void setNoticeid(int noticeid) {
-		this.noticeid = noticeid;
+	public void setNoid(int noid) {
+		this.noid = noid;
 	}
-	public int getNoticeviews() {
-		return noticeviews;
+	public int getNohit() {
+		return nohit;
 	}
-	public void setNoticeviews(int noticeviews) {
-		this.noticeviews = noticeviews;
+	public void setNohit(int nohit) {
+		this.nohit = nohit;
 	}
 	public String getUserid() {
 		return userid;
@@ -79,24 +65,28 @@ public class NoticeDto {
 	public void setAdid(String adid) {
 		this.adid = adid;
 	}
-	public String getNoticetitle() {
-		return noticetitle;
+	public String getNotitle() {
+		return notitle;
 	}
-	public void setNoticetitle(String noticetitle) {
-		this.noticetitle = noticetitle;
+	public void setNotitle(String notitle) {
+		this.notitle = notitle;
 	}
-	public String getNoticecontent() {
-		return noticecontent;
+	public String getNocontent() {
+		return nocontent;
 	}
-	public void setNoticecontent(String noticecontent) {
-		this.noticecontent = noticecontent;
+	public void setNocontent(String nocontent) {
+		this.nocontent = nocontent;
 	}
-	public String getNoticedate() {
-		return noticedate;
+	public String getNodate() {
+		return nodate;
 	}
-	public void setNoticedate(String noticedate) {
-		this.noticedate = noticedate;
+	public void setNodate(String nodate) {
+		this.nodate = nodate;
 	}
+		
+		
+		
+
 
 
 	

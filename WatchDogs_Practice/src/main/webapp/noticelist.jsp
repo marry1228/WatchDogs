@@ -8,48 +8,63 @@
 <head>
 <meta charset="UTF-8">
 <title>공지 목록</title>
+
+<style>
+	li{
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+	color: orange;
+	}
+	th, td {
+	  text-align: center;
+	}
+</style>
+
 </head>
 <body>
-	<nav > 
+	<!-- 선택 (공지/ 후기) ---------------------------------------->
+	<nav style="margin:0 auto;" > 
 		<ul class="nav-container" > 
 		<li class="nav-item"> <a href="noticelist.wd">공지</a></li>
 		<li class="nav-item"> <a href="reviewlist.wd">후기</a></li>	
 		</ul>
 		
 	</nav>	
-	<section><p>공지</p></section>
 	
-	
-	
-	<div class="search-form margin-top first align-right">
-		<h3 class="hidden">공지사항 검색폼</h3>
-			<form class="table-form">
-				<fieldset>
-					<legend class="hidden">공지사항 검색</legend>
-					<label class="hidden">검색분류</label>
-					<select name="f">
-						<option  value="title">제목</option>
-						<option  value="writerId">내용</option>
-					</select> 
-					<label class="hidden">검색어</label>
-					<input type="text" name="q" value=""/>
-					<input class="btn btn-search" type="submit" value="검색" />
-				</fieldset>
+
+		<!-- 오렌지색 줄 ---------------------------------------->
+	<div style="width: 700px; height: 50px;  margin:0 auto; background-color: orange;"></div>
+	<br><br>
+		<!-- 검색창 ---------------------------------------->
+	<div class="row" style="clear:right;width:500px; margin: auto;">
+		<div class="col-lg-12">
+			<form id="searchForm" action="noticelist.wd" method="post">
+				<select name="searchCategory">
+					<option value="all">전체</option>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+				</select>
+				<input type="text" name="searchWord" value="" placeholder="검색어를 입력해주세요"/>
+				<input type="submit" value="검색">
 			</form>
+		</div>
 	</div>
-	
-	
-	
-	
-	
-	
-	<div style="width: 510px; height: 50px; background-color: orange;"></div>
-	<h3>공지 목록</h3>
-	
-	<table border="1" class="table"> 
+	<!-- 검색창 -->
+		
+	<h3 align="center">공지 목록</h3>
+	<!-- table list  -->
+	<table width="700" cellspacing="0" cellpadding="5" border="1" style=" margin:0 auto;" class="table"> 
+	<colgroup>
+    	<col width="5%"/>
+    	<col width="18%"/>
+    	<col width="32%"/>
+    	<col width="15%"/>
+    	<col width="8%"/>
+    </colgroup>
 		<thead class="thead-light">
 			<tr>
-				<th scope="col">번호</th>
+				<th scope="col">No.</th>
 				<th scope="col">제목</th>
 				<th scope="col">내용</th>
 				<th scope="col">날짜</th>
@@ -57,13 +72,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items = "${noticelist }" var="noticelist" >
+			<c:forEach items = "${noticelist }" var="noticeDto" >
 				<tr>
-					<td>${noticelist.noticeid}</td>
-					<td>${noticelist.noticetitle}</td>
-					<td><a href="noticedetail.wd?noticeid=${noticelist.noticeid}" >${noticelist.noticecontent}</a></td>
-					<td>${noticelist.noticedate}</td>
-					<td>${noticelist.noticeviews}</td>
+					<td>${noticeDto.noid}</td>
+					<td>${noticeDto.notitle}</td>
+					<td><a href="noticedetail.wd?noid=${noticeDto.noid}" >${noticeDto.nocontent}</a></td>
+					<td>${noticeDto.nodate}</td>
+					<td>${noticeDto.nohit}</td>
 			
 				</tr>
 
@@ -81,7 +96,6 @@
 	   		</tr>
 	</tbody>			
 	</table>
-	
 
 </body>
 </html>

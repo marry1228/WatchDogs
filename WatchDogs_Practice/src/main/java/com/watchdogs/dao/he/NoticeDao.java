@@ -2,7 +2,6 @@ package com.watchdogs.dao.he;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -30,23 +29,39 @@ public class NoticeDao {
 	 *  2021.05. 20 권효은
 	 *  공지 목록 불러오기
 	 */
-	
-	public ArrayList<NoticeDto> noticeList(int clickPage, int numInAPage) {
+	public ArrayList<NoticeDto> noticeList(int clickPage, int numInAPage, String searchCategory, String searchWord) {
 		//여러개의 list 이므로 arraylist
 		ArrayList<NoticeDto> list = new ArrayList<NoticeDto>();
 		
+		String query = "null";
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
 		
 		try {
-			String query = "select * from notice order by noticeid desc limit ?, ?"; 
+			if(searchCategory.equals("all"))
+			{	
+				query = "select noid, notitle, nocontent,nodate, nohit from notice where notitle like '%"+searchWord+"%' or nocontent like '%"+searchWord+"%' and nodeldate is null order by noid desc limit ?, ? ";
+				System.out.println(query);
+				
+			}else if(searchCategory.equals("title")) {
+				
+				query = "select noid, notitle, nocontent, nodate, nohit from notice where notitle like '%"+searchWord+"%' and nodeldate is null order by noid desc limit ?, ? ";
+				
+			}else if(searchCategory.equals("content")) {
+				
+				query = "select noid, notitle, nocontent, nodate, nohit from notice where nocontent like '%"+searchWord+"%' and nodeldate is null order by noid desc limit ?, ? ";
+
+			}
+				
+			
 			//String query = "select noticeid, noticetitle, noticecontent, noticedate, noticeviews from notice order by noticeid desc limit ?, ?"; 
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			
-			preparedStatement.setInt(1, (clickPage-1) * numInAPage); //여기에 그냥 요청 페이지를 넣으면 ? 안됨
+			System.out.println(query);
+			int defpage = clickPage -1;
+			preparedStatement.setInt(1, defpage * numInAPage); //여기에 그냥 요청 페이지를 넣으면 ? 안됨
 			//10(numInApage)개 기준이면 0에서 -> 0, 1 이 들어오면 10, 2가 들어오면 20 이렇게 되어야함 
 			//즉 처음 물음표는 값이 계속 limit해 놓은 페이지 다음게 시작해야하므로  clickpage * numInApage 인데, 첫시작은 0인게 좋음
 			preparedStatement.setInt(2, numInAPage);
@@ -55,13 +70,13 @@ public class NoticeDao {
 			
 			
 			while(resultSet.next()) {
-				int noticeid = resultSet.getInt(1);
-				String noticetitle = resultSet.getString(2);
-				String noticecontent = resultSet.getString(3);
-				Timestamp noticedate = resultSet.getTimestamp(4);
-				int noticeviews = resultSet.getInt(5);
+				int noid = resultSet.getInt(1);
+				String notitle = resultSet.getString(2);
+				String nocontent = resultSet.getString(3);
+				String nodate = resultSet.getString(4); 
+				int nohit = resultSet.getInt(5);
 				
-				NoticeDto dto = new NoticeDto(noticeid, noticetitle, noticecontent, noticecontent, noticeviews);
+				NoticeDto dto = new NoticeDto(noid, notitle, nocontent, nodate, nohit);
 				list.add(dto); 
 				System.out.println("NoticeList 데이터 로드 성공");
 				
@@ -88,8 +103,8 @@ public class NoticeDao {
 	 *  2021.05.18 권효은
 	 *  공지 상세 페이지
 	 */
-	public NoticeDto noticeDetail(String noticeid) {
-		
+	public NoticeDto noticeDetail(String noid) {
+		//String adid = "jj";
 		NoticeDto dto =null; 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -98,24 +113,26 @@ public class NoticeDao {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "select noticeid, noticetitle, noticecontent, noticedate, noticeviews from notice where noticeid = ?"; 
+			String query = "select noid, notitle, nocontent, nodate, nohit from notice where noid = ? and nodeldate is null";
+			
 			preparedStatement = connection.prepareStatement(query);
 			
-			preparedStatement.setInt(1, Integer.parseInt(noticeid));  // ?인 것을 뭐로 하겠다! 
+			preparedStatement.setInt(1, Integer.parseInt(noid));  // ?인 것을 뭐로 하겠다! 
+			//preparedStatement.setString(2, adid);  
 		
 			resultSet = preparedStatement.executeQuery(); // 그 문장을 가지고 쿼리문을 실행한 값을 받아둠
 			
 			while(resultSet.next()) {
 				//ReviewDto dto = new ReviewDto();
 				
-				int noticeId = resultSet.getInt(1); //추가 새벽
-				String noticetitle = resultSet.getString(2);
-				String noticecontent = resultSet.getString(3);
-				String noticedate = resultSet.getString(4);
-				int noticeviews = resultSet.getInt(5); 
+				int noId = resultSet.getInt(1); 
+				String notitle = resultSet.getString(2);
+				String nocontent = resultSet.getString(3);
+				String nodate = resultSet.getString(4);
+				int nohit = resultSet.getInt(5); 
 				
 
-				dto = new NoticeDto(noticeId, noticetitle, noticecontent, noticedate, noticeviews);
+				dto = new NoticeDto(noId, notitle, nocontent, nodate, nohit);
 				System.out.println("noticeDetail 데이터 로드 성공");
 				
 			}
@@ -179,7 +196,7 @@ public class NoticeDao {
 	 * 	조회수
 	 */
 	
-	public int countViews(String noticeid) {
+	public int countHit(int noid) {
 		//int 로 변경
 
 	Connection connection = null;
@@ -187,19 +204,21 @@ public class NoticeDao {
 	
 	//조회수 저장공간
 	int countRead = 0;
+	System.out.println("쿼리 전 조회수 :" + countRead);
 	try {
 		connection = dataSource.getConnection();
-		String query = "update notice set noticeviews = noticeviews + 1 where noticeid = ? " ;
+		String query = "update notice set nohit = nohit + 1 where noid = ? " ;
 		preparedStatement = connection.prepareStatement(query);
 		
 		//query문 안에 뭐넣을지 정해줌
-		preparedStatement.setInt(1, Integer.parseInt(noticeid));  // ?인 것을 뭐로 하겠다! 
+		preparedStatement.setInt(1, noid);  // ?인 것을 뭐로 하겠다! 
 		
-		System.out.println("countViews 로드 성공");
+		System.out.println("countHit 로드 성공");
 		countRead = preparedStatement.executeUpdate(); //실행 -> countRead에 담기
+		System.out.println("쿼리 후 조회수: " + countRead);
 		
 		}catch(Exception e) {
-		System.out.println("countViews 로드 실패");
+		System.out.println("countHit 로드 실패");
 		e.printStackTrace();
 		}finally{
 			try {

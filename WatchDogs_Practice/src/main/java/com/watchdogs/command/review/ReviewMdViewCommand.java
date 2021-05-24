@@ -5,20 +5,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.watchdogs.command.home.BCommand;
 import com.watchdogs.dao.he.ReviewDao;
+import com.watchdogs.dto.he.ReviewDto;
 
-public class ReviewCountViewsCommand implements BCommand {
+public class ReviewMdViewCommand implements BCommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
+		System.out.println("ReviewDetailViewCommand 성공");
 		
-		System.out.println("ReviewCountViewsCommand 성공");
-		String docid = request.getParameter("docid");
+		String reid = request.getParameter("reid");
 		
 		ReviewDao dao = new ReviewDao();
-		int countviews = dao.countViews(docid);
-		request.setAttribute("countviews", countviews);
-
+		
+		System.out.println(reid);
+		ReviewDto dto = dao.reviewDetail(reid);	
+		request.setAttribute("reviewdetail", dto);
+		
+		
+		
+			
 	}
+
+	
 
 }

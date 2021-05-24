@@ -23,28 +23,6 @@ public class ReviewWriteCommand implements BCommand {
 		 * 게시판 작성 부분 메소드
 		 */
 		
-//		int docid = Integer.parseInt(request.getParameter("docid")) ;//게시글 번호 가져오기 인트로형변환.  기준
-//		System.out.println("ReviewWriteCommand 성공");
-//		String doctitle = request.getParameter("doctitle");
-//		String doccontent = request.getParameter("doccontent");
-		
-		
-		
-//		//05.20 파일 추가
-//		String filename = request.getParameter("filename");
-//		String filerealname = request.getParameter("filerealname");
-		
-//		ReviewDao dao = new ReviewDao();
-//		ReviewDto dto = dao.review_write(id, doctitle, doccontent);
-//		dao.reviewWrite(docid, doctitle, doccontent,filename, filerealname);
-//		dao.reviewWrite(docid, doctitle, doccontent);
-
-		
-//		request.setAttribute("review_write", dto);  // arraylist등 Dao에서 리턴값이 있을때 사용함
-
-		//new FileDao().upload(filename,filerealname);
-		// Dao에 있는 upload 메소드를 실행
-		
 		
 		
 		/*/
@@ -54,7 +32,7 @@ public class ReviewWriteCommand implements BCommand {
 		//session 받기 
 		HttpSession session = request.getSession();
 	    // 파일이 저장되는 경로
-	    String path = request.getSession().getServletContext().getRealPath("fileFolder"); 
+	    String path = request.getSession().getServletContext().getRealPath("review"); 
 //	    String path = "/Users/hehe/Documents/JSP/WatchDogs_Practice/src/main/webapp/resources/"; 
 	    System.out.println(path);
 
@@ -72,10 +50,10 @@ public class ReviewWriteCommand implements BCommand {
 	        MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 			//실제 path, max size, defaulFileRenamePolicy : 오리지날파일 어떻게 하겠느냐 : 파일뒤에 1,2 3 붙음 (덮어씌우기 방지 )
 			//String doc
-	        String docid = multi.getParameter("docid") ;//게시글 번호 가져오기 인트로형변환.  기준
-			System.out.println("ReviewWriteCommand 성공");
-			String doctitle = multi.getParameter("doctitle");
-			String doccontent = multi.getParameter("doccontent");
+	        String reid = multi.getParameter("reid") ;//게시글 번호 가져오기 인트로형변환.  기준
+			String retitle = multi.getParameter("retitle");
+			String recontent = multi.getParameter("recontent");
+			System.out.println("ReviewWriteCommand 불러오기 성공");
 			
 			ReviewDao dao = new ReviewDao();
 			//파일 이름 가져오기
@@ -87,7 +65,8 @@ public class ReviewWriteCommand implements BCommand {
 			session.setAttribute("filepath", file); // name을 session에 저장
 			
 			//dao로 정보 다 보내서 write실행
-			dao.reviewWrite(docid, doctitle, doccontent, file);
+			dao.reviewWrite(reid, retitle, recontent, file);
+			
 
 	        
 	    } catch (Exception e) {

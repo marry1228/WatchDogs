@@ -17,14 +17,18 @@ public class NoticeDetailViewCommand implements BCommand {
 		// TODO Auto-generated method stub
 		System.out.println("NoticeDetailViewCommand 성공");
 		
-		String noticeid = request.getParameter("noticeid");
+		String noid = request.getParameter("noid");
+		int tempnoid = Integer.parseInt(noid);
 		
 		NoticeDao dao = new NoticeDao();
 		//조회수 사용 위함
-		int result = dao.countViews(noticeid);
+		int result = dao.countHit(tempnoid);
 		if(result == 1) {
-			NoticeDto dto = dao.noticeDetail(noticeid);	//int 로 변경 (21)
+			NoticeDto dto = dao.noticeDetail(noid);	
+			
 			request.setAttribute("noticedetail", dto);
+			System.out.println("reviewCount&reviewDetail 실행 성공");
+
 		}else {
 			System.out.println("noticeCount&noticeDetail 실행 실패");
 		}
