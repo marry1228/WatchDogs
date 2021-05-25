@@ -10,11 +10,20 @@
 <head>
 <meta charset="UTF-8">
 <title>공지 상세 페이지</title>
+<style type="text/css">
+a { text-decoration:none } 
+</style>
 </head>
 <body>
+<%//임시 id 
+String adid = "admind1"; 
+session.setAttribute("adid", adid);
+
+%>
 
 	<div style="width: 700px; height: 50px; margin:0 auto; background-color: orange;"></div>
-
+	<input type="hidden" name="noid" value="${noticedetail.noid}">
+	
 	 <table width="700" cellspacing="0" cellpadding="5" border="0" style="background-color: #eeeeee; text-align: center; margin:0 auto;">
 			<thead>
 				<tr>
@@ -23,39 +32,39 @@
 			</thead>
 			<tr>
 				<td>No.</td>
-				<td><input type="text" name="noid" size="80" readonly="readonly" value="${noticedetail.noid}"></td>
+				<td><input type="text" name="noid" size="70" readonly="readonly" value="${noticedetail.noid}"></td>
 			
 			</tr> 
-<%-- 			<tr>
+ 			<tr>
 				<td>관리자</td>
-				<td><input type="text" name="adid" size="80" readonly="readonly" value="${noticedetail.adid}"></td>
+				<td><input type="text" name="adid" size="70" readonly="readonly" value="${noticedetail.adid}"></td>
 			
-			</tr>  --%>
+			</tr>  
 			<tr>
 				<td>조회수</td>
-				<td><input type="text" name="nohit" size="80" readonly="readonly" value="${noticedetail.nohit}"></td>
+				<td><input type="text" name="nohit" size="70" readonly="readonly" value="${noticedetail.nohit}"></td>
 			
 			</tr> 
 				
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="notitle" size="80" readonly="readonly" value="${noticedetail.notitle}"></td>
+				<td><input type="text" name="notitle" size="70" readonly="readonly" value="${noticedetail.notitle}"></td>
 			
 			</tr>
 			<tr>
 				<td>날짜</td>
-				<td><input type="text" name="nodate" size="80" readonly="readonly"  value="${noticedetail.nodate}"></td>
+				<td><input type="text" name="nodate" size="70" readonly="readonly"  value="${noticedetail.nodate}"></td>
 			
 			</tr>
 		
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="10" cols="80" name="nocontent" readonly="readonly">${noticedetail.nocontent}</textarea>>
+				<td><textarea rows="10" cols="60" name="nocontent" readonly="readonly">${noticedetail.nocontent}</textarea>
 			
 			</tr>
 			<tr>
 				<td></td>			
-				<td><button type="button" style="color:#F5DEB3; background:#FFA500; font-size:1em; border-radius:4px;" onclick="location.href='noticelist.wd'">확인</button></td>
+				<td><button type="button" style="color:#F5DEB3; background:#FFA500; font-size:15px; border-radius:4px;" onclick="location.href='noticelist.wd'">확인</button></td>
 			</tr>
 			
 			<!-- 입력이 안됐을때 첫 화면으로 돌아가게 하기 위해서 하이퍼 링크 달아주기 -->

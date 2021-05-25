@@ -35,11 +35,22 @@ button {
 	background-color: orange;
 }
 
+a { text-decoration:none } 
 
 
 </style>
 </head>
 <body>
+<%-- <% 
+	String userid =(String)session.getAttribute("userid");
+%>
+<%=userid %>님이 로그인하였습니다 --%>
+<%
+
+	String userid="userhehe";
+	session.setAttribute("userid", userid);
+
+%>
 	<!-- 선택 (공지/ 후기) ---------------------------------------->
 	<nav style="margin:auto;"> 
 		<ul class="nav-container" > 
@@ -73,6 +84,7 @@ button {
 	<table  width="700" cellspacing="0" cellpadding="5" border="1" style=" margin:0 auto;" class="table"> 
 	<colgroup>
     	<col width="5%"/>
+    	<col width="10%"/>
     	<col width="18%"/>
     	<col width="32%"/>
     	<col width="15%"/>
@@ -81,6 +93,7 @@ button {
 		<thead class="thead-light">
 			<tr>
 				<th scope="col">No.</th>
+				<th scope="col">작성자</th>
 				<th scope="col">제목</th>
 				<th scope="col">내용</th>
 				<th scope="col">날짜</th>
@@ -89,21 +102,23 @@ button {
 		</thead>
 		<tbody>
 			<c:forEach items = "${reviewlist }" var="ReviewDto" >
+			<c:if test="${empty ReviewDto.redeldate }">
 				<tr>
 					<td>${ReviewDto.reid}</td>
-					<td>${ReviewDto.retitle}</td>
+					<td>${ReviewDto.userid}</td>
+					<td><a href="reviewdetail.wd?reid=${ReviewDto.reid}" >${ReviewDto.retitle}</a></td>
 					<td><a href="reviewdetail.wd?reid=${ReviewDto.reid}" >${ReviewDto.recontent}</a></td>
 					<td>${ReviewDto.redate}</td>
 					<td>${ReviewDto.rehit}</td>
 			
 				</tr>
-
+			</c:if>
 			</c:forEach>
 		
 		
 		<!-- 2021.05.19 페이징 구현 -->
 			<tr>
-				<td colspan="5" align="center">
+				<td colspan="6" align="center">
 					<!-- 페이징 부분 -->
 					<c:forEach items="${pagelist }" var="page">
 						<a href="reviewlist.wd?page=${page }">${page}</a>
@@ -112,6 +127,7 @@ button {
 	   		</tr>
 	</tbody>			
 	</table>
+	<br>
 	<div >
 	<button class="button" onClick="location.href='review.wd'" >후기작성</button>
 	</div>

@@ -34,6 +34,7 @@ public class NoticeDao {
 		ArrayList<NoticeDto> list = new ArrayList<NoticeDto>();
 		
 		String query = "null";
+		String query2 = "null";
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -42,23 +43,24 @@ public class NoticeDao {
 		try {
 			if(searchCategory.equals("all"))
 			{	
-				query = "select noid, notitle, nocontent,nodate, nohit from notice where notitle like '%"+searchWord+"%' or nocontent like '%"+searchWord+"%' and nodeldate is null order by noid desc limit ?, ? ";
-				System.out.println(query);
+				query = "select noid, adid, notitle, nocontent, nodate, nohit, nodeldate from notice ";
+				query2 = "where notitle like '%"+searchWord+"%' or nocontent like '%"+searchWord+"%' and nodeldate is null order by noid desc limit ?, ? ";
 				
 			}else if(searchCategory.equals("title")) {
 				
-				query = "select noid, notitle, nocontent, nodate, nohit from notice where notitle like '%"+searchWord+"%' and nodeldate is null order by noid desc limit ?, ? ";
+				query = "select noid, adid, notitle, nocontent, nodate, nohit, nodeldate from notice ";
+				query2 ="where notitle like '%"+searchWord+"%' and nodeldate is null order by noid desc limit ?, ? ";
 				
 			}else if(searchCategory.equals("content")) {
 				
-				query = "select noid, notitle, nocontent, nodate, nohit from notice where nocontent like '%"+searchWord+"%' and nodeldate is null order by noid desc limit ?, ? ";
+				query = "select noid, adid, notitle, nocontent, nodate, nohit, nodeldate from notice ";
+				query2= "where nocontent like '%"+searchWord+"%' and nodeldate is null order by noid desc limit ?, ? ";
 
 			}
 				
 			
-			//String query = "select noticeid, noticetitle, noticecontent, noticedate, noticeviews from notice order by noticeid desc limit ?, ?"; 
 			connection = dataSource.getConnection();
-			preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(query +	query2);
 			System.out.println(query);
 			int defpage = clickPage -1;
 			preparedStatement.setInt(1, defpage * numInAPage); //여기에 그냥 요청 페이지를 넣으면 ? 안됨
@@ -71,12 +73,14 @@ public class NoticeDao {
 			
 			while(resultSet.next()) {
 				int noid = resultSet.getInt(1);
-				String notitle = resultSet.getString(2);
-				String nocontent = resultSet.getString(3);
-				String nodate = resultSet.getString(4); 
-				int nohit = resultSet.getInt(5);
+				String adid = resultSet.getString(2);
+				String notitle = resultSet.getString(3);
+				String nocontent = resultSet.getString(4);
+				String nodate = resultSet.getString(5); 
+				int nohit = resultSet.getInt(6);
+				String nodeldate = resultSet.getString(7);
 				
-				NoticeDto dto = new NoticeDto(noid, notitle, nocontent, nodate, nohit);
+				NoticeDto dto = new NoticeDto(noid, adid, notitle, nocontent, nodate, nohit, nodeldate);
 				list.add(dto); 
 				System.out.println("NoticeList 데이터 로드 성공");
 				
@@ -104,7 +108,7 @@ public class NoticeDao {
 	 *  공지 상세 페이지
 	 */
 	public NoticeDto noticeDetail(String noid) {
-		//String adid = "jj";
+		
 		NoticeDto dto =null; 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -113,7 +117,7 @@ public class NoticeDao {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "select noid, notitle, nocontent, nodate, nohit from notice where noid = ? and nodeldate is null";
+			String query = "select noid, adid, notitle, nocontent, nodate, nohit from notice where noid = ? and nodeldate is null";
 			
 			preparedStatement = connection.prepareStatement(query);
 			
@@ -123,16 +127,16 @@ public class NoticeDao {
 			resultSet = preparedStatement.executeQuery(); // 그 문장을 가지고 쿼리문을 실행한 값을 받아둠
 			
 			while(resultSet.next()) {
-				//ReviewDto dto = new ReviewDto();
 				
 				int noId = resultSet.getInt(1); 
-				String notitle = resultSet.getString(2);
-				String nocontent = resultSet.getString(3);
-				String nodate = resultSet.getString(4);
-				int nohit = resultSet.getInt(5); 
+				String adid = resultSet.getString(2);
+				String notitle = resultSet.getString(3);
+				String nocontent = resultSet.getString(4);
+				String nodate = resultSet.getString(5);
+				int nohit = resultSet.getInt(6); 
 				
 
-				dto = new NoticeDto(noId, notitle, nocontent, nodate, nohit);
+				dto = new NoticeDto(noId, adid,notitle, nocontent, nodate, nohit);
 				System.out.println("noticeDetail 데이터 로드 성공");
 				
 			}

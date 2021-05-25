@@ -36,7 +36,7 @@ public class ReviewDto { // 자바에서 Bean 역할. MVC 에서는 Dto : 불러
 	}
 
 	
-
+	
 
 	/*
 	 * 2021.05.18 권효은
@@ -55,28 +55,8 @@ public class ReviewDto { // 자바에서 Bean 역할. MVC 에서는 Dto : 불러
 		this.redate = redate;
 		this.refilepath = refilepath;
 	}
-
-	/*/
-	 *  2021.05.18 권효은
-	 *  리스트 불러올때 조회수를 위해 추가함
-	 */
 	
-	public ReviewDto(String userid, String retitle, String recontent, String redate, int rehit) {
-		super();
-		this.rehit = rehit;
-		this.userid = userid;
-		this.retitle = retitle;
-		this.recontent = recontent;
-		this.redate = redate;
-	}
 
-	// ?? 수정..?
-//	public ReviewDto(String doctitle, String doccontent, int docid) {
-//		super();
-//		this.doctitle = doctitle;
-//		this.doccontent = doccontent;
-//		this.docid = docid;
-//	}
 	
 	
 	/*/
@@ -92,6 +72,23 @@ public class ReviewDto { // 자바에서 Bean 역할. MVC 에서는 Dto : 불러
 		this.redate = redate;
 		this.rehit = rehit;
 	}
+	
+	
+	/*
+	 * 리스트 불러오기 
+	 * 
+	 */
+	
+	public ReviewDto(int reid, int rehit, String userid, String retitle, String recontent, String redate, String redeldate) {
+		super();
+		this.reid = reid;
+		this.rehit = rehit;
+		this.userid = userid;
+		this.retitle = retitle;
+		this.recontent = recontent;
+		this.redate = redate;
+		this.redeldate = redeldate;
+	}
 
 
 	
@@ -101,6 +98,7 @@ public class ReviewDto { // 자바에서 Bean 역할. MVC 에서는 Dto : 불러
 	public int getReid() {
 		return reid;
 	}
+
 
 
 	public void setReid(int reid) {

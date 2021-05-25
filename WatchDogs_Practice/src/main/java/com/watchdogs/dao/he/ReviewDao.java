@@ -36,10 +36,9 @@ public class ReviewDao {
 	 * 2021.05.17 17:45 완성
 	 */
 	
-	public void reviewWrite(String reid, String retitle, String recontent ,String refilepath) { //여기 메소드에서 아이디는  사용할 필요는 없다
-		// 입력해둔 아이디가 하나있고, 그 아이디와 같아야 입력됨! (임시아이디)
-		String userid = "봄봄봄"; 
+	public void reviewWrite(String reid, String userid, String retitle, String recontent ,String refilepath) { //여기 메소드에서 아이디는  사용할 필요는 없다
 		
+		// 입력해둔 아이디가 하나있고, 그 아이디와 같아야 입력됨! (임시아이디)
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -89,6 +88,7 @@ public class ReviewDao {
 		ArrayList<ReviewDto> list = new ArrayList<ReviewDto>();
 		
 		String query = "null"; 
+		String query2 ="null";
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -96,29 +96,30 @@ public class ReviewDao {
 		
 		try {
 			
-			//String query = "select docid, doctitle, doccontent, docdate, dochit from document order by docid desc limit 10;"; 
 			//limit에 한 페이지당 들어갈 게시물 갯수를 ?로 구현 
-			//String query = "select reid, retitle, recontent, redate, rehit from review order by reid desc limit ?, ?"; //limit start 지점. 몇개 뽑을 건지
+			//limit start 지점. 몇개 뽑을 건지
 				
 			if(searchCategory.equals("all"))
 			{	
-				query = "select reid, retitle, recontent, redate, rehit from review where retitle like '%"+searchWord+"%' or recontent like '%"+searchWord+"%' and redeldate is null order by reid desc limit ?, ?";
-				
+				query = "select reid, rehit, userid, retitle, recontent, redate, redeldate ";
+				query2= "from review where redeldate is null and retitle like '%"+searchWord+"%' or recontent like '%"+searchWord+"%' order by reid desc limit ?, ?";
 			}else if(searchCategory.equals("title")) {
 				
-				query = "select reid, retitle, recontent, redate, rehit from review where retitle like '%"+searchWord+"%' and redeldate is null order by reid desc limit ?, ?";
+				query = "select reid, rehit, userid, retitle, recontent, redate, redeldate ";
+				query2 = "from review where retitle like '%"+searchWord+"%' and redeldate is null order by reid desc limit ?, ?";
 				
 			}else if(searchCategory.equals("content")) {
 				
-				query = "select reid, retitle, recontent, redate, rehit from review where recontent like '%"+searchWord+"%' and redeldate is null order by reid desc limit ?, ?";
+				query = "select reid, rehit, userid, retitle, recontent, redate, redeldate ";
+				query2 = "from review where recontent like '%"+searchWord+"%' and redeldate is null order by reid desc limit ?, ?";
 
 			}
 			
 			connection = dataSource.getConnection();
-			preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(query+query2);
 			
 			int defpage = clickPage -1;
-			preparedStatement.setInt(1, defpage * numInAPage); //여기에 그냥 요청 페이지를 넣으면 ? 안됨
+			preparedStatement.setInt(1, defpage * numInAPage); 
 			//10(numInApage)개 기준이면 0에서 -> 0, 1 이 들어오면 10, 2가 들어오면 20 이렇게 되어야함 
 			//즉 처음 물음표는 값이 계속 limit해 놓은 페이지 다음게 시작해야하므로  clickpage * numInApage 인데, 첫시작은 0인게 좋음
 			preparedStatement.setInt(2, numInAPage);
@@ -128,12 +129,14 @@ public class ReviewDao {
 			
 			while(resultSet.next()) {
 				int reid = resultSet.getInt(1);
-				String retitle = resultSet.getString(2);
-				String recontent = resultSet.getString(3);
-				String redate = resultSet.getString(4);
-				int rehit = resultSet.getInt(5);
+				int rehit = resultSet.getInt(2);
+				String userid = resultSet.getString(3);
+				String retitle = resultSet.getString(4);
+				String recontent = resultSet.getString(5);
+				String redate = resultSet.getString(6);
+				String redeldate = resultSet.getString(7);
 				
-				ReviewDto dto = new ReviewDto(reid, retitle, recontent, redate, rehit);
+				ReviewDto dto = new ReviewDto(reid, rehit, userid, retitle, recontent, redate, redeldate);
 				list.add(dto); 
 				System.out.println("reviewList 데이터 로드 성공");
 				
@@ -142,9 +145,9 @@ public class ReviewDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("reviewList 데이터 로드 실패");
-		}finally { // 메모리에서 정리 
+		}finally { 
 			try {
-				if(resultSet != null) resultSet.close(); // resultset이 비어있지 않으면, 정리한다. 
+				if(resultSet != null) resultSet.close(); 
 				if(preparedStatement != null) preparedStatement.close();
 				if(connection != null) connection.close();
 				System.out.println("reviewList 데이터 final 성공");
@@ -279,7 +282,7 @@ public class ReviewDao {
 			
 			preparedStatement = connection.prepareStatement(query);
 			//날짜가 입력되도록 함
-			preparedStatement.setInt(2, Integer.parseInt(reid));
+			preparedStatement.setInt(1, Integer.parseInt(reid));
 			
 			preparedStatement.executeUpdate();
 			System.out.println("reviewDelete DB입력 성공");

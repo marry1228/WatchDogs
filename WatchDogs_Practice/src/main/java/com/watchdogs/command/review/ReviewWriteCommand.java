@@ -30,15 +30,12 @@ public class ReviewWriteCommand implements BCommand {
 		 */
 		//2021.05.19 권효은 파일 업로드 작업
 		//session 받기 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 	    // 파일이 저장되는 경로
 	    String path = request.getSession().getServletContext().getRealPath("review"); 
-//	    String path = "/Users/hehe/Documents/JSP/WatchDogs_Practice/src/main/webapp/resources/"; 
 	    System.out.println(path);
 
-	   // String path = request.getRealPath("fileUpload");
-	   //String path = request.getRealPath("save");
-	  	
+
 	  	System.out.println("fileFolder 접근 완료");
 	  	
 	    int size = 1024 * 1024 * 10; // 업로드 할 최대 파일 크기 (몇 메가바이트까지인지)
@@ -51,6 +48,10 @@ public class ReviewWriteCommand implements BCommand {
 			//실제 path, max size, defaulFileRenamePolicy : 오리지날파일 어떻게 하겠느냐 : 파일뒤에 1,2 3 붙음 (덮어씌우기 방지 )
 			//String doc
 	        String reid = multi.getParameter("reid") ;//게시글 번호 가져오기 인트로형변환.  기준
+	        
+	        String userid = (String)session.getAttribute("userid");
+	        
+	        System.out.println("useridsmsdy 는요   "+ userid);
 			String retitle = multi.getParameter("retitle");
 			String recontent = multi.getParameter("recontent");
 			System.out.println("ReviewWriteCommand 불러오기 성공");
@@ -65,7 +66,7 @@ public class ReviewWriteCommand implements BCommand {
 			session.setAttribute("filepath", file); // name을 session에 저장
 			
 			//dao로 정보 다 보내서 write실행
-			dao.reviewWrite(reid, retitle, recontent, file);
+			dao.reviewWrite(reid, userid, retitle, recontent, file);
 			
 
 	        

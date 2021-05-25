@@ -15,27 +15,41 @@ public class NoticeDto {
 	String notitle;
 	String nocontent;
 	String nodate;
-	
+	String nodeldate;
 	
 	//-------------------------------------------Constructor
 	public NoticeDto() {
 		// TODO Auto-generated constructor stub
 	}
+
+	/*/
+	 * 2021.05.25 권효은
+	 * 리스트 불러오기 수정
+	 */
+	public NoticeDto(int noid, String adid, String notitle, String nocontent, String nodate ,int nohit, String nodeldate) {
+		super();
+		this.noid = noid;
+		this.adid = adid;
+		this.notitle = notitle;
+		this.nocontent = nocontent;
+		this.nodate = nodate;
+		this.nohit = nohit;
+		this.nodeldate = nodeldate;
+	}
+	
 	/*/
 	 * 2021.05.20 권효은
 	 * 공지 상세정보에 불러올 내용
 	 */
-
-	
-	public NoticeDto(int noid,  String notitle, String nocontent, String nodate ,int nohit) {
+	public NoticeDto(int noid, String adid, String notitle, String nocontent, String nodate ,int nohit) {
 		super();
 		this.noid = noid;
+		this.adid = adid;
 		this.notitle = notitle;
 		this.nocontent = nocontent;
 		this.nodate = nodate;
 		this.nohit = nohit;
 	}
-	
 		
 		//-------------------------------------------Getter & Setter
 		//모든 getter /setter	
@@ -82,6 +96,14 @@ public class NoticeDto {
 	}
 	public void setNodate(String nodate) {
 		this.nodate = nodate;
+	}
+
+	public String getNodeldate() {
+		return nodeldate;
+	}
+
+	public void setNodeldate(String nodeldate) {
+		this.nodeldate = nodeldate;
 	}
 		
 		

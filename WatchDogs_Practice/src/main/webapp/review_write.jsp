@@ -27,10 +27,15 @@
 </script>
 </head>
 <body>
+<%//임시 id 
+String userid = "userhehe"; 
+session.setAttribute("userid", userid);
+
+%>
 	
-	<div style="width: 700px; height: 50px; background-color: orange;"></div>
+	<div style="width: 700px; height: 50px; background-color: orange; margin:0 auto;"></div>
 	
-	 <table width="700" cellspacing="0" cellpadding="5" border="0" style="background-color: #eeeeee; text-align: center;">
+	 <table width="700" cellspacing="0" cellpadding="5" border="0" style="background-color: #eeeeee; text-align: center; margin:0 auto;">
 		<form name="writeForm"  action="review_write.wd" method="post" enctype="multipart/form-data">
 			<thead>
 				<tr>
@@ -38,14 +43,9 @@
 				</tr>
 			</thead>
 
+<%--  			<input type="hidden" name="userid" value="${userid}">
+ --%> 			
 
-<%--  			<tr>
-				<td>작성자 아이디</td>
-				<td><input type="text" name="userid" size="50" readonly="readonly" value="${reviewdetail.userid}"></td>
-			
-			</tr>   --%>
-			
-			
 			<tr>
 				<td>제목</td>
 				<td><input type="text" name="retitle" placeholder="제목을 입력해주세요" size="70"></td>
@@ -60,26 +60,21 @@
 			<tr>
 				<td>파일 첨부 : </td>
 				<td><input type="file" name="file"> 
-				<!-- 사용자가 전송한(업로드한) 파일이 name명 대로 (file) 전송됨 -->
 				
-<!-- 				<input type="button"  value="파일첨부" onclick="location.href='fileupload.jsp'"><br></td>
- -->			</tr>
-			<!-- 입력이 안됐을때 첫 화면으로 돌아가게 하기 위해서 하이퍼 링크 달아주기 -->
+ 			</tr>
 			<tr>
-				<td colspan="2"><input type="button" style="color:#F5DEB3; background:#FFA500; font-size:1em; border-radius:4px;"  value="입력" onclick="check()"></td>
+				
+				<td colspan="2"><input type="button" style="color:#F5DEB3; background:#FFA500; font-size:1em; border-radius:4px;"  
+				value="입력" onclick="check()"></td>
+	
 			</tr>
 			<tr>
+			<!-- 입력이 안됐을때 첫 화면으로 돌아가게 하기 위해서 하이퍼 링크 달아주기 -->
 				<td><a href = "reviewlist.wd">목록으로</a></td>
 			</tr>	
 		</form>
 	</table>
 		
-	
-	<!-- <form action="fileupload.jsp"  method="post" enctype="multipart/form-data">
-		파일 첨부 : <input type="file" name="file"> <br>  
-				사용자가 전송한(업로드한) 파일이 name명 대로 (file) 전송됨
-				<input type="submit"  value="파일첨부" ><br>
-	</form> -->
 
 
 

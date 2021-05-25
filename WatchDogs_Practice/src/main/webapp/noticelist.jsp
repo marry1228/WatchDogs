@@ -57,6 +57,7 @@
 	<table width="700" cellspacing="0" cellpadding="5" border="1" style=" margin:0 auto;" class="table"> 
 	<colgroup>
     	<col width="5%"/>
+    	<col width="10%"/>
     	<col width="18%"/>
     	<col width="32%"/>
     	<col width="15%"/>
@@ -65,6 +66,7 @@
 		<thead class="thead-light">
 			<tr>
 				<th scope="col">No.</th>
+				<th scope="col">관리자</th>
 				<th scope="col">제목</th>
 				<th scope="col">내용</th>
 				<th scope="col">날짜</th>
@@ -73,21 +75,23 @@
 		</thead>
 		<tbody>
 			<c:forEach items = "${noticelist }" var="noticeDto" >
+			<c:if test="${empty noticeDto.nodeldate}">
 				<tr>
 					<td>${noticeDto.noid}</td>
-					<td>${noticeDto.notitle}</td>
+					<td>${noticeDto.adid}</td>
+					<td><a href="noticedetail.wd?noid=${noticeDto.noid}" >${noticeDto.notitle}</a></td>
 					<td><a href="noticedetail.wd?noid=${noticeDto.noid}" >${noticeDto.nocontent}</a></td>
 					<td>${noticeDto.nodate}</td>
 					<td>${noticeDto.nohit}</td>
 			
 				</tr>
-
+		    </c:if>
 			</c:forEach>
 		
 
 		<!-- 2021.05.19 페이징 구현 -->
 			<tr>
-				<td colspan="5" align="center">
+				<td colspan="6" align="center">
 					<!-- 페이징 부분 -->
 					<c:forEach items="${pagelist }" var="page">
 						<a href="noticelist.wd?page=${page }">${page}</a>
