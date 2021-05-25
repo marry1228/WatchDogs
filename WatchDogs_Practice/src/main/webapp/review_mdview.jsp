@@ -5,16 +5,13 @@
   
 <!DOCTYPE html>
 <html>
-<script> 
-function btn(){ alert("게시글이 삭제되었습니다"); } 
 
-function modifycheck() { alert("수정하시겠습니까");}
 
 
 </script>
 <head>
 <meta charset="UTF-8">
-<title>후기 상세 페이지</title>
+<title>후기 수정 페이지</title>
 <style type="text/css">
 th, td {
 	text-align: center;
@@ -27,11 +24,11 @@ th, td {
 <div style="width: 700px; height: 50px; margin:0 auto; background-color: orange;"></div>
 
 	 <table width="700" cellspacing="0" cellpadding="5" border="0"  style="background-color: #eeeeee; text-align: center; margin:0 auto;">
-	 <form action="reviewmodify.wd" method="post" >
+	 <form action="reviewmodify.wd" method="post" enctype="multipart/form-data" >
 	 	<input type="hidden" name="reid" value="${reviewdetail.reid}">
 			<thead>
 				<tr>
-					<th colspan="2" style="background-color: #FFEBCD; text-align: center;">후기 상세 페이지</th>
+					<th colspan="2" style="background-color: #FFEBCD; text-align: center;">후기 수정 페이지</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,12 +60,17 @@ th, td {
 			</tr>
 			<tr>
 				<td>사진</td>
-				<td><img width="450" height="300" src="review/${reviewdetail.refilepath }"></td>
+				<td><img class="imgClass" width="450" height="300" src="review/${reviewdetail.refilepath }"></td>
+
 			
 			</tr> 
 			<tr>
 			<td>이미지 수정</td>
-				<td><input type="file" name="file"> </td>
+				
+				<td><input type="hidden" name="beforeimg" value="${reviewdetail.refilepath }">
+				<input class="file" type="file" name="file"> 
+				<input type="button"  value="파일첨부" onclick="fileupload.jsp"><br></td>
+				
 			</tr>	
 			<tr>
 				<td>내용</td>
@@ -76,7 +78,7 @@ th, td {
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" style="color:#F5DEB3; background:#FFA500; font-size:1em; border-radius:4px;" onclick="modifycherck()" value="수정">
+				<td><input type="submit" style="color:#F5DEB3; background:#FFA500; font-size:1em; border-radius:4px;" value="수정">
 					<input type="button" class="button" style="color:#F5DEB3; background:#FFA500; font-size:1em; border-radius:4px;" onclick="location.href='reviewdelete.wd?reid=${reviewdetail.reid}'; btn();" value="삭제"></td>
 			</tr>
 				
@@ -89,7 +91,6 @@ th, td {
 			</tbody>
 		</form>
 	</table> 
-
 
 </body>
 </html>

@@ -8,10 +8,12 @@
 	//2021.05.19 권효은 파일 업로드 작업
 	
     // 파일이 저장되는 경로
-    String path = request.getSession().getServletContext().getRealPath("fileFolder"); 
+    String path = request.getSession().getServletContext().getRealPath("review"); 
+	//상대경로 : 아래와 같은 방법으로도 가능
+	/* String path = "/upload/image/"
+	String realPath = request.getServletContext().getRealPath(path); */
+ 	// String path = request.getRealPath("fileUpload");
 	System.out.println(path);
-  // String path = request.getRealPath("fileUpload");
-  //String path = request.getRealPath("save");
   	
   	System.out.println("fileFolder 접근 완료");
   	
@@ -19,16 +21,18 @@
     String file = ""; // 업로드 한 파일의 이름(이름이 변경될수 있다)
     String originalFile = ""; // 이름이 변경되기 전 실제 파일 이름 (옛날께 이름바꿨다고 삭제 되지 않게)
     String str="";
-
-    // 실제 파일 업로드하는 과정
+	String reid=""; //이렇게 해야 try안에서만 사용 하지 않고 전체로 사용 가능
+	String retitle="";
+	String recontent="";
+    // 실제 파일 업로드하는 과정 : 파일 올리는 라이브러리 MultipartRequest 객체 생성 -> 자동으로 파일이 올라간다
     try{
         MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 		//실제 path, max size, defaulFileRenamePolicy : 오리지날파일 어떻게 하겠느냐 : 파일뒤에 1,2 3 붙음 (덮어씌우기 방지 )
-		//값 받아와보기
-/* 		String docid = multi.getParameter("docid") ;
-		String doctitle = multi.getParameter("doctitle");
-		String doccontent = request.getParameter("doccontent");
-		 */
+		//name값 받아와보기
+		multi.getParameter("reid") ;
+		multi.getParameter("retitle");
+		request.getParameter("recontent");
+		 
 		
 		//파일 이름 가져오기
         Enumeration<String> files = multi.getFileNames();
@@ -43,13 +47,19 @@
     } catch (Exception e) {
         e.printStackTrace();
     }
+//파일 정보를 수정 - 번호, 파일명
+
+
+//DB에 파일 정보 수정
+    
+    
     
 %>
 
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>file upload</title>
 <script type="text/javascript">
 
 /* 	function WinClose()
@@ -58,11 +68,14 @@
 	} */
 </script>
 <body>
+	
+
+	
 	<h3>파일 업로드 성공</h3>
-<%-- 	<img src="<%= request.getContextPath().file %>"/>
- --%>	
-	번호 : <input name="user" value="사용자"><br/> 
-	제목 : 
+	업로드 된 파일 이름: <%=path %><br>
+
+	문서번호 : <%=reid %>
+	제목 : <%=retitle %>
 
 	<form action="fileupload.jsp"  method="post" enctype="multipart/form-data">
 		파일 첨부 : <input type="file" name="file"> <br>  

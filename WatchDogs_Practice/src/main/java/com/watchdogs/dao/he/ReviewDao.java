@@ -36,7 +36,7 @@ public class ReviewDao {
 	 * 2021.05.17 17:45 완성
 	 */
 	
-	public void reviewWrite(String reid,String retitle, String recontent ,String refilepath) { //여기 메소드에서 아이디는  사용할 필요는 없다
+	public void reviewWrite(String reid, String retitle, String recontent ,String refilepath) { //여기 메소드에서 아이디는  사용할 필요는 없다
 		// 입력해둔 아이디가 하나있고, 그 아이디와 같아야 입력됨! (임시아이디)
 		String userid = "봄봄봄"; 
 		
@@ -217,7 +217,7 @@ public class ReviewDao {
 	 * 2021.05.18-19 권효은 
 	 * 후기 수정
 	 */
-	public void reviewModify(String retitle, String recontent , String reid) {
+	public void reviewModify(String reid, String retitle, String recontent , String refilepath) {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -226,16 +226,18 @@ public class ReviewDao {
 		try {
 			connection = dataSource.getConnection();
 			//update때는 values가 안먹힐때 있음
-			String query = "update review set retitle = ?, recontent = ? where reid = ? ";
+			String query = "update review set retitle = ?, recontent = ? , refilepath = ? where reid = ? ";
 			
 			preparedStatement = connection.prepareStatement(query);
 			
 			//query문 안에 뭐넣을지 정해줌
 			preparedStatement.setString(1, retitle);
 			preparedStatement.setString(2, recontent);
+			//이미지 수정을위해 파일경로 추가
+			preparedStatement.setString(3, refilepath);
 			//화면상의 String 인 문서번호를 인트값으로 바꿔주기 
 			int temdocid = Integer.parseInt(reid);
-			preparedStatement.setInt(3, temdocid);
+			preparedStatement.setInt(4, temdocid);
 			
 			System.out.println("reviewModify 로드 성공");
 			preparedStatement.executeUpdate();
