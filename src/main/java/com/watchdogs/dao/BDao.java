@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream:src/main/java/com/watchdogs/dao/jp/BDao.java
 package com.jsplec.bbs.dao.jp;
+=======
+package com.watchdogs.dao;
+>>>>>>> Stashed changes:src/main/java/com/watchdogs/dao/BDao.java
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +14,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+<<<<<<< Updated upstream:src/main/java/com/watchdogs/dao/jp/BDao.java
 import com.jsplec.bbs.dto.jp.BDto;
+=======
+import com.watchdogs.dto.BDto;
+>>>>>>> Stashed changes:src/main/java/com/watchdogs/dao/BDao.java
 
 public class BDao {
 

@@ -14,13 +14,21 @@
        <%
        int dogid = Integer.parseInt(request.getParameter("dogid"));
       
+<<<<<<< Updated upstream
        String url_mysql="jdbc:mysql://localhost:3306/watchdogs?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+=======
+       String url_mysql="jdbc:mysql://localhost:3306/watchdogs_test_03?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+>>>>>>> Stashed changes
        String id_mysql = "root";
        String pw_mysql = "qwer1234";
        
        PreparedStatement ps = null;
 		
+<<<<<<< Updated upstream
 		String query = "update dog set dogadopttst=? where dogid = " +dogid+";";		
+=======
+		String query = "update dog set dogadoptst=? where dogid = " +dogid+";";		
+>>>>>>> Stashed changes
 		
 		try {
 			
@@ -30,7 +38,11 @@
 			
 			// 자료 수정 업데이트
 			ps = conn_mysql.prepareStatement(query);
+<<<<<<< Updated upstream
 			ps.setString(1, "진행");		// tfName에 
+=======
+			ps.setString(1, "입양진행중");		// tfName에 
+>>>>>>> Stashed changes
 			
 			//입력된 텍스트 1번 자리에 설정
 			

@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream:src/main/java/com/watchdogs/dto/jp/BDto.java
 package com.jsplec.bbs.dto.jp;
+=======
+package com.watchdogs.dto;
+>>>>>>> Stashed changes:src/main/java/com/watchdogs/dto/BDto.java
 
 import java.sql.Timestamp;
 
