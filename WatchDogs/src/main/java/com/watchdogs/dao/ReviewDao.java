@@ -1,4 +1,4 @@
-package com.watchdogs.dao.he;
+package com.watchdogs.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.watchdogs.dto.he.ReviewDto;
+import com.watchdogs.dto.ReviewDto;
 
 public class ReviewDao {
 	

@@ -1,4 +1,4 @@
-package com.watchdogs.command.trainerlist;
+package com.watchdogs.command.admin_trainer;
 
 import java.util.ArrayList;
 

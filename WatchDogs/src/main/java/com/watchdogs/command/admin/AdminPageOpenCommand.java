@@ -1,4 +1,4 @@
-package com.watchdogs.command.adminpage;
+package com.watchdogs.command.admin;
 
 import java.util.ArrayList;
 

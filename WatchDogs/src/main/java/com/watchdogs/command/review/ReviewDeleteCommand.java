@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.watchdogs.command.home.BCommand;
-import com.watchdogs.dao.he.ReviewDao;
+import com.watchdogs.dao.ReviewDao;
 
 public class ReviewDeleteCommand implements BCommand {
 

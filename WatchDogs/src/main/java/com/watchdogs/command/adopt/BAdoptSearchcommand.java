@@ -70,9 +70,9 @@ public class BAdoptSearchcommand implements BCommand {
 		  System.out.println(endPage+"endpaGE");
 		  System.out.println(pageCount+"pageCount");
 		  
-		  request.setAttribute("pageCount", pageCount); // 결과!
-		  request.setAttribute("startPage", startPage); // 결과!
-		  request.setAttribute("endPage", endPage); // 결과!
+		  session.setAttribute("pageCount", pageCount);
+		  session.setAttribute("startPage", startPage);
+		  session.setAttribute("endPage", endPage);
 
 				
 				request.setAttribute("adopt", dtosadopt);

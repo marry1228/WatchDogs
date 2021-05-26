@@ -19,7 +19,7 @@ public class LookUpPwCommand implements BCommand {
 		String userName = request.getParameter("username");
 		
 		DaoUser daoUser = new DaoUser();
-		daoUser.insert(userId, userPw, userTel, userEmail, userName);
+		//daoUser.insert(userId, userPw, userTel, userEmail, userName);
 	}
 
 }

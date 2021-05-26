@@ -8,14 +8,14 @@ public class DtoUser {
 	String userName;
 	String userDate;
 	String userDelDate;
-	String adminID;
+	
 
 	public DtoUser() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public DtoUser(String userId, String userPw, String userTel, String userEmail, String userName, String userDate,
-			String userDelDate, String adminID) {
+			String userDelDate) {
 		super();
 		this.userId = userId;
 		this.userPw = userPw;
@@ -24,7 +24,7 @@ public class DtoUser {
 		this.userName = userName;
 		this.userDate = userDate;
 		this.userDelDate = userDelDate;
-		this.adminID = adminID;
+	
 	}
 	
 	public DtoUser(String userId, String userEmail, String userName,
@@ -92,13 +92,6 @@ public class DtoUser {
 		this.userDelDate = userDelDate;
 	}
 
-	public String getAdminID() {
-		return adminID;
-	}
-
-	public void setAdminID(String adminID) {
-		this.adminID = adminID;
-	}
 
 	
 	

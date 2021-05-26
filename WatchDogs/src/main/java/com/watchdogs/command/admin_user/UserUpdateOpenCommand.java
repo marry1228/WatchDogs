@@ -1,4 +1,4 @@
-package com.watchdogs.command.adminpage;
+package com.watchdogs.command.admin_user;
 
 import java.io.IOException;
 

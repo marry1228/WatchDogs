@@ -1,10 +1,6 @@
-<<<<<<< Updated upstream:src/main/java/com/watchdogs/dto/jp/BDto.java
-package com.jsplec.bbs.dto.jp;
-=======
-package com.watchdogs.dto;
->>>>>>> Stashed changes:src/main/java/com/watchdogs/dto/BDto.java
 
-import java.sql.Timestamp;
+package com.watchdogs.dto;
+
 
 public class BDto { // 자바에서 Bin 역할. MVC 에서는 Dto
 	String bId;

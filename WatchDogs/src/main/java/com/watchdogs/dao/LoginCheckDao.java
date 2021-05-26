@@ -47,18 +47,34 @@ public class LoginCheckDao {
 			while(resultSet.next()) {
 				bPW = resultSet.getString("userpw"); 
 			}
+			
+			preparedStatement.close();
+			resultSet.close();
 		
 			System.out.println("입력한 비밀번호 = " + inputPW +" 그리고 받은 비밀번호 = " + bPW );	
 			
 			if(inputPW.equals(bPW)) {
-				result = "success";
+				result = "successUser";
 			}else {
-				result = "failure";
+				query = "select adpw from admin where adid = ?" ;
+				preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setString(1, inputID);
+				resultSet = preparedStatement.executeQuery();
+				
+				while(resultSet.next()) {
+					bPW = resultSet.getString("adpw"); 
+				}
+				
+				System.out.println("입력한 비밀번호 = " + inputPW +" 그리고 받은 비밀번호 = " + bPW );
+				if(inputPW.equals(bPW)) {
+					result = "successAdmin";
+				}else {
+					result = "";
+				}			
 			}
 			
 		} catch (Exception e) {
-			System.out.println("에러코드1");
-			result = "fail";
+			result = "";
 			e.printStackTrace();
 		}finally { // 메모리에서 정리 
 			try {
@@ -66,6 +82,7 @@ public class LoginCheckDao {
 				if(preparedStatement != null) preparedStatement.close();
 				if(connection != null) connection.close();
 			} catch (Exception e) {
+				result = "";
 				e.printStackTrace();
 			}
 		}

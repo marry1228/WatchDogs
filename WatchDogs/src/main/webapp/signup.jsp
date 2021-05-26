@@ -13,7 +13,7 @@
             <div class="form-wrap">
 
                 <div class="icon">
-                    <img src="images/logo.png" width="150px" height="100px" alt="WatchDogs">
+                    <a href="home.jsp"><img src="images/logo.png" width="150px" height="100px" alt="WatchDogs"></a>
                 </div>
 
                 <form id="left" action="signupfunction.wd" class="input-group" method="post">

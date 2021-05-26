@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.watchdogs.command.home.BCommand;
-import com.watchdogs.dao.he.NoticeDao;
-import com.watchdogs.dto.he.NoticeDto;
+import com.watchdogs.dao.NoticeDao;
+import com.watchdogs.dto.NoticeDto;
 
 public class NoticeListCommand implements BCommand {
 

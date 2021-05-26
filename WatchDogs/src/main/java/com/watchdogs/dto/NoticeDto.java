@@ -1,4 +1,4 @@
-package com.watchdogs.dto.he;
+package com.watchdogs.dto;
 
 
 public class NoticeDto {

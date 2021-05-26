@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.watchdogs.command.home.BCommand;
-import com.watchdogs.dao.he.NoticeDao;
-import com.watchdogs.dto.he.NoticeDto;
+import com.watchdogs.dao.NoticeDao;
+import com.watchdogs.dto.NoticeDto;
 
 public class NoticeDetailViewCommand implements BCommand {
 	/*/

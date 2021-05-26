@@ -1,4 +1,4 @@
-package com.watchdogs.command.adminpage;
+package com.watchdogs.command.admin_review;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

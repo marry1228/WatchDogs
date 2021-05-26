@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.watchdogs.command.home.BCommand;
-import com.watchdogs.dao.he.ReviewDao;
-import com.watchdogs.dto.he.ReviewDto;
+import com.watchdogs.dao.ReviewDao;
+import com.watchdogs.dto.ReviewDto;
 
 public class ReviewModifyCommand implements BCommand {
 

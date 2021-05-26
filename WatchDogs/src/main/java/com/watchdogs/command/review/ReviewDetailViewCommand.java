@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.watchdogs.command.home.BCommand;
-import com.watchdogs.dao.he.ReviewDao;
-import com.watchdogs.dto.he.ReviewDto;
+import com.watchdogs.dao.ReviewDao;
+import com.watchdogs.dto.ReviewDto;
 
 public class ReviewDetailViewCommand implements BCommand {
 

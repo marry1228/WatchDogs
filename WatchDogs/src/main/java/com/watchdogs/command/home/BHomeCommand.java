@@ -9,10 +9,10 @@ public class BHomeCommand implements BCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		String str = "";
-		
-		HttpSession hsession = request.getSession(true);
-		hsession.setAttribute("userid", str); // session 초기화
+//		String str = "";
+//		
+//		HttpSession hsession = request.getSession(true);
+//		hsession.setAttribute("userid", str); // session 초기화
 	}
 
 }

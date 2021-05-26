@@ -1,4 +1,4 @@
-package com.watchdogs.command.adminpage;
+package com.watchdogs.command.admin_user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,10 +17,9 @@ public class UserInsertCommand implements BCommand {
 		String userTel = request.getParameter("userTel");
 		String userEmail = request.getParameter("userEmail");
 		String userName = request.getParameter("userName");
-		String adminID = request.getParameter("adminID");
 		
 		DaoUser daoUser = new DaoUser();
-		daoUser.insert(userId, userPw, userTel, userEmail, userName, adminID);
+		daoUser.insert(userId, userPw, userTel, userEmail, userName);
 	}
 
 }

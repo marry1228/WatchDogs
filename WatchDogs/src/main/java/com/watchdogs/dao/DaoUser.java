@@ -34,7 +34,7 @@ public class DaoUser {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "select userid, userpw, usertel, useremail, username, userdate, userdeldate, admin_adid from user"; // 속성명에 유의! 
+			String query = "select userid, userpw, usertel, useremail, username, userdate, userdeldate from user"; // 속성명에 유의! 
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -46,11 +46,10 @@ public class DaoUser {
 				String username = resultSet.getString("username"); // 속성 명에 유의! 
 				String userdate = resultSet.getString("userdate"); // 속성 명에 유의! 
 				String userdeldate = resultSet.getString("userdeldate"); // 속성 명에 유의! 
-				String admin_adid = resultSet.getString("admin_adid"); // 속성 명에 유의! 
 
 				System.out.println(" Id = " + userid); // 테스트 용
 				
-				DtoUser dto = new DtoUser(userid, userpw, usertel, useremail, username, userdate, userdeldate, admin_adid);
+				DtoUser dto = new DtoUser(userid, userpw, usertel, useremail, username, userdate, userdeldate);
 				dtos.add(dto);
 				
 				
@@ -81,7 +80,7 @@ public class DaoUser {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "select userid, userpw, usertel, useremail, username, userdate, userdeldate, admin_adid from user where userid = ?"; // 속성명에 유의! 
+			String query = "select userid, userpw, usertel, useremail, username, userdate, userdeldate  from user where userid = ?"; // 속성명에 유의! 
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, userId);
 			resultSet = preparedStatement.executeQuery();
@@ -94,11 +93,10 @@ public class DaoUser {
 				String username = resultSet.getString("username"); // 속성 명에 유의! 
 				String userdate = resultSet.getString("userdate"); // 속성 명에 유의! 
 				String userdeldate = resultSet.getString("userdeldate"); // 속성 명에 유의! 
-				String admin_adid = resultSet.getString("admin_adid"); // 속성 명에 유의! 
 				
 				System.out.println(" Id = " + userId); // 테스트 용
 				
-				dto = new DtoUser(userid, userpw, usertel, useremail, username, userdate, userdeldate, admin_adid);
+				dto = new DtoUser(userid, userpw, usertel, useremail, username, userdate, userdeldate);
 				
 			}
 			
@@ -124,7 +122,7 @@ public class DaoUser {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "update user set userid = ?, userpw = ?, usertel = ?, useremail = ?, username = ?, userdate = ?, userdeldate = ?, admin_adid = ? where userid = ?";
+			String query = "update user set userid = ?, userpw = ?, usertel = ?, useremail = ?, username = ?, userdate = ?, userdeldate = ? where userid = ?";
 			preparedStatement = connection.prepareStatement(query);
 			
 			preparedStatement.setString(1, userId);
@@ -134,8 +132,7 @@ public class DaoUser {
 			preparedStatement.setString(5, userName);
 			preparedStatement.setString(6, userDate);
 			preparedStatement.setString(7, userDelDate);
-			preparedStatement.setString(8, adminID);
-			preparedStatement.setString(9, userId);
+			preparedStatement.setString(8, userId);
 			
 			preparedStatement.executeUpdate();
 			
@@ -203,14 +200,14 @@ public class DaoUser {
 		}
 	}
 	
-	public void insert(String userId, String userPw, String userTel, String userEmail, String userName, String adminID) {
+	public void insert(String userId, String userPw, String userTel, String userEmail, String userName) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "insert into user (userid, userpw, usertel, useremail, username, userdate, admin_adid) values (?,?,?,?,?,now(),?)";
+			String query = "insert into user (userid, userpw, usertel, useremail, username, userdate) values (?,?,?,?,?,now())";
 			preparedStatement = connection.prepareStatement(query);
 			
 			preparedStatement.setString(1, userId);
@@ -218,7 +215,6 @@ public class DaoUser {
 			preparedStatement.setString(3, userTel);
 			preparedStatement.setString(4, userEmail);
 			preparedStatement.setString(5, userName);
-			preparedStatement.setString(6, adminID);
 			
 			preparedStatement.executeUpdate();
 			

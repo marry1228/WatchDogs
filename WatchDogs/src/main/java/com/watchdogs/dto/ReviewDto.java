@@ -1,4 +1,4 @@
-package com.watchdogs.dto.he;
+package com.watchdogs.dto;
 
 
 public class ReviewDto { // 자바에서 Bean 역할. MVC 에서는 Dto : 불러오기 등 DB 값 가져올때 사용 (임시저장소)

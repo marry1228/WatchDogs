@@ -1,4 +1,4 @@
-package com.watchdogs.command.trainerpage;
+package com.watchdogs.command.admin_trainer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

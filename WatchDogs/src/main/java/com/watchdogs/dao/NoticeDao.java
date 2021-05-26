@@ -1,4 +1,4 @@
-package com.watchdogs.dao.he;
+package com.watchdogs.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.watchdogs.dto.he.NoticeDto;
+import com.watchdogs.dto.NoticeDto;
 
 
 public class NoticeDao {

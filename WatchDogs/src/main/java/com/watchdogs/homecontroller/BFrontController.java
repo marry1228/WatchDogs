@@ -10,28 +10,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.watchdogs.command.admin.AdminOpenCommand;
-import com.watchdogs.command.admin.DocumentDeleteCommand;
-import com.watchdogs.command.admin.DocumentInsertCommand;
-import com.watchdogs.command.admin.DocumentUpdateCommand;
-import com.watchdogs.command.admin.DocumentUpdateOpenCommand;
-import com.watchdogs.command.admin.DogDeleteCommand;
-import com.watchdogs.command.admin.DogInsertCommand;
-import com.watchdogs.command.admin.DogUpdateCommand;
-import com.watchdogs.command.admin.DogUpdateOpenCommand;
-import com.watchdogs.command.admin.TrainerDeleteCommand;
-import com.watchdogs.command.admin.TrainerInsertCommand;
-import com.watchdogs.command.admin.TrainerUpdateCommand;
-import com.watchdogs.command.admin.TrainerUpdateOpenCommand;
-import com.watchdogs.command.admin.UserDeleteCommand;
-import com.watchdogs.command.admin.UserInsertCommand;
-import com.watchdogs.command.admin.UserUpdateCommand;
-import com.watchdogs.command.admin.UserUpdateOpenCommand;
+
+import com.watchdogs.command.admin.AdminPageOpenCommand;
+import com.watchdogs.command.admin_trainer.TrainerPageOpenCommand;
+import com.watchdogs.command.admin_user.UserPageOpenCommand;
+import com.watchdogs.command.admin_user.UserDeleteCancelCommand;
+import com.watchdogs.command.admin_notice.NoticeDeleteCancelCommand;
+import com.watchdogs.command.admin_notice.NoticeDeleteCommand;
+import com.watchdogs.command.admin_notice.NoticeInsertCommand;
+import com.watchdogs.command.admin_notice.NoticeUpdateCommand;
+import com.watchdogs.command.admin_notice.NoticeUpdateOpenCommand;
+import com.watchdogs.command.admin_review.ReviewDeleteCommandInAdmin;
+import com.watchdogs.command.admin_review.ReviewDeleteCancelCommandInAdmin;
+import com.watchdogs.command.admin_review.ReviewInsertCommand;
+import com.watchdogs.command.admin_review.ReviewUpdateCommand;
+import com.watchdogs.command.admin_review.ReviewUpdateOpenCommand;
+import com.watchdogs.command.admin_dog.DogDeleteCommand;
+import com.watchdogs.command.admin_dog.DogDeleteCancelCommand;
+import com.watchdogs.command.admin_dog.DogInsertCommand;
+import com.watchdogs.command.admin_dog.DogUpdateCommand;
+import com.watchdogs.command.admin_dog.DogUpdateOpenCommand;
+import com.watchdogs.command.admin_trainer.TrainerDeleteCommand;
+import com.watchdogs.command.admin_trainer.TrainerDeleteCancelCommand;
+import com.watchdogs.command.admin_trainer.TrainerInsertCommand;
+import com.watchdogs.command.admin_trainer.TrainerUpdateCommand;
+import com.watchdogs.command.admin_trainer.TrainerUpdateOpenCommand;
+import com.watchdogs.command.admin_user.UserDeleteCommand;
+import com.watchdogs.command.admin_user.UserInsertCommand;
+import com.watchdogs.command.admin_user.UserUpdateCommand;
+import com.watchdogs.command.admin_user.UserUpdateOpenCommand;
+import com.watchdogs.command.adopt.BAdoptSearchcommand;
 import com.watchdogs.command.adopt.BAdoptcommand;
 import com.watchdogs.command.adopt.BAdoptcomplete_02coammand;
 import com.watchdogs.command.adopt.BAdoptcompletecoammand;
+import com.watchdogs.command.adopt.BAdoptimginsertcommand;
 import com.watchdogs.command.adopt.BAdoptproceeding_02command;
 import com.watchdogs.command.adopt.BAdoptproceedingcommand;
+import com.watchdogs.command.adopt.BAdopttrainingcommand;
+import com.watchdogs.command.adopt.BAdopttrainingcommand_02;
 import com.watchdogs.command.adopt.BAdoptwait_02command;
 import com.watchdogs.command.home.BCommand;
 import com.watchdogs.command.home.BHomeCommand;
@@ -47,7 +63,7 @@ import com.watchdogs.command.review.ReviewMdViewCommand;
 import com.watchdogs.command.review.ReviewModifyCommand;
 import com.watchdogs.command.review.ReviewWriteCommand;
 import com.watchdogs.command.signup.SignUpCommand;
-import com.watchdogs.command.trainerlist.TrainerListOpenCommand;
+import com.watchdogs.command.admin_trainer.TrainerListOpenCommand;
 
 /**
  * Servlet implementation class BFrontController
@@ -117,13 +133,19 @@ public class BFrontController extends HttpServlet {
 				HttpSession hsession = request.getSession(true);
 				String result = (String)hsession.getAttribute("result");
 
-				if(result.equals("success")) { // 로그인 성공 
+				if(result.equals("successUser")) { // 유저 로그인 성공 
 					hsession.setAttribute("userid", request.getParameter("userid"));
+					hsession.setAttribute("usertype", "user");
 					viewPage ="home.jsp";
-				}else { // 로그인 실패
+				}else if (result.equals("successAdmin")){ // 관리자 로그인 성공
+					hsession.setAttribute("userid", request.getParameter("userid"));
+					hsession.setAttribute("usertype", "admin");
+					viewPage ="home.jsp";
+				} else{// 로그인 실패
 					viewPage ="loginpop.jsp";
 				}
 				break;
+				
 	      case("/signup.wd"):  // 회원가입 화면
 	    	  viewPage ="signup.jsp";
 	      		break;
@@ -131,7 +153,8 @@ public class BFrontController extends HttpServlet {
 	    	  command = new SignUpCommand();
 			    command.execute(request, response);
 			    viewPage ="home.jsp";
-			    break;	    
+			    break;	
+
 	      case("/lookupidpw.wd"):  // 아이디,비밀번호 찾기 페이지
 	    	  	viewPage ="lookup.jsp";
 	      		break;
@@ -162,13 +185,8 @@ public class BFrontController extends HttpServlet {
 	      		viewPage ="trainerList.jsp";
 	      		break;	      		
 	      case("/notice.wd"):  // 게시판 페이지
-	    	  viewPage ="notice.jsp";
+	    	  viewPage ="nolist.jsp";
 	      break;	      
-	      case("/admin.wd"):  // admin 페이지
-	    	  	command = new AdminOpenCommand();
-	      		command.execute(request, response);
-				viewPage ="admin.jsp";
-				break;
 	     
 //				--메인 메뉴 리스트 끝!
 			
@@ -180,8 +198,11 @@ public class BFrontController extends HttpServlet {
 	      case("/reviewlist.wd"): // 게시판 후기 페이지
 			   command = new ReviewListCommand();
 			   command.execute(request, response);
-			   viewPage = "reviewlist.jsp"; 
+			   viewPage = "reviewlist.jsp";  
 			   break;
+	       case("/review.wd"):	//후기작성 입력 화면만 띄우기
+				viewPage = "review_write.jsp";
+				break;
 	      case("/review_write.wd"): // 작성 후 다시 후기 페이지로
 				command = new ReviewWriteCommand();
 				command.execute(request, response);
@@ -197,11 +218,18 @@ public class BFrontController extends HttpServlet {
 				command.execute(request, response);
 				viewPage = "reviewlist.wd";
 				break;	
-		  	case("/reviewdelete.wd"): // 후기 상세 페이지에서 삭제 눌러 삭제후 목록으로
+		  	case("/review_mdview.wd")://수정페이지 분할
+				command = new ReviewMdViewCommand();
+				command.execute(request, response);
+				viewPage = "review_mdview.jsp";
+				break;
+			case("/reviewdelete.wd"): // 후기 상세 페이지에서 삭제 눌러 삭제후 목록으로
 				command = new ReviewDeleteCommand();
 				command.execute(request, response);
 				viewPage = "reviewlist.wd";
-				break;	
+				break;
+		  	
+				
 		  	case("/noticelist.wd"): // 공지 목록 보기
 				   command = new NoticeListCommand();
 				   command.execute(request, response);
@@ -212,22 +240,34 @@ public class BFrontController extends HttpServlet {
 				command.execute(request, response);
 				viewPage = "notice_detailview.jsp";
 				break;
-		  	case("/review_mdview.wd"):
-				System.out.print("1");
-				command = new ReviewMdViewCommand();
-				System.out.print("2");
-				command.execute(request, response);
-				System.out.print("3");
-				viewPage = "review_mdview.jsp";
-				break;
+
 				
 //				--게시판 페이지 끝!
 				
+//				마이페이지(어드민, 트레이너, 유저)
+		     case("/longintypecheck.wd"):  // longintypecheck 페이지 
+		      		viewPage ="logintypecheck.jsp";
+	      			break;
+		      case("/adminpage.wd"):  // admin 페이지 
+		    	  	command = new AdminPageOpenCommand();
+		      		command.execute(request, response);
+	      			viewPage ="adminpage.jsp";
+	      			break;
+		      case("/trainerpage.wd"):  // trainer 페이지 
+		    	  	command = new TrainerPageOpenCommand();
+		      		command.execute(request, response);
+	      			viewPage ="trainerpage.jsp";
+	      			break;
+		      case("/userpage.wd"):  // user 페이지 
+		    	  	command = new UserPageOpenCommand();
+		      		command.execute(request, response);
+					viewPage ="userpage.jsp";
+					break;				
 	      
 	      
 //			--트레이너 페이지 시작!
 
-	      case("/trainerUpdateOpen.wd"):  
+	  	 case("/trainerUpdateOpen.wd"):  
 	    	  	command = new TrainerUpdateOpenCommand();
 	      		command.execute(request, response);
 	      		viewPage ="trainerUpdate.jsp";
@@ -235,7 +275,7 @@ public class BFrontController extends HttpServlet {
 	      case("/trainerUpdate.wd"):  
 	    	  	command = new TrainerUpdateCommand();
 	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
+	      		viewPage ="adminpage.wd";
     			break;
 	      case("/trainerInsertOpen.wd"):  
 	      		viewPage ="trainerInsert.jsp";
@@ -243,13 +283,18 @@ public class BFrontController extends HttpServlet {
 	      case("/trainerInsert.wd"):  
 	    	  	command = new TrainerInsertCommand();
 	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
+	      		viewPage ="adminpage.wd";
     			break;
 	      case("/trainerDelete.wd"):  
 	    	  	command = new TrainerDeleteCommand();
 	      		command.execute(request, response);
-    			viewPage ="admin.wd";
+    			viewPage ="adminpage.wd";
     			break;
+	      case("/trainerDeleteCancel.wd"):  
+	    	  	command = new TrainerDeleteCancelCommand();
+	      		command.execute(request, response);
+	      		viewPage ="adminpage.wd";
+	      		break;
     			
 //    			--트레이너 페이지 끝!
     			
@@ -264,7 +309,7 @@ public class BFrontController extends HttpServlet {
 	      case("/dogUpdate.wd"):  
 	    	  	command = new DogUpdateCommand();
 	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
+	      		viewPage ="adminpage.wd";
 	      		break;
 	      case("/dogInsertOpen.wd"):  
 	    	  	viewPage ="dogInsert.jsp";
@@ -272,43 +317,82 @@ public class BFrontController extends HttpServlet {
 	      case("/dogInsert.wd"):  
 	    	  	command = new DogInsertCommand();
 	      		command.execute(request, response);
-    			viewPage ="admin.wd";
-    			break;
+  			viewPage ="adminpage.wd";
+  			break;
 	      case("/dogDelete.wd"):  
 	    	  	command = new DogDeleteCommand();
 	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
+	      		viewPage ="adminpage.wd";
 	      		break;
+	      case("/dogDeleteCancel.wd"):  
+	    	  	command = new DogDeleteCancelCommand();
+	      		command.execute(request, response);
+				viewPage ="adminpage.wd";
+				break;
 //    			-- 어드민_강아지 관리 기능 끝! 		      		
 	      		
+//    			-- 어드민_게시판(공지, 리뷰) 관리 기능 시작! 		      		// jy수정5/24
+	      case("/noticeUpdateOpen.wd"):  
+	    	  	command = new NoticeUpdateOpenCommand();
+	      		command.execute(request, response);
+	      		viewPage ="noticeUpdate.jsp";
+	      		break;
+	      case("/noticeUpdate.wd"):  
+	    	  	command = new NoticeUpdateCommand();
+	      		command.execute(request, response);
+	      		viewPage ="adminpage.wd";
+	      		break;
+	      case("/noticeInsertOpen.wd"):  
+	    	  	viewPage ="noticeInsert.jsp";
+	      		break;
+	      case("/noticeInsert.wd"):  
+	    	  	command = new NoticeInsertCommand();
+	      		command.execute(request, response);
+	      		viewPage ="adminpage.wd";
+	      		break;
+	      case("/noticeDelete.wd"):  
+	    	  	command = new NoticeDeleteCommand();
+	      		command.execute(request, response);
+	      		viewPage ="adminpage.wd";
+	      		break;
+	      case("/noticeDeleteCancel.wd"):  
+	    	  	command = new NoticeDeleteCancelCommand();
+	      		command.execute(request, response);
+	      		viewPage ="adminpage.wd";
+	      		break;
 	      		
-//    			-- 어드민_게시판(공지, 리뷰) 관리 기능 시작! 		      		
-	      case("/documentUpdateOpen.wd"):  
-	    	  	command = new DocumentUpdateOpenCommand();
-	      		command.execute(request, response);
-	      		viewPage ="documentUpdate.jsp";
-	      		break;
-	      case("/documentUpdate.wd"):  
-	    	  	command = new DocumentUpdateCommand();
-	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
-	      		break;
-	      case("/documentInsertOpen.wd"):  
-	    	  	viewPage ="documentInsert.jsp";
-	      		break;
-	      case("/documentInsert.wd"):  
-	    	  	command = new DocumentInsertCommand();
-	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
-	      		break;
-	      case("/documentDelete.wd"):  
-	    	  	command = new DocumentDeleteCommand();
-	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
-	      		break;
-//    			-- 어드민_게시판(공지, 리뷰) 관리 기능 끝! 		       		
 	      		
-	      		
+	   // 관리자 리뷰   		
+	      case("/reviewUpdateOpen.wd"):  
+	    	  	command = new ReviewUpdateOpenCommand();
+	      		command.execute(request, response);
+      			viewPage ="reviewUpdate.jsp";
+      			break;
+	      case("/reviewUpdate.wd"):  
+	    	  	command = new ReviewUpdateCommand();
+	      		command.execute(request, response);
+      			viewPage ="adminpage.wd";
+      			break;
+	      case("/reviewInsertOpen.wd"):  
+	    	  	viewPage ="reviewInsert.jsp";
+	      		break;
+	      case("/reviewInsert.wd"):  
+	    	  	command = new ReviewInsertCommand();
+	      		command.execute(request, response);
+      			viewPage ="adminpage.wd";
+      			break;
+	      case("/reviewDeleteInAdmin.wd"):  
+	    	  	command = new ReviewDeleteCommandInAdmin();
+	      		command.execute(request, response);
+	      		viewPage ="adminpage.wd";
+	      		break;
+	      case("/reviewDeleteCancelInAdmin.wd"):  
+	    	  	command = new ReviewDeleteCancelCommandInAdmin();
+	      		command.execute(request, response);
+      			viewPage ="adminpage.wd";
+      			break;
+//    			-- 어드민_게시판(공지, 리뷰) 관리 기능 끝! 		      		
+      		
 	      		
 //    			-- 어드민_유저 관리 기능 시작! 		 
 	      case("/userUpdateOpen.wd"):  
@@ -319,7 +403,7 @@ public class BFrontController extends HttpServlet {
 	      case("/userUpdate.wd"):  
 	    	  	command = new UserUpdateCommand();
 	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
+	      		viewPage ="adminpage.wd";
 	      		break;
 	      case("/userInsertOpen.wd"):  
 	    	  	viewPage ="userInsert.jsp";
@@ -327,12 +411,17 @@ public class BFrontController extends HttpServlet {
 	      case("/userInsert.wd"):  
 	    	  	command = new UserInsertCommand();
 	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
+	      		viewPage ="adminpage.wd";
 	      		break;
 	      case("/userDelete.wd"):  
 	    	  	command = new UserDeleteCommand();
 	      		command.execute(request, response);
-	      		viewPage ="admin.wd";
+	      		viewPage ="adminpage.wd";
+	      		break;
+	      case("/userDeleteCancel.wd"):  
+	    	  	command = new UserDeleteCancelCommand();
+	      		command.execute(request, response);
+	      		viewPage ="adminpage.wd";
 	      		break;
 //    			-- 어드민_유저 관리 기능 끝!      		
 	    
@@ -373,8 +462,44 @@ public class BFrontController extends HttpServlet {
 	    	  command = new BAdoptproceeding_02command() ;
 		      viewPage = "adoptproceeding_02.jsp";
 		      command.execute(request, response);
+		      
 		      break;	
-//	      		-- 입얍 페이지 끝!
+	      case("/adopttraining.wd") :                 // 입양카테고리 훈련 중
+	    	  command = new BAdopttrainingcommand() ;
+	          viewPage = "adopttraining.jsp";
+	         command.execute(request, response);
+	      break; 
+	      case("/adopttraining_02.wd") :                 // 입양카테고리 훈련 중  강아지 상세정보
+		      command = new BAdopttrainingcommand_02() ;
+		      viewPage = "adopttraining_02.jsp";
+		      command.execute(request, response);
+	      break;
+	      case("/adoptwaitSearch.wd") :                 // 입양카테고리 가능 검색
+	    	  command = new BAdoptSearchcommand();
+		      viewPage = "adoptwait.jsp";
+		      command.execute(request, response);
+	      break;
+	      case("/adoptproceedingSearch.wd") :                 // 입양카테고리 진행 검색
+	    	  command = new BAdoptSearchcommand();
+		      viewPage = "adoptproceeding.jsp";
+		      command.execute(request, response);
+	      break;
+	      case("/adoptcompleteSearch.wd") :                 // 입양카테고리 완료 검색
+	    	  command = new BAdoptSearchcommand();
+		      viewPage = "adoptcomplete.jsp";
+		      command.execute(request, response);
+	      break;
+	      case("/adopttrainingSearch.wd") :                 // 입양카테고리 훈련 중 검색
+	    	  command = new BAdoptSearchcommand();
+		      viewPage = "adopttraining.jsp";
+		      command.execute(request, response);
+	      break;    
+	      case("/adoptimginsert.wd") :                 // 이미지 업로드하기
+	    	  command = new BAdoptimginsertcommand();
+		      viewPage = "adoptimginsert.jsp";
+		      command.execute(request, response);
+	      break;
+//	      		-- 입양 페이지 끝!
 		    
 	      }
 	      

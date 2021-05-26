@@ -9,7 +9,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.watchdogs.dto.DtoDocument;
 import com.watchdogs.dto.DtoTrainer;
 import com.watchdogs.dto.DtoUser;
 
