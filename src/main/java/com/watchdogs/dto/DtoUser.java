@@ -26,6 +26,15 @@ public class DtoUser {
 		this.userDelDate = userDelDate;
 		this.adminID = adminID;
 	}
+	
+	public DtoUser(String userId, String userEmail, String userName,
+			String userDelDate) {
+		super();
+		this.userId = userId;
+		this.userEmail = userEmail;
+		this.userName = userName;
+		this.userDelDate = userDelDate;
+	}
 
 	public String getUserId() {
 		return userId;

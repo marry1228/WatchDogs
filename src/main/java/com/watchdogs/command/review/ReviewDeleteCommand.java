@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.watchdogs.command.home.BCommand;
-import com.watchdogs.dao.ReviewDao;
+import com.watchdogs.dao.he.ReviewDao;
 
 public class ReviewDeleteCommand implements BCommand {
 
@@ -13,10 +13,10 @@ public class ReviewDeleteCommand implements BCommand {
 		// TODO Auto-generated method stub
 		
 		//docid는 삭제하지 않지만 참조값
-			String docid = request.getParameter("docid");
+			String reid = request.getParameter("reid");
 		
 			ReviewDao dao = new ReviewDao();
-			dao.reviewDelete(docid);
+			dao.reviewDelete(reid);
 		
 
 	}

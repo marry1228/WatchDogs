@@ -35,24 +35,27 @@ public class DaoDog {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "select dogid, dogname, dogtrainst, dogadoptst, dogdate, dogadoptdate, dogtraincomm, admin_adid, trainer_trid from dog"; // 속성명에 유의! 
+			String query = "select dogid, dogname, dogtype, dogmf, dogage, dogadoptst, dogdate, dogadoptdate, dogfilepath, dogtraincomm, adid, trid from dog"; // 속성명에 유의! 
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
 				int dogid = resultSet.getInt("dogid"); // 속성 명에 유의! 
 				String dogname = resultSet.getString("dogname"); // 속성 명에 유의! 
-				String dogtrainst = resultSet.getString("dogtrainst"); // 속성 명에 유의! 
+				String dogtype = resultSet.getString("dogtype"); // 속성 명에 유의! 
+				String dogmf = resultSet.getString("dogmf"); // 속성 명에 유의! 
+				String dogage = resultSet.getString("dogage"); // 속성 명에 유의! 
 				String dogadoptst = resultSet.getString("dogadoptst"); // 속성 명에 유의! 
 				String dogdate = resultSet.getString("dogdate"); // 속성 명에 유의! 
 				String dogadoptdate = resultSet.getString("dogadoptdate"); // 속성 명에 유의! 
+				String dogfilepath = resultSet.getString("dogfilepath"); // 속성 명에 유의! 
 				String dogtraincomm = resultSet.getString("dogtraincomm"); // 속성 명에 유의! 
-				String admin_adid = resultSet.getString("admin_adid"); // 속성 명에 유의! 
-				String trainer_trid = resultSet.getString("trainer_trid"); // 속성 명에 유의! 
+				String adid = resultSet.getString("adid"); // 속성 명에 유의! 
+				String trid = resultSet.getString("trid"); // 속성 명에 유의! 
 
 				System.out.println(" Id = " + dogid); // 테스트 용
 				
-				DtoDog dto = new DtoDog(dogid, dogname, dogtrainst, dogadoptst, dogdate, dogadoptdate, dogtraincomm, admin_adid, trainer_trid);
+				DtoDog dto = new DtoDog(dogid, dogname, dogtype, dogmf, dogage, dogadoptst, dogdate, dogadoptdate, dogfilepath, dogtraincomm, adid, trid);
 				dtos.add(dto);
 				
 				
@@ -83,7 +86,7 @@ public class DaoDog {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "select dogid, dogname, dogtrainst, dogadoptst, dogdate, dogadoptdate, dogtraincomm, admin_adid, trainer_trid from dog where dogid = ?"; // 속성명에 유의! 
+			String query = "select dogid, dogname, dogtype, dogmf, dogage, dogadoptst, dogdate, dogadoptdate, dogfilepath, dogtraincomm, adid, trid from dog where dogid = ?"; // 속성명에 유의! 
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, dogId);
 			resultSet = preparedStatement.executeQuery();
@@ -91,17 +94,20 @@ public class DaoDog {
 			if(resultSet.next()) {
 				int dogid = resultSet.getInt("dogid"); // 속성 명에 유의! 
 				String dogname = resultSet.getString("dogname"); // 속성 명에 유의! 
-				String dogtrainSt = resultSet.getString("dogtrainst"); // 속성 명에 유의! 
+				String dogtype = resultSet.getString("dogtype"); // 속성 명에 유의! 
+				String dogmf = resultSet.getString("dogmf"); // 속성 명에 유의! 
+				String dogage = resultSet.getString("dogage"); // 속성 명에 유의! 
 				String dogadoptst = resultSet.getString("dogadoptst"); // 속성 명에 유의! 
 				String dogdate = resultSet.getString("dogdate"); // 속성 명에 유의! 
 				String dogadoptdate = resultSet.getString("dogadoptdate"); // 속성 명에 유의! 
+				String dogfilepath = resultSet.getString("dogfilepath"); // 속성 명에 유의! 
 				String dogtraincomm = resultSet.getString("dogtraincomm"); // 속성 명에 유의! 
-				String admin_adid = resultSet.getString("admin_adid"); // 속성 명에 유의! 
-				String trainer_trid = resultSet.getString("trainer_trid"); // 속성 명에 유의! 
+				String adid = resultSet.getString("adid"); // 속성 명에 유의! 
+				String trid = resultSet.getString("trid"); // 속성 명에 유의! 
 				
 				System.out.println(" Id = " + dogid); // 테스트 용
 				
-				dto = new DtoDog(dogid, dogname, dogtrainSt, dogadoptst, dogdate, dogadoptdate, dogtraincomm, admin_adid, trainer_trid);
+				dto = new DtoDog(dogid, dogname, dogtype, dogmf, dogage, dogadoptst, dogdate, dogadoptdate, dogfilepath, dogtraincomm, adid, trid);
 				
 			}
 			
@@ -120,22 +126,22 @@ public class DaoDog {
 		
 	}
 	
-	public void update(int dogId, String dogName, String dogTrainSt, String dogAdoptSt, String dogDate, String dogAdoptDate, String dogTrainComm, String adminID, String trainerID) {
+	public void update(int dogId, String dogName, String dogType, String dogMF, String dogAge, String dogAdoptSt, String dogDate, String dogAdoptDate, String dogTrainComm, String adminID, String trainerID, String dogFilePath) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "update dog set dogid = ?, dogname = ?, dogtrainst = ?, dogadoptst = ?, dogdate = ?, dogadoptdate = ?, dogtraincomm = ?, admin_adid = ?, trainer_trid = ? where dogid = ?";
+			String query = "update dog set dogname = ?, dogtype = ?, dogmf = ?, dogage = ?, dogadoptst = ?, dogfilepath = ?, dogtraincomm = ?, adid = ?, trid = ? where dogid = ?";
 			preparedStatement = connection.prepareStatement(query);
 			
-			preparedStatement.setInt(1, dogId);
-			preparedStatement.setString(2, dogName);
-			preparedStatement.setString(3, dogTrainSt);
-			preparedStatement.setString(4, dogAdoptSt);
-			preparedStatement.setString(5, dogDate);
-			preparedStatement.setString(6, dogAdoptDate);
+			preparedStatement.setString(1, dogName);
+			preparedStatement.setString(2, dogType);
+			preparedStatement.setString(3, dogMF);
+			preparedStatement.setString(4, dogAge);
+			preparedStatement.setString(5, dogAdoptSt);
+			preparedStatement.setString(6, dogFilePath);
 			preparedStatement.setString(7, dogTrainComm);
 			preparedStatement.setString(8, adminID);
 			preparedStatement.setString(9, trainerID);
@@ -181,19 +187,49 @@ public class DaoDog {
 		}
 	}
 	
-	public void insert(String dogName, String adminID, String trainerID) {
+	public void deletecancel(int dogId) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "insert into dog (dogname, dogtrainst, dogadoptst, dogdate, admin_adid, trainer_trid) values (?,'훈련중','훈련중',now(),?,?)";
+			String query = "update dog set dogadoptst = '입양진행중', dogadoptdate = null where dogid = ?";
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setInt(1, dogId);
+			
+			preparedStatement.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void insert(String dogName, String dogType, String dogMF, String dogAge, String adminID, String trainerID, String dogFilePath) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "insert into dog (dogname, dogtype, dogmf, dogage, dogadoptst, dogdate, dogfilepath, adid, trid) values (?,?,?,?,'훈련중',now(),?,?,?)";
 			preparedStatement = connection.prepareStatement(query);
 			
 			preparedStatement.setString(1, dogName);
-			preparedStatement.setString(2, adminID);
-			preparedStatement.setString(3, trainerID);
+			preparedStatement.setString(2, dogType);
+			preparedStatement.setString(3, dogMF);
+			preparedStatement.setString(4, dogAge);
+			preparedStatement.setString(5, dogFilePath);
+			preparedStatement.setString(6, adminID);
+			preparedStatement.setString(7, trainerID);
 			
 			preparedStatement.executeUpdate();
 			

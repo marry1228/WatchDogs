@@ -11,8 +11,62 @@ public class BDtoAdopt {
 	String dogtraincomm;
 	String doggender;
 	String trname;
-	int dogid;	                                                             
+	String dogmf;
+	String dogage;
+	String dogfilepath;
+	int dogid;	
+	String dogtype;
+	
+	
+	
+	
     
+	public BDtoAdopt(String dogname, String dogadopttst, String dogtraincomm, String trname,
+			String dogmf, String dogage, String dogfilepath, String dogtype, int dogid, Timestamp dogdate) {
+		super();
+		this.dogname = dogname;
+		this.dogadopttst = dogadopttst;
+		this.dogdate = dogdate;
+		this.dogtraincomm = dogtraincomm;
+		this.trname = trname;
+		this.dogmf = dogmf;
+		this.dogage = dogage;
+		this.dogfilepath = dogfilepath;
+		this.dogid = dogid;
+		this.dogtype = dogtype;
+	}
+
+
+
+
+
+
+
+
+
+
+	public BDtoAdopt(String dogname, String dogadopttst,  String dogtraincomm, String dogmf,
+			String dogage, String dogfilepath,Timestamp dogdate, int dogid) {
+		super();
+		this.dogname = dogname;
+		this.dogadopttst = dogadopttst;
+		this.dogdate = dogdate;
+		this.dogtraincomm = dogtraincomm;
+		this.dogmf = dogmf;
+		this.dogage = dogage;
+		this.dogfilepath = dogfilepath;
+		this.dogid = dogid;
+	}
+
+
+
+
+
+
+
+
+
+
 	public BDtoAdopt(String dogname, String dogadopttst, String dogtraincomm, String doggender,Timestamp dogdate,String trname) {
 		super();
 		this.dogname = dogname;
@@ -70,6 +124,33 @@ public class BDtoAdopt {
 	}
 	
 	
+	
+	public String getDogtype() {
+		return dogtype;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setDogtype(String dogtype) {
+		this.dogtype = dogtype;
+	}
+
+
+
+
+
+
+
+
+
+
 	public String getTrname() {
 		return trname;
 	}
@@ -82,6 +163,84 @@ public class BDtoAdopt {
 	public BDtoAdopt(String trname) {
 		super();
 		this.trname = trname;
+	}
+
+
+
+
+
+
+
+
+
+
+	public String getDogmf() {
+		return dogmf;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setDogmf(String dogmf) {
+		this.dogmf = dogmf;
+	}
+
+
+
+
+
+
+
+
+
+
+	public String getDogage() {
+		return dogage;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setDogage(String dogage) {
+		this.dogage = dogage;
+	}
+
+
+
+
+
+
+
+
+
+
+	public String getDogfilepath() {
+		return dogfilepath;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setDogfilepath(String dogfilepath) {
+		this.dogfilepath = dogfilepath;
 	}
 
 

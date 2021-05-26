@@ -19,7 +19,7 @@ public class BAdoptcomplete_02coammand implements BCommand {
 		    BDaoAdopt daoadopt = new BDaoAdopt();
 		    ArrayList<BDtoAdopt> dtosadopt = daoadopt.adoptcomplete_02(dogid);
 		    
-		    request.setAttribute("adoptcomplete_02", dtosadopt);
+		    request.setAttribute("adopt", dtosadopt);
             System.out.println("여기는 adoptcomplete_02 커멘드야");
 	}
 

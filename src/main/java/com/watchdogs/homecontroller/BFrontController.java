@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.watchdogs.command.admin.AdminOpenCommand;
 import com.watchdogs.command.admin.DocumentDeleteCommand;
@@ -34,18 +35,18 @@ import com.watchdogs.command.adopt.BAdoptproceedingcommand;
 import com.watchdogs.command.adopt.BAdoptwait_02command;
 import com.watchdogs.command.home.BCommand;
 import com.watchdogs.command.home.BHomeCommand;
-import com.watchdogs.command.home.BListCommand;
-import com.watchdogs.command.login.BLoginCheckCommand;
-import com.watchdogs.command.login.BLoginCommand;
+import com.watchdogs.command.login.LoginCheckCommand;
+import com.watchdogs.command.lookup.LookUpIdCommand;
+import com.watchdogs.command.lookup.LookUpPwCommand;
 import com.watchdogs.command.notice.NoticeDetailViewCommand;
 import com.watchdogs.command.notice.NoticeListCommand;
-import com.watchdogs.command.review.ReviewCountViewsCommand;
 import com.watchdogs.command.review.ReviewDeleteCommand;
 import com.watchdogs.command.review.ReviewDetailViewCommand;
-import com.watchdogs.command.review.ReviewDocidCommand;
 import com.watchdogs.command.review.ReviewListCommand;
+import com.watchdogs.command.review.ReviewMdViewCommand;
 import com.watchdogs.command.review.ReviewModifyCommand;
 import com.watchdogs.command.review.ReviewWriteCommand;
+import com.watchdogs.command.signup.SignUpCommand;
 import com.watchdogs.command.trainerlist.TrainerListOpenCommand;
 
 /**
@@ -92,9 +93,9 @@ public class BFrontController extends HttpServlet {
 	      String viewPage = null;
 	      BCommand command = null;
 	      
-	      System.out.println("getRequestURI = " + uri);
-	      System.out.println("getContextPath = " + conPath);
-	      System.out.println("URI - Path" + com); // 체크 용 
+//	      System.out.println("getRequestURI = " + uri);
+//	      System.out.println("getContextPath = " + conPath);
+//	      System.out.println("URI = " + com); 
 	      
 	      switch(com) {
 	      
@@ -103,33 +104,49 @@ public class BFrontController extends HttpServlet {
 				command = new BHomeCommand();
 				command.execute(request, response);
 				viewPage ="home.jsp";
-				break; 
-				
-				
+				break;
 				
 //			--로그인 기능 시작!			
-	      case("/login.wd"):  // 로그인 화면 + 회원가입 포함
-				command = new BLoginCommand();
-				command.execute(request, response);
+	      case("/login.wd"):  // 로그인 화면
 				viewPage ="login.jsp";
-				break;			
-	      case("/logincheck.wd"):  // 로그인 중간 과정
-				command = new BLoginCheckCommand();
-				command.execute(request, response);
-				viewPage ="logincheck.jsp";
 				break;
-	      case("/loginsuccess.wd"):  // 로그인 성공 시 홈 화면으로
-	    	  	viewPage ="home.jsp";
+	      case("/logincheck.wd"):  // 로그인 중간 과정
+				command = new LoginCheckCommand();
+				command.execute(request, response);
+				
+				HttpSession hsession = request.getSession(true);
+				String result = (String)hsession.getAttribute("result");
+
+				if(result.equals("success")) { // 로그인 성공 
+					hsession.setAttribute("userid", request.getParameter("userid"));
+					viewPage ="home.jsp";
+				}else { // 로그인 실패
+					viewPage ="loginpop.jsp";
+				}
+				break;
+	      case("/signup.wd"):  // 회원가입 화면
+	    	  viewPage ="signup.jsp";
 	      		break;
-	      case("/loginfailure.wd"):  // 로그인 실패 시 화면 
-	    	  	viewPage ="loginfailure.jsp";
+	      case("/signupfunction.wd"):  // 회원가입 기능
+	    	  command = new SignUpCommand();
+			    command.execute(request, response);
+			    viewPage ="home.jsp";
+			    break;	    
+	      case("/lookupidpw.wd"):  // 아이디,비밀번호 찾기 페이지
+	    	  	viewPage ="lookup.jsp";
 	      		break;
-	      case("/lookupid.wd"):  // 아이디 찾기 페이지
-	    	  viewPage ="lookupid.jsp";
-	      		break;		
-	      case("/lookuppw.wd"):  // 비밀번호 찾기 페이지
-	    	  viewPage ="lookuppw.jsp";
-	      		break;	
+	      case("/lookupidfunction.wd"):  // 아이디 찾기 기능
+	    		command = new LookUpIdCommand();
+				command.execute(request, response);
+				viewPage ="lookupidpop.jsp";
+				break;
+	      case("/lookuppwfunction.wd"):  // 비밀번호 찾기 기능
+	    	  	command = new LookUpPwCommand();
+	      		command.execute(request, response);
+	      		viewPage ="lookuppwpop.jsp";
+	      	break;
+	      		
+	      		
 //			--로그인 기능 끝!	 
 	      
 	      		
@@ -165,11 +182,6 @@ public class BFrontController extends HttpServlet {
 			   command.execute(request, response);
 			   viewPage = "reviewlist.jsp"; 
 			   break;
-	      case("/review.wd"):	// 후기 입력 페이지
-			    command = new ReviewDocidCommand();
-			    command.execute(request, response);
-				viewPage = "review_write.jsp";
-				break;
 	      case("/review_write.wd"): // 작성 후 다시 후기 페이지로
 				command = new ReviewWriteCommand();
 				command.execute(request, response);
@@ -190,16 +202,6 @@ public class BFrontController extends HttpServlet {
 				command.execute(request, response);
 				viewPage = "reviewlist.wd";
 				break;	
-		  	case("/fileupload.wd"): // 이미지 파일 불러오기 
-				command = new ReviewWriteCommand();
-				command.execute(request, response);
-				viewPage = "imgtest.jsp";  //여기로 가나 테스트
-				break;	
-		  	case("/countviews.wd"): // 조회수 작업  ---> 필요?
-				command = new ReviewCountViewsCommand();
-				command.execute(request, response);
-				viewPage = "reviewlist.wd";
-				break;
 		  	case("/noticelist.wd"): // 공지 목록 보기
 				   command = new NoticeListCommand();
 				   command.execute(request, response);
@@ -209,6 +211,14 @@ public class BFrontController extends HttpServlet {
 				command = new NoticeDetailViewCommand();
 				command.execute(request, response);
 				viewPage = "notice_detailview.jsp";
+				break;
+		  	case("/review_mdview.wd"):
+				System.out.print("1");
+				command = new ReviewMdViewCommand();
+				System.out.print("2");
+				command.execute(request, response);
+				System.out.print("3");
+				viewPage = "review_mdview.jsp";
 				break;
 				
 //				--게시판 페이지 끝!

@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.watchdogs.command.home.BCommand;
-import com.watchdogs.dao.NoticeDao;
-import com.watchdogs.dto.NoticeDto;
+import com.watchdogs.dao.he.NoticeDao;
+import com.watchdogs.dto.he.NoticeDto;
 
 public class NoticeListCommand implements BCommand {
 
@@ -35,24 +35,32 @@ public class NoticeListCommand implements BCommand {
 				e.printStackTrace();
 			}
 		}
+		
+		/*/
+		 * 2021.05. 23 권효은
+		 * 공지 목록 검색 
+		 */
+		String searchCategory = request.getParameter("searchCategory");  //검색목록 콤보박스 값 받아오기
+		String searchWord = request.getParameter("searchWord"); //입력받은 단어 받아오기
+		if(searchCategory == null || searchCategory.isEmpty()) {
+			searchCategory = "all"; 
+		}
+		if(searchWord == null || searchWord.isEmpty()) {
+			searchWord = "";
+		}
+		
 
 		int countrows = dao.countTotalRows(); //총 게시물 데이터 수
 		ArrayList<Integer> pageList = countPage(countrows);
 		session.setAttribute("pagelist", pageList); 
 		
-		ArrayList<NoticeDto> dtos = dao.noticeList(clickPage, numInAPage); // 해당 페이지에 알맞은 번호의 게시글
-		request.setAttribute("noticelist", dtos); //결과!
-
-		
-		/*/
-		 * 2021.05.20
-		 * 조회수 추가 
+		/*
+		 * 21.05.23 
+		 * 리스트 불러올때 페이지 + 조건검색 값으로 가져간다 (searchCategory, searchWord 추가)
 		 */
-		
-		String noticeid = request.getParameter("noticeid");
-		NoticeDao ndao = new NoticeDao();
-		int countviews = ndao.countViews(noticeid);
-		request.setAttribute("ncountviews", countviews);	
+		ArrayList<NoticeDto> dtos = dao.noticeList(clickPage, numInAPage, searchCategory, searchWord); // 해당 페이지에 알맞은 번호의 게시글
+		request.setAttribute("noticelist", dtos); //결과!
+	
 
 
 }		

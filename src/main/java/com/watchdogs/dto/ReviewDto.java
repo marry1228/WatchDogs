@@ -1,6 +1,5 @@
-package com.watchdogs.dto;
+package com.watchdogs.dto.he;
 
-import java.sql.Timestamp;
 
 public class ReviewDto { // 자바에서 Bean 역할. MVC 에서는 Dto : 불러오기 등 DB 값 가져올때 사용 (임시저장소)
 	
@@ -8,17 +7,17 @@ public class ReviewDto { // 자바에서 Bean 역할. MVC 에서는 Dto : 불러
 	
 	//변수이름과 DB 이름은 소문자로 _ 사용 말고!
 
-	int docid;
-	int docviews; //조회수 추가 (2021.05.18)
-	String user_userid;
-	String doctitle;
-	String doccontent;
-	Timestamp docdate;
-	String doctype;
+	int reid;
+	int rehit; //조회수 추가 (2021.05.18)
+	String userid;
+	String retitle;
+	String recontent;
+	String redate;
+	String redeldate;
 	
 	// 파일 이름 추가
-	String filename;
-	String filerealname;
+	String refilepath;
+	
 	
 	//-------------------------------------------Constructor
 
@@ -28,78 +27,36 @@ public class ReviewDto { // 자바에서 Bean 역할. MVC 에서는 Dto : 불러
 	
 	/*
 	 * 2021.05.17 권효은
-	 * userid 받아오기
+	 * userid 받아오기   -----> 아이디 불러올때 쓰려나?
 	 */
 	//id만 받아오는 것 (먼저 만들어 놓은것)
-	public ReviewDto(String user_userid) {
+	public ReviewDto(String userid) {
 		super();
-		this.user_userid = user_userid;
+		this.userid = userid;
 	}
 
 	
 	
+
 	/*
 	 * 2021.05.18 권효은
-	 * docid만 받아오기 : ReviewDocidCommand 로 불러오기
-	 */
-	public ReviewDto(int docid) {
-		super();
-		this.docid = docid;
-	}
-	
-
-	
-	/*
-	 *	2021.05.18 권효은
-	 * 	review detail  : 상세 페이지에 불러올 요소
-	 *  user_userid, title, content , date
-	 */
-	public ReviewDto(String user_userid, String doctitle, String doccontent, Timestamp docdate) {
-		super();
-		this.user_userid = user_userid;
-		this.doctitle = doctitle;
-		this.doccontent = doccontent;
-		this.docdate = docdate;
-	}
-	/*
 	 * 상세 페이지 불러오기 수정 더 불러옴 (위의 요소 변경) : docid, dochit 
-	 * 
+	 * 21.05.22 파일불러오기 추가 (filepath)
 	 */
 
-	public ReviewDto(int docid, String user_userid, int docviews, String doctitle, Timestamp docdate , String doccontent) {
+
+	public ReviewDto(int reid, String userid, int rehit, String retitle, String redate, String recontent, String refilepath) {
 		super();
-		this.docid = docid;
-		this.user_userid = user_userid;
-		this.docviews = docviews;
-		this.doctitle = doctitle;
-		this.docdate = docdate;
-		this.doccontent = doccontent;
-	}
-	
-	
-	
-	/*/
-	 *  2021.05.18 권효은
-	 *  리스트 불러올때 조회수를 위해 추가함
-	 */
-	
-	public ReviewDto(String user_userid, String doctitle, String doccontent, Timestamp docdate, int docviews) {
-		super();
-		this.user_userid = user_userid;
-		this.doctitle = doctitle;
-		this.doccontent = doccontent;
-		this.docdate = docdate;
-		this.docviews = docviews;
+		this.reid = reid;
+		this.rehit = rehit;
+		this.userid = userid;
+		this.retitle = retitle;
+		this.recontent = recontent;
+		this.redate = redate;
+		this.refilepath = refilepath;
 	}
 	
 
-	// ?? 수정..?
-	public ReviewDto(String doctitle, String doccontent, int docid) {
-		super();
-		this.doctitle = doctitle;
-		this.doccontent = doccontent;
-		this.docid = docid;
-	}
 	
 	
 	/*/
@@ -107,106 +64,107 @@ public class ReviewDto { // 자바에서 Bean 역할. MVC 에서는 Dto : 불러
 	 * 리스트 페이징 처리
 	 */
 	
-	public ReviewDto(int docid, String doctitle, String doccontent, Timestamp docdate, int docviews) {
+	public ReviewDto(int reid,  String retitle, String recontent, String redate, int rehit) {
 		super();
-		this.docid = docid;
-		this.docviews = docviews;
-		this.doctitle = doctitle;
-		this.doccontent = doccontent;
-		this.docdate = docdate;
+		this.reid = reid;
+		this.retitle = retitle;
+		this.recontent = recontent;
+		this.redate = redate;
+		this.rehit = rehit;
 	}
 	
-
 	
+	/*
+	 * 리스트 불러오기 
+	 * 
+	 */
+	
+	public ReviewDto(int reid, int rehit, String userid, String retitle, String recontent, String redate, String redeldate) {
+		super();
+		this.reid = reid;
+		this.rehit = rehit;
+		this.userid = userid;
+		this.retitle = retitle;
+		this.recontent = recontent;
+		this.redate = redate;
+		this.redeldate = redeldate;
+	}
+
+
 	
 	
 	//-------------------------------------------Getter & Setter
 	// Generate constructor using fields 사용; 오버로드
-	public int getDocid() {
-		return docid;
+	public int getReid() {
+		return reid;
 	}
 
 
 
-
-	public void setDocid(int docid) {
-		this.docid = docid;
+	public void setReid(int reid) {
+		this.reid = reid;
 	}
 
-	public String getUser_userid() {
-		return user_userid;
+	public int getRehit() {
+		return rehit;
 	}
 
-	public void setUser_userid(String user_userid) {
-		this.user_userid = user_userid;
+	public void setRehit(int rehit) {
+		this.rehit = rehit;
 	}
 
-	public String getDoctitle() {
-		return doctitle;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setDoctitle(String doctitle) {
-		this.doctitle = doctitle;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public String getDoccontent() {
-		return doccontent;
+	public String getRetitle() {
+		return retitle;
 	}
 
-	public void setDoccontent(String doccontent) {
-		this.doccontent = doccontent;
+	public void setRetitle(String retitle) {
+		this.retitle = retitle;
 	}
 
-	public Timestamp getDocdate() {
-		return docdate;
+	public String getRecontent() {
+		return recontent;
 	}
 
-	public void setDocdate(Timestamp docdate) {
-		this.docdate = docdate;
+	public void setRecontent(String recontent) {
+		this.recontent = recontent;
 	}
 
-	public String getDoctype() {
-		return doctype;
+	public String getRedate() {
+		return redate;
 	}
 
-	public void setDoctype(String doctype) {
-		this.doctype = doctype;
+	public void setRedate(String redate) {
+		this.redate = redate;
 	}
 
-	//조회수 추가
-	public int getDocviews() {
-		return docviews;
+	public String getRedeldate() {
+		return redeldate;
 	}
 
-	public void setDocviews(int docviews) {
-		this.docviews = docviews;
+	public void setRedeldate(String redeldate) {
+		this.redeldate = redeldate;
 	}
 
+	public String getRefilepath() {
+		return refilepath;
+	}
 
-
-	//05.20 파일 추가
-	public String getFilename() {
-		return filename;
-	}
-	
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-	
-	public String getFilerealname() {
-		return filerealname;
-	}
-	
-	public void setFilerealname(String filerealname) {
-		this.filerealname = filerealname;
+	public void setRefilepath(String refilepath) {
+		this.refilepath = refilepath;
 	}
 	
 
 	
 	
-	
-	
-	
+
 	
 	
 }//end

@@ -9,8 +9,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.watchdogs.dto.DtoDocument;
-import com.watchdogs.dto.DtoTrainer;
 import com.watchdogs.dto.DtoUser;
 
 public class DaoUser {
@@ -179,6 +177,32 @@ public class DaoUser {
 		}
 	}
 	
+	public void deletecancel(String userId) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			
+			String query = "update user set userdeldate = null where userid = ?";
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setString(1, userId);
+			
+			preparedStatement.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void insert(String userId, String userPw, String userTel, String userEmail, String userName, String adminID) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -210,5 +234,6 @@ public class DaoUser {
 		}
 		
 	}
+	
 	
 }

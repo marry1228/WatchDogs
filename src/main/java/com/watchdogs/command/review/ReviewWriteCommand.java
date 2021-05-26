@@ -9,12 +9,12 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.watchdogs.command.home.BCommand;
-import com.watchdogs.dao.ReviewDao;
-import com.watchdogs.dto.ReviewDto;
+import com.watchdogs.dao.he.ReviewDao;
+import com.watchdogs.dto.he.ReviewDto;
 
 public class ReviewWriteCommand implements BCommand {
 	
-	@Override 
+	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		//jsp에서 만든 request임
@@ -23,28 +23,6 @@ public class ReviewWriteCommand implements BCommand {
 		 * 게시판 작성 부분 메소드
 		 */
 		
-//		int docid = Integer.parseInt(request.getParameter("docid")) ;//게시글 번호 가져오기 인트로형변환.  기준
-//		System.out.println("ReviewWriteCommand 성공");
-//		String doctitle = request.getParameter("doctitle");
-//		String doccontent = request.getParameter("doccontent");
-		
-		
-		
-//		//05.20 파일 추가
-//		String filename = request.getParameter("filename");
-//		String filerealname = request.getParameter("filerealname");
-		
-//		ReviewDao dao = new ReviewDao();
-//		ReviewDto dto = dao.review_write(id, doctitle, doccontent);
-//		dao.reviewWrite(docid, doctitle, doccontent,filename, filerealname);
-//		dao.reviewWrite(docid, doctitle, doccontent);
-
-		
-//		request.setAttribute("review_write", dto);  // arraylist등 Dao에서 리턴값이 있을때 사용함
-
-		//new FileDao().upload(filename,filerealname);
-		// Dao에 있는 upload 메소드를 실행
-		
 		
 		
 		/*/
@@ -52,15 +30,12 @@ public class ReviewWriteCommand implements BCommand {
 		 */
 		//2021.05.19 권효은 파일 업로드 작업
 		//session 받기 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 	    // 파일이 저장되는 경로
-	    String path = request.getSession().getServletContext().getRealPath("fileFolder"); 
-//	    String path = "/Users/hehe/Documents/JSP/WatchDogs_Practice/src/main/webapp/resources/"; 
+	    String path = request.getSession().getServletContext().getRealPath("review"); 
 	    System.out.println(path);
 
-	   // String path = request.getRealPath("fileUpload");
-	   //String path = request.getRealPath("save");
-	  	
+
 	  	System.out.println("fileFolder 접근 완료");
 	  	
 	    int size = 1024 * 1024 * 10; // 업로드 할 최대 파일 크기 (몇 메가바이트까지인지)
@@ -72,10 +47,14 @@ public class ReviewWriteCommand implements BCommand {
 	        MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 			//실제 path, max size, defaulFileRenamePolicy : 오리지날파일 어떻게 하겠느냐 : 파일뒤에 1,2 3 붙음 (덮어씌우기 방지 )
 			//String doc
-	        String docid = multi.getParameter("docid") ;//게시글 번호 가져오기 인트로형변환.  기준
-			System.out.println("ReviewWriteCommand 성공");
-			String doctitle = multi.getParameter("doctitle");
-			String doccontent = multi.getParameter("doccontent");
+	        String reid = multi.getParameter("reid") ;//게시글 번호 가져오기 인트로형변환.  기준
+	        
+	        String userid = (String)session.getAttribute("userid");
+	        
+	        System.out.println("useridsmsdy 는요   "+ userid);
+			String retitle = multi.getParameter("retitle");
+			String recontent = multi.getParameter("recontent");
+			System.out.println("ReviewWriteCommand 불러오기 성공");
 			
 			ReviewDao dao = new ReviewDao();
 			//파일 이름 가져오기
@@ -87,7 +66,8 @@ public class ReviewWriteCommand implements BCommand {
 			session.setAttribute("filepath", file); // name을 session에 저장
 			
 			//dao로 정보 다 보내서 write실행
-			dao.reviewWrite(docid, doctitle, doccontent, file);
+			dao.reviewWrite(reid, userid, retitle, recontent, file);
+			
 
 	        
 	    } catch (Exception e) {

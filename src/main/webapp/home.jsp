@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	String userid = (String)session.getAttribute("userid");
+    	out.println("ID = " + userid);
+    %>
     
 <!doctype html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="imagetoolbar" content="no">
-<meta http-equiv="X-UA-Compatible" content="IE=10,chrome=1">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
 <title>WatchDogs</title>
 <link rel="stylesheet" href="http://dmshop.kr/theme/moon/css/default_shop.css?ver=12928">
@@ -48,17 +49,28 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
 
     <div id="tnb">
         <h3>메뉴</h3>
-        <ul>                    
-            <li><a href="login.wd"><b>로그인</b></a></li> 
+        <ul>    
+         	<%
+        		if(userid.equals("")){
+        	%>		
+        			<li><a href="login.jsp"><b>로그인</b></a></li>
+        	<%
+        		}else{
+        	%>	
+        			<li><a href="logout.jsp"><b>로그아웃</b></a></li>
+        	<%	
+        		}
+        	%>  
+            <li><a href="signup.wd"><b>회원가입</b></a></li>
             <!-- <li class="tnb_cart"><a href="http://dmshop.kr/shop/cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 참고용 장바구니?</a></li> -->
-            <li class="tnb_bookmark"><a href="home.wd" ><i class="fas fa-home"></i> HOME<span class="st_bg"></span></li>
+            <li class="tnb_bookmark"><a href="home.jsp" ><i class="fas fa-home"></i> HOME<span class="st_bg"></span></a></li>
 		</ul>
     </div>
 
       
     <div id="hd_wrapper">
         
-        <div id="logo"><a href="home.wd"><img src="images/logo.png" width="120px" height="80px" alt="WatchDogs"></a></div>
+        <div id="logo"><a href="home.wd"><img src="images/logo.png" width="150px" height="100px" alt="WatchDogs"></a></div>
 <!--         <div id="hd_sch">
             <h3>쇼핑몰 검색</h3>
             <form name="frmsearch1" action="http://dmshop.kr/shop/search.php" onsubmit="return search_submit(this);">
@@ -82,7 +94,7 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
             
             
         <nav class="nav">
-        <div id="gnb">
+        <div id="gnb" >
             <h2>사이트 카테고리</h2>
             <ul id="gnb_1dul">
          
@@ -97,9 +109,9 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
 			<li class="gnb_1dli" style="z-index:998">
 			    <a href="adoptpage.wd" class="gnb_1da gnb_1dam">입양</a>
 			    <div class="gnb_2dul gnb_2dli" style="z-index:998"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">입양</strong><ul>      
-			            <li><a href="" class="gnb_2da">목록1</a></li>
-			            <li><a href="" class="gnb_2da">목록2</a></li>
-			            <li><a href="" class="gnb_2da">목록3</a></li>
+			            <li><a href="adoptproceeding.wd" class="gnb_2da">입양 진행 중</a></li>
+			            <li><a href="adopt.wd" class="gnb_2da">입양 대기 중</a></li>
+			            <li><a href="adoptcomplete.wd" class="gnb_2da">입양 완료</a></li>
 			    </ul></div></div></li>
 			<li class="gnb_1dli" style="z-index:997">
 			    <a href="trainerlist.wd" class="gnb_1da gnb_1dam">훈련사 소개</a>
@@ -198,9 +210,7 @@ $(document).ready(function() {
 
 	<div id="container">
    		<br>
-		<!-- 임시!!!!! --> <a href="adoptproceeding.jsp">정평 테스트 화면!</a>
-
-
+   		
 	</div>
 
 </div>

@@ -11,10 +11,11 @@
     position: absolute;
 }
 .form-wrap {
-    width: 380px;
-    height: 550px;
+	top : 20px;
+	width: 380px;
+    height: 450px;
     position: relative;
-    margin: 6% auto;
+    margin: auto;
     background: #fff;
     padding: 5px;
     overflow: hidden;
@@ -34,6 +35,14 @@
     outline: none;
     position: relative;
 }
+.certibtn {
+	margin : 20px auto;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
 #btn {
     top: 0;
     left: 0;
@@ -44,8 +53,9 @@
     border-radius: 30px;
     transition: .5s;
 }
+
 .icon {
-    margin: 30px auto;
+    margin: 10px auto;
     text-align: center;
 }
 .social-icons img {
@@ -53,13 +63,21 @@
     cursor: pointer;
 }
 .input-group {
-    top: 180px;
+    top: 150px;
     position: absolute;
     width: 280px;
     transition: .5s;
 }
-.abc {
+.input-group2 {
+    top: 200px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+.lookup {
+	margin : 5px;
     color: gray;
+    font-family: "돋움", arial;
     font-size: 12px;
     text-align: center;
 }
@@ -72,29 +90,50 @@
     outline: none;
     background: transparent;
 }
+
+
 .submit {
     width: 85%;
     padding: 10px 30px;
     cursor: pointer;
     display: block;
-    margin: auto;
+    margin: 10px auto;
     background: linear-gradient(to right, rgb(245, 205, 5) , #ffad06);
     border: 0;
     outline: none;
     border-radius : 30px;
 }
+.email {
+	width: 10%;
+	font-weight: bold;
+}
 .checkbox {
     margin: 30px 10px 30px 0;
 }
+.Foot {
+	margin : 50px;
+	color : gray;
+	text-align: center;
+	font-size : 13px;
+	font-family: "돋움", arial;
+}
+.hide {
+	margin : 5px;
+	background-color: gray;
+}
+
 span {
     color: #777;
     font-size: 12px;
     bottom: 68px;
     position: absolute;
 }
-#login {
+#left {
     left: 50px;
-}
-#register {
+} 
+#right {
+    left: 450px;
+} 
+#right {
     left: 450px;
 } 
