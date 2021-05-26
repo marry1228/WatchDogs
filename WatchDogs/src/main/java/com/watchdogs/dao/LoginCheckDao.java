@@ -62,7 +62,7 @@ public class LoginCheckDao {
 				resultSet = preparedStatement.executeQuery();
 				
 				while(resultSet.next()) {
-					bPW = resultSet.getString("adpw"); 
+					bPW = resultSet.getString("adpw").trim(); 
 				}
 				
 				System.out.println("입력한 비밀번호 = " + inputPW +" 그리고 받은 비밀번호 = " + bPW );

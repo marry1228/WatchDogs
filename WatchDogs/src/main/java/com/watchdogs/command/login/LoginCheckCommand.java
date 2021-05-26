@@ -26,7 +26,7 @@ public class LoginCheckCommand implements BCommand {
 		LoginCheckDao bLCDao = new LoginCheckDao();
 		String result = bLCDao.logincheck(userId, userPw);		
 		
-		System.out.println("result = " + result);
+
 		HttpSession hSession = request.getSession(true); // session에 아이디 값 설정
 		hSession.setAttribute("result", result);
 	}

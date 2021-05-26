@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-        <%
-    	String lookupresult = (String)session.getAttribute("lookupresult");
-    %>   
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,10 +21,9 @@
                 
 <!--                 아이콘 구역 -->
                 <div class="icon">
-                    <a href="home.jsp"> <img src="images/logo.png" width="150px" height="100px" alt="WatchDogs"></a>
+                    <a href="home.jsp"><img src="images/logo.png" width="150px" height="100px" alt="WatchDogs"></a>
                 </div>
                 <br>
-                
  <!--                id찾기 폼-->
                 <form id="left" action="lookupidfunction.wd" class="input-group2" method="post">
                     <input type="text" name="username" class="input-field" placeholder="이름" required>
@@ -38,16 +34,7 @@
                 
  <!--                pw찾기 폼-->
                 <form id="right" class="input-group2" method="post">                
-                	<input type="text" id="userid" class="input-field" placeholder="아이디" required>  
-                	<br><br>
-                	<select name="language" >
-					    <option value="none">=== 선택 ===</option>
-					    <option value="korean" selected>한국어</option>
-					    <option value="english">영어</option>
-					    <option value="chinese">중국어</option>
-					    <option value="spanish">스페인어</option>
-					</select>              	 
-                	<input type="text" id="userpwquiz" class="input-field" placeholder="질문의 대답을 입력해 주세요." required>                	 
+                	<input type="text" id="userid" class="input-field" placeholder="아이디" required>                	 
                     <button class="submit">다음</button>  
                    
                 </form>
@@ -74,8 +61,11 @@
 	                z.style.left = "110px";
 	            }
 	            
-	            window.onload(alert('비밀번호는 <%=lookupresult%> 입니다.'));
+	            window.open(alert('일치하는 정보가 없습니다. 다시 입력해 주세요.'));
 	    </script>
     </body>
 </html> 
+
+
+
 

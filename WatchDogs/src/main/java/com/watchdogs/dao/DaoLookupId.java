@@ -45,10 +45,18 @@ public class DaoLookupId {
 			resultSet = preparedStatement.executeQuery(); // 쿼리문 실행
 			
 			while(resultSet.next()) {
-				searchedId = (resultSet.getString("userid"));
+				searchedId = (resultSet.getString("userid").trim());
 			}
 			
-			System.out.println("id = " + searchedId);
+			preparedStatement.close();
+			resultSet.close();
+			
+			if(searchedId.equals("")) {
+				searchedId = "";
+			}else { 
+				
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally { // 메모리에서 정리 

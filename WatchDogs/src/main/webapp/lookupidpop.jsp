@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	String lookupresult = (String)session.getAttribute("lookupresult");
+    %>    
+    
     
 <!DOCTYPE html>
 <html>
@@ -21,8 +25,9 @@
                 
 <!--                 아이콘 구역 -->
                 <div class="icon">
-                    <img src="images/logo.png" width="150px" height="100px" alt="WatchDogs">
+                    <a href="home.jsp"><img src="images/logo.png" width="150px" height="100px" alt="WatchDogs"></a>
                 </div>
+                <br>
                 
  <!--                id찾기 폼-->
                 <form id="left" action="lookupidfunction.wd" class="input-group2" method="post">
@@ -61,8 +66,7 @@
 	                z.style.left = "110px";
 	            }
 	            
-	            window.open("lookuppop.jsp","아이디 찾기 결과","width=400,height=300");
-
+	            window.onload(alert('아이디는 <%=lookupresult%> 입니다.'));
 	    </script>
     </body>
 </html> 

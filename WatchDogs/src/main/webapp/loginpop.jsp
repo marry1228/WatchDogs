@@ -6,11 +6,7 @@
         <title>로그인</title>
         <link rel="stylesheet" href="style.css">
     </head>
-<%--    <%
-    	String Id = "";
-		request.setAttribute("userid", Id);
-    	%> 
---%>
+
     
     <body>
         <div class="wrap">

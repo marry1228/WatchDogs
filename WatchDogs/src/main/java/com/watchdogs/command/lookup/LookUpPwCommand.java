@@ -2,8 +2,10 @@ package com.watchdogs.command.lookup;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.watchdogs.command.home.BCommand;
+import com.watchdogs.dao.DaoLookupPw;
 import com.watchdogs.dao.DaoTrainer;
 import com.watchdogs.dao.DaoUser;
 
@@ -12,14 +14,16 @@ public class LookUpPwCommand implements BCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		String userId = request.getParameter("userid");
-		String userPw = request.getParameter("userpw");
-		String userTel = request.getParameter("usertel");
-		String userEmail = request.getParameter("useremail");
-		String userName = request.getParameter("username");
+		String userid = request.getParameter("userid");
+		String userpwquiz = request.getParameter("userpwquiz");
+
+		DaoLookupPw daolookuppw = new DaoLookupPw();
+		String searchedPw = daolookuppw.lookuppw(userid, userpwquiz);
 		
-		DaoUser daoUser = new DaoUser();
-		//daoUser.insert(userId, userPw, userTel, userEmail, userName);
+		HttpSession hSession = request.getSession(true); // session에 아이디 값 설정
+		hSession.setAttribute("lookupresult", searchedPw);
+		
+
 	}
 
 }

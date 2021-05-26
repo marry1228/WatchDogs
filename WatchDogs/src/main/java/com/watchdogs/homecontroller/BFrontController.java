@@ -161,13 +161,34 @@ public class BFrontController extends HttpServlet {
 	      case("/lookupidfunction.wd"):  // 아이디 찾기 기능
 	    		command = new LookUpIdCommand();
 				command.execute(request, response);
-				viewPage ="lookupidpop.jsp";
+				
+				hsession = request.getSession(true);
+				String lookupresultid = (String)hsession.getAttribute("lookupresult");
+
+				if(lookupresultid.equals("")) { // 아이디 찾기 실패
+					viewPage ="lookupfail.jsp";
+				}else{ 	// 아이디 찾기 실패
+					hsession.setAttribute("lookupresult", lookupresultid);
+					viewPage ="lookupidpop.jsp";					
+				} 
 				break;
+				
 	      case("/lookuppwfunction.wd"):  // 비밀번호 찾기 기능
 	    	  	command = new LookUpPwCommand();
 	      		command.execute(request, response);
-	      		viewPage ="lookuppwpop.jsp";
-	      	break;
+	      		
+	      		hsession = request.getSession(true);
+				String lookupresultpw = (String)hsession.getAttribute("lookupresult");
+
+				if(lookupresultpw.equals("")) { // 비밀번호 찾기 성공
+					viewPage ="lookupfail.jsp";
+				}else{ 	// 비밀번호 찾기 실패
+					hsession.setAttribute("lookupresult", lookupresultpw);
+					viewPage ="lookuppwpop.jsp";
+					
+				} 
+				break;
+	    
 	      		
 	      		
 //			--로그인 기능 끝!	 

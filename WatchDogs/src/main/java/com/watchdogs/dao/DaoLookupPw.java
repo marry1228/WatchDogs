@@ -25,10 +25,8 @@ public class DaoLookupPw {
 		}
 	}
 	
-
-	
-	public DtoUser detail(String userId) {
-		DtoUser dto = null;
+	public String lookuppw(String userid, String userpwquiz) {
+		String searchedPw = "";
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -37,26 +35,30 @@ public class DaoLookupPw {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "select userid, userpw, usertel, useremail, username, userdate, userdeldate  from user where userid = ?"; // 속성명에 유의! 
+			String query = "select userpw from user where userid = ? and userpwquiz = ?"; 
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, userId);
-			resultSet = preparedStatement.executeQuery();
 			
-			if(resultSet.next()) {
-				String userid = resultSet.getString("userid"); // 속성 명에 유의! 
-				String userpw = resultSet.getString("userpw"); // 속성 명에 유의! 
-				String usertel = resultSet.getString("usertel"); // 속성 명에 유의! 
-				String useremail = resultSet.getString("useremail"); // 속성 명에 유의! 
-				String username = resultSet.getString("username"); // 속성 명에 유의! 
-				String userdate = resultSet.getString("userdate"); // 속성 명에 유의! 
-				String userdeldate = resultSet.getString("userdeldate"); // 속성 명에 유의! 
-				
-				System.out.println(" Id = " + userId); // 테스트 용
-				
-				dto = new DtoUser(userid, userpw, usertel, useremail, username, userdate, userdeldate);
+			preparedStatement.setString(1, userid);
+			preparedStatement.setString(2, userpwquiz);
+			
+			resultSet = preparedStatement.executeQuery(); // 쿼리문 실행
+
+			
+			while(resultSet.next()) {
+				searchedPw = (resultSet.getString("userpw").trim());
+			}
+
+			
+			preparedStatement.close();
+			resultSet.close();
+			
+			if(searchedPw.equals("")) {
+				searchedPw = "";
+			}else { 
 				
 			}
-			
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally { // 메모리에서 정리 
@@ -67,100 +69,8 @@ public class DaoLookupPw {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		return dto;
-		
-	}
-	
-	public void update(String userId, String userPw, String userTel, String userEmail, String userName, String userDate, String userDelDate ) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		
-		try {
-			connection = dataSource.getConnection();
-			
-			String query = "update user set userid = ?, userpw = ?, usertel = ?, useremail = ?, username = ?, userdate = ?, userdeldate = ? where userid = ?";
-			preparedStatement = connection.prepareStatement(query);
-			
-			preparedStatement.setString(1, userId);
-			preparedStatement.setString(2, userPw);
-			preparedStatement.setString(3, userTel);
-			preparedStatement.setString(4, userEmail);
-			preparedStatement.setString(5, userName);
-			preparedStatement.setString(6, userDate);
-			preparedStatement.setString(7, userDelDate);
-			preparedStatement.setString(8, userId);
-			
-			preparedStatement.executeUpdate();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(preparedStatement != null) preparedStatement.close();
-				if(connection != null) connection.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void delete(String userId) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		
-		try {
-			connection = dataSource.getConnection();
-			
-			String query = "update user set userdeldate = now() where userid = ?";
-			preparedStatement = connection.prepareStatement(query);
-			
-			preparedStatement.setString(1, userId);
-			
-			preparedStatement.executeUpdate();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(preparedStatement != null) preparedStatement.close();
-				if(connection != null) connection.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void insert(String userId, String userPw, String userTel, String userEmail, String userName) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		
-		try {
-			connection = dataSource.getConnection();
-			
-			System.out.println("2" + userId + userPw + userTel + userEmail + userName);
-			String query = "insert into user (userid, userpw, usertel, useremail, username, userdate) values (?,?,?,?,?,now())";
-			preparedStatement = connection.prepareStatement(query);
-			
-			preparedStatement.setString(1, userId);
-			preparedStatement.setString(2, userPw);
-			preparedStatement.setString(3, userTel);
-			preparedStatement.setString(4, userEmail);
-			preparedStatement.setString(5, userName);
-			
-			preparedStatement.executeUpdate();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(preparedStatement != null) preparedStatement.close();
-				if(connection != null) connection.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
+		}	
+		return searchedPw;
 	}
 	
 }

@@ -19,11 +19,12 @@
                     <button type="button" class="togglebtn" onclick="lookuppw()">pw 찾기</button>
                 </div>
                 
+                
 <!--                 아이콘 구역 -->
                 <div class="icon">
-                    <img src="images/logo.png" width="150px" height="100px" alt="WatchDogs">
+                    <a href="home.jsp"> <img src="images/logo.png" width="150px" height="100px" alt="WatchDogs"></a>
                 </div>
-                
+                <br>
  <!--                id찾기 폼-->
                 <form id="left" action="lookupidfunction.wd" class="input-group2" method="post">
                     <input type="text" name="username" class="input-field" placeholder="이름" required>
@@ -33,8 +34,16 @@
                 </form>               
                 
  <!--                pw찾기 폼-->
-                <form id="right" class="input-group2" method="post">                
-                	<input type="text" id="userid" class="input-field" placeholder="아이디" required>                	 
+                <form id="right" action="lookuppwfunction.wd" class="input-group2" method="post">                
+                	<input type="text" name="userid" class="input-field" placeholder="아이디" required> 
+                	<br><br> 
+                	<font size="2px"> 질문 : </font> <select name="language"  >
+					    <option value="none">===== 질문을 선택해 주세요 =====</option>
+					    <option value="quiz_shcool" selected>태어난 초등학교는?</option>
+					    <option value="quiz_singer">가장 좋아하는 가수는?</option>
+					    <option value="quiz_father">아버지의 이름은?</option>
+					</select>               	 
+                	<input type="text" name="userpwquiz" class="input-field" placeholder="질문의 대답을 입력해 주세요." required>                	 
                     <button class="submit">다음</button>  
                    
                 </form>
