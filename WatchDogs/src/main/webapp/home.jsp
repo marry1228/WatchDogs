@@ -127,7 +127,7 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
 			            <li><a href="reviewlist.wd" class="gnb_2da">후기</a></li>
 			    </ul></div></div></li>
 			<li class="gnb_1dli" style="z-index:995">
-			    <a href="admin.wd" class="gnb_1da gnb_1dam">마이 페이지 (임시 어드민)</a>
+			    <a href="longintypecheck.wd" class="gnb_1da gnb_1dam">마이 페이지 (임시 어드민)</a>
 			    <div class="gnb_2dul gnb_2dli" style="z-index:995"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">마이 페이지</strong><ul>        
 			            <li><a href="" class="gnb_2da">목록1</a></li>
 			            <li><a href="" class="gnb_2da">목록2</a></li>
