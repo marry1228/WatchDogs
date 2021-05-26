@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%
+    	String userid = (String)session.getAttribute("userid");
+    	String usertype = (String)session.getAttribute("usertype");
+%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,15 +45,18 @@
 		text-decoration:none
 	 } 
 	input:focus{
-		background-color:#FFCD28;
+		background-color: #f5af46;
 	}
-	#topline{
-		width: 700px; 
-		height: 50px; 
-		background-color: #8FBC8F; 
-		margin:0 auto; 
-		border-top:2px solid green;
-	}
+	#button{
+ 	margin:auto;
+ 	width: 100px;
+	background-color: #f5af46;
+	line-height:36px;
+ 	height: 36px;
+ 	text-align:center;
+ 	font-size:15px;
+	border-radius: 50px !important;
+}
 </style>
 <script>
 // 자바스크립트에서 사용하는 전역변수 선언
@@ -87,38 +93,28 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
 
     <div id="tnb">
         <h3>메뉴</h3>
-        <ul>                    
-            <li><a href="login.wd"><b>로그인</b></a></li>
-            <li><a href="signup.wd"><b>회원가입</b></a></li> 
+        <ul>    
+         	<%
+        		if(userid.equals("")){
+        	%>		
+        			<li><a href="login.jsp"><b>로그인</b></a></li>
+        	<%
+        		}else{
+        	%>	
+        			<li><a href="logout.jsp"><b>로그아웃</b></a></li>
+        	<%	
+        		}
+        	%>  
+            <li><a href="signup.wd"><b>회원가입</b></a></li>
             <!-- <li class="tnb_cart"><a href="http://dmshop.kr/shop/cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 참고용 장바구니?</a></li> -->
-            <li class="tnb_bookmark"><a href="home.wd" ><i class="fas fa-home"></i> HOME<span class="st_bg"></span></li>
+            <li class="tnb_bookmark"><a href="home.jsp" ><i class="fas fa-home"></i> HOME<span class="st_bg"></span></a></li>
 		</ul>
     </div>
 
       
     <div id="hd_wrapper">
         
-        <div id="logo"><a href="home.wd"><img src="images/logo.png" width="150px" height="100px" alt="WatchDogs"></a></div>
-<!--         <div id="hd_sch">
-            <h3>쇼핑몰 검색</h3>
-            <form name="frmsearch1" action="http://dmshop.kr/shop/search.php" onsubmit="return search_submit(this);">
-            <label for="sch_str" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-            <input type="text" placeholder="찾으시는 상품을 검색해주세요!" name="q" value="" id="sch_str" required>
-            <button type="submit"  id="sch_submit"><i class="fa fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
-            </form>
-            
-            <script>
-            function search_submit(f) {
-                if (f.q.value.length < 2) {
-                    alert("검색어는 두글자 이상 입력하십시오.");
-                    f.q.select();
-                    f.q.focus();
-                    return false;
-                }
-
-                return true;
-            }
-            </script> -->
+        <div id="logo"><a href="home.jsp"><img src="images/logo.png" width="150px" height="100px" alt="WatchDogs"></a></div>
             
             
         <nav class="nav">
@@ -128,26 +124,23 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
          
 			<li class="gnb_1dli" style="z-index:999">
 			    <a href="" class="gnb_1da gnb_1dam">소개</a>
-			    <div class="gnb_2dul gnb_2dli" style="z-index:999"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">소개</strong><ul>       
-			            <li><a href="" class="gnb_2da">목록1</a></li>
-			            <li><a href="" class="gnb_2da">목록2</a></li>
-			            <li><a href="" class="gnb_2da">목록3</a></li>
-			
-			    </ul></div></div></li>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:999"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">소개</strong>      
+			  </div></div></li>
+			  
 			<li class="gnb_1dli" style="z-index:998">
 			    <a href="adoptpage.wd" class="gnb_1da gnb_1dam">입양</a>
 			    <div class="gnb_2dul gnb_2dli" style="z-index:998"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">입양</strong><ul>      
 			            <li><a href="adoptproceeding.wd" class="gnb_2da">입양 진행 중</a></li>
 			            <li><a href="adopt.wd" class="gnb_2da">입양 대기 중</a></li>
 			            <li><a href="adoptcomplete.wd" class="gnb_2da">입양 완료</a></li>
+			            <li><a href="adopttraining.wd" class="gnb_2da">훈련중</a></li>
 			    </ul></div></div></li>
+			    
 			<li class="gnb_1dli" style="z-index:997">
 			    <a href="trainerlist.wd" class="gnb_1da gnb_1dam">훈련사 소개</a>
-			    <div class="gnb_2dul gnb_2dli" style="z-index:997"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">훈련사 소개</strong><ul>        
-			            <li><a href="" class="gnb_2da">목록1</a></li>
-			            <li><a href="" class="gnb_2da">목록2</a></li>
-			            <li><a href="" class="gnb_2da">목록3</a></li>
-			    </ul></div></div></li>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:997"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">훈련사 소개</strong>        
+			    </div></div></li>
+			    
 			<li class="gnb_1dli" style="z-index:996">
 			    <a href="notice.wd" class="gnb_1da gnb_1dam">게시판</a>
 			    <div class="gnb_2dul gnb_2dli" style="z-index:996"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">게시판</strong><ul>        
@@ -155,12 +148,9 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
 			            <li><a href="reviewlist.wd" class="gnb_2da">후기</a></li>
 			    </ul></div></div></li>
 			<li class="gnb_1dli" style="z-index:995">
-			    <a href="admin.wd" class="gnb_1da gnb_1dam">마이 페이지 (임시 어드민)</a>
-			    <div class="gnb_2dul gnb_2dli" style="z-index:995"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">마이 페이지</strong><ul>        
-			            <li><a href="" class="gnb_2da">목록1</a></li>
-			            <li><a href="" class="gnb_2da">목록2</a></li>
-			            <li><a href="" class="gnb_2da">목록3</a></li>
-			    </ul></div></div></li>
+			    <a href="longintypecheck.wd" class="gnb_1da gnb_1dam">마이 페이지</a>
+			    <div class="gnb_2dul gnb_2dli" style="z-index:995"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">마이 페이지</strong>      
+			</div></div></li>
 
             </ul>
         </div>
@@ -177,16 +167,15 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
 	
 	
 	<style>
-		#must_read{background-color: #FFB900; border-color: #ebccd1; text-align: center }
-		#must_read h3{color: #a94442; font-weight: 400; padding: 10px 0; }
+		#must_read{background-color: #fc6; border-color: #ebccd1; text-align: center }
+		#must_read h3{color: #a94442; font-weight: 400; padding: 20px 0; }
 		
 		.top_banner{width:1050px; margin:0 auto; margin-top:50px}
 		.top_banner td{}
 	</style>
 	
 	<section id="must_read">
-	    <h3>※ 강조할 <strong>알림</strong>, 또는 <strong>공지사항</strong> 이 있을 경우 사용할 공간.</h3>
-
+	    <h3> </h3>
 	</section>
 	
 	
@@ -239,22 +228,13 @@ $(document).ready(function() {
 	<div id="container">
    		<br>
 
-<%//임시 id 
-String userid = "userhehe"; 
-session.setAttribute("userid", userid);
 
-%>
-
-<!-- 줄 ---------------------------------------->	
-	<div id="topline"></div>
-<!-- 테이블시작 ---------------------------------------->
-<%--  			<input type="hidden" name="userid" value="${userid}">
- --%> 
-	 <table border="1" width="700">
+<!-- 테이블시작 ----------------------------------------> 
+	 <table border="1" width="600">
 		<form name="writeForm"  action="review_write.wd" method="post" enctype="multipart/form-data">
 			<thead>
 				<tr>
-					<th colspan="4" style="background-color: #FFCD28; text-align: center; font-size:18px;">후기글 작성</th>
+					<th colspan="4" style="background-color: #f5af46; text-align: center; font-size:18px;">후기글 작성</th>
 				</tr>
 			</thead>		
 			<tbody>
@@ -272,22 +252,21 @@ session.setAttribute("userid", userid);
 						<td>파일 첨부</td>
 						<td colspan="3"><input type="file" name="file"> 
 		 			</tr>
-		 			
+		
+		
 					<tr>
-				
-						<td colspan="4" style="text-align: right;"><a href = "reviewlist.wd">목록으로</a></td>
-					</tr>	
-					<tr>
-						<td colspan="4"><input type="button" style="background:#FFCD28; font-size:15px;"  
+						<td colspan="4"><input type="button" style="background: #f5af46; font-size:15px;"  
 								value="입력" onclick="check()">
 								<input type="reset"  value="다시입력">
 								
 					</tr>
+
 					
 					<!-- 입력이 안됐을때 첫 화면으로 돌아가게 하기 위해서 하이퍼 링크 달아주기 -->
 				</tbody>
 		</form>
-	</table>
+	</table><br>
+					<div id="button" onClick="location.href='reviewlist.wd'" style="cursor: pointer"><b>목록으로</b></div>
 	</div>
 
 </div>

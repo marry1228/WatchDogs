@@ -133,13 +133,19 @@ public class BFrontController extends HttpServlet {
 				HttpSession hsession = request.getSession(true);
 				String result = (String)hsession.getAttribute("result");
 
-				if(result.equals("success")) { // 로그인 성공 
+				if(result.equals("successUser")) { // 유저 로그인 성공 
 					hsession.setAttribute("userid", request.getParameter("userid"));
+					hsession.setAttribute("usertype", "user");
 					viewPage ="home.jsp";
-				}else { // 로그인 실패
+				}else if (result.equals("successAdmin")){ // 관리자 로그인 성공
+					hsession.setAttribute("userid", request.getParameter("userid"));
+					hsession.setAttribute("usertype", "admin");
+					viewPage ="home.jsp";
+				} else{// 로그인 실패
 					viewPage ="loginpop.jsp";
 				}
 				break;
+				
 	      case("/signup.wd"):  // 회원가입 화면
 	    	  viewPage ="signup.jsp";
 	      		break;
@@ -147,7 +153,8 @@ public class BFrontController extends HttpServlet {
 	    	  command = new SignUpCommand();
 			    command.execute(request, response);
 			    viewPage ="home.jsp";
-			    break;	    
+			    break;	
+
 	      case("/lookupidpw.wd"):  // 아이디,비밀번호 찾기 페이지
 	    	  	viewPage ="lookup.jsp";
 	      		break;
@@ -170,7 +177,7 @@ public class BFrontController extends HttpServlet {
 //			--메인 메뉴 리스트 시작!
 
 	      case("/adoptpage.wd"):  // 입양 페이지
-	    	  	viewPage ="adoptpage.jsp";
+	    	  	viewPage ="adopt.wd";
 	      		break;	      
 	      case("/trainerlist.wd"):  // 훈련사 리스트 페이지
 	    	  	command = new TrainerListOpenCommand();
@@ -178,8 +185,18 @@ public class BFrontController extends HttpServlet {
 	      		viewPage ="trainerList.jsp";
 	      		break;	      		
 	      case("/notice.wd"):  // 게시판 페이지
-	    	  viewPage ="nolist.jsp";
-	      break;	      
+	    	  viewPage ="noticelist.wd";
+	      break;	
+	      case("/userUpdateForUser.wd"):  // jy추가5/27
+              command = new UserUpdateCommand();
+            command.execute(request, response);
+            viewPage ="home.wd";
+            break;
+         case("/userOut.wd"):  // jy추가5/27
+              command = new UserDeleteCommand();
+              command.execute(request, response);
+              viewPage ="logout.jsp";
+              break;
 	     
 //				--메인 메뉴 리스트 끝!
 			
@@ -211,11 +228,18 @@ public class BFrontController extends HttpServlet {
 				command.execute(request, response);
 				viewPage = "reviewlist.wd";
 				break;	
-		  	case("/reviewdelete.wd"): // 후기 상세 페이지에서 삭제 눌러 삭제후 목록으로
+		  	case("/review_mdview.wd")://수정페이지 분할
+				command = new ReviewMdViewCommand();
+				command.execute(request, response);
+				viewPage = "review_mdview.jsp";
+				break;
+			case("/reviewdelete.wd"): // 후기 상세 페이지에서 삭제 눌러 삭제후 목록으로
 				command = new ReviewDeleteCommand();
 				command.execute(request, response);
 				viewPage = "reviewlist.wd";
-				break;	
+				break;
+		  	
+				
 		  	case("/noticelist.wd"): // 공지 목록 보기
 				   command = new NoticeListCommand();
 				   command.execute(request, response);
@@ -226,11 +250,7 @@ public class BFrontController extends HttpServlet {
 				command.execute(request, response);
 				viewPage = "notice_detailview.jsp";
 				break;
-		  	case("/review_mdview.wd")://수정페이지 분할
-				command = new ReviewMdViewCommand();
-				command.execute(request, response);
-				viewPage = "review_mdview.jsp";
-				break;
+
 				
 //				--게시판 페이지 끝!
 				

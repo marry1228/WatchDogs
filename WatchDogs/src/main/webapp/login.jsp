@@ -19,7 +19,7 @@
                 <div class="icon">
                    <a href="home.jsp"><img src="images/logo.png" width="150px" height="100px" alt="WatchDogs"></a>
                 </div>
-                <form id="left" action="logincheck.wd" class="input-group2">
+                <form id="left" action="logincheck.wd" class="input-group2" method="post">
                     <input type="text" name="userid" class="input-field" placeholder="아이디" required>
                     <input type="password" name="userpw" class="input-field" placeholder="비밀번호" required>
                     <input type="checkbox" class="checkbox"><span>아이디 기억하기</span>

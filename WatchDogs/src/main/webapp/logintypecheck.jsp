@@ -7,22 +7,25 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <%
 	
+	String userid = (String)session.getAttribute("userid");
+	String usertype = (String)session.getAttribute("usertype");
+	session.getAttribute("userid");
+	
+	out.println("ID = " + userid);
+	out.println("type = " + usertype);
 
-	String logintype = "admin";
-	/* String logintype = "user"; */
-	/* String logintype = "trainer"; */
-	/* ogintype = (String)session.getAttribute("logintype"); */
 
-	if(logintype.equals("admin")){
+	if(usertype.equals("admin")){
 		response.sendRedirect("adminpage.wd");
-	}else if(logintype.equals("trainer")){
+	}else if(usertype.equals("trainer")){
 		response.sendRedirect("trainerpage.wd");
-	}else if(logintype.equals("user")){
+	}else if(usertype.equals("user")){
 		response.sendRedirect("userpage.wd");
 	}else{
-		out.print(logintype);
+		
 	}
 	
 

@@ -2,6 +2,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    	String userid = (String)session.getAttribute("userid");
+    	String usertype = (String)session.getAttribute("usertype");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +49,17 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
     <div id="tnb">
         <h3>메뉴</h3>
         <ul>                    
-            <li><a href="login.wd"><b>로그인</b></a></li>
+            <%
+        		if(userid.equals("")){
+        	%>		
+        			<li><a href="login.jsp"><b>로그인</b></a></li>
+        	<%
+        		}else{
+        	%>	
+        			<li><a href="logout.jsp"><b>로그아웃</b></a></li>
+        	<%	
+        		}
+        	%> 
             <li><a href="signup.wd"><b>회원가입</b></a></li> 
             <!-- <li class="tnb_cart"><a href="http://dmshop.kr/shop/cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 참고용 장바구니?</a></li> -->
             <li class="tnb_bookmark"><a href="home.wd" ><i class="fas fa-home"></i> HOME<span class="st_bg"></span></li>
