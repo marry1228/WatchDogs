@@ -25,52 +25,7 @@ public class DaoLookupPw {
 		}
 	}
 	
-	public ArrayList<DtoUser> list() {
-		ArrayList<DtoUser> dtos = new ArrayList<DtoUser>();
-		
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		
-		try {
-			connection = dataSource.getConnection();
-			
-			String query = "select userid, userpw, usertel, useremail, username, userdate, userdeldate, admin_adid from user"; // 속성명에 유의! 
-			preparedStatement = connection.prepareStatement(query);
-			resultSet = preparedStatement.executeQuery();
-			
-			while(resultSet.next()) {
-				String userid = resultSet.getString("userid"); // 속성 명에 유의! 
-				String userpw = resultSet.getString("userpw"); // 속성 명에 유의! 
-				String usertel = resultSet.getString("usertel"); // 속성 명에 유의! 
-				String useremail = resultSet.getString("useremail"); // 속성 명에 유의! 
-				String username = resultSet.getString("username"); // 속성 명에 유의! 
-				String userdate = resultSet.getString("userdate"); // 속성 명에 유의! 
-				String userdeldate = resultSet.getString("userdeldate"); // 속성 명에 유의! 
-				String admin_adid = resultSet.getString("admin_adid"); // 속성 명에 유의! 
 
-				System.out.println(" Id = " + userid); // 테스트 용
-				
-				DtoUser dto = new DtoUser(userid, userpw, usertel, useremail, username, userdate, userdeldate, admin_adid);
-				dtos.add(dto);
-				
-				
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally { // 메모리에서 정리 
-			try {
-				if(resultSet != null) resultSet.close(); // resultset이 비어있지 않으면, 정리한다. 
-				if(preparedStatement != null) preparedStatement.close();
-				if(connection != null) connection.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return dtos;
-	
-	}
 	
 	public DtoUser detail(String userId) {
 		DtoUser dto = null;
@@ -82,7 +37,7 @@ public class DaoLookupPw {
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "select userid, userpw, usertel, useremail, username, userdate, userdeldate, admin_adid from user where userid = ?"; // 속성명에 유의! 
+			String query = "select userid, userpw, usertel, useremail, username, userdate, userdeldate  from user where userid = ?"; // 속성명에 유의! 
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, userId);
 			resultSet = preparedStatement.executeQuery();
@@ -95,11 +50,10 @@ public class DaoLookupPw {
 				String username = resultSet.getString("username"); // 속성 명에 유의! 
 				String userdate = resultSet.getString("userdate"); // 속성 명에 유의! 
 				String userdeldate = resultSet.getString("userdeldate"); // 속성 명에 유의! 
-				String admin_adid = resultSet.getString("admin_adid"); // 속성 명에 유의! 
 				
 				System.out.println(" Id = " + userId); // 테스트 용
 				
-				dto = new DtoUser(userid, userpw, usertel, useremail, username, userdate, userdeldate, admin_adid);
+				dto = new DtoUser(userid, userpw, usertel, useremail, username, userdate, userdeldate);
 				
 			}
 			
@@ -118,14 +72,14 @@ public class DaoLookupPw {
 		
 	}
 	
-	public void update(String userId, String userPw, String userTel, String userEmail, String userName, String userDate, String userDelDate, String adminID) {
+	public void update(String userId, String userPw, String userTel, String userEmail, String userName, String userDate, String userDelDate ) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		try {
 			connection = dataSource.getConnection();
 			
-			String query = "update user set userid = ?, userpw = ?, usertel = ?, useremail = ?, username = ?, userdate = ?, userdeldate = ?, admin_adid = ? where userid = ?";
+			String query = "update user set userid = ?, userpw = ?, usertel = ?, useremail = ?, username = ?, userdate = ?, userdeldate = ? where userid = ?";
 			preparedStatement = connection.prepareStatement(query);
 			
 			preparedStatement.setString(1, userId);
@@ -135,8 +89,7 @@ public class DaoLookupPw {
 			preparedStatement.setString(5, userName);
 			preparedStatement.setString(6, userDate);
 			preparedStatement.setString(7, userDelDate);
-			preparedStatement.setString(8, adminID);
-			preparedStatement.setString(9, userId);
+			preparedStatement.setString(8, userId);
 			
 			preparedStatement.executeUpdate();
 			
