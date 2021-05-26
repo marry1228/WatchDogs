@@ -10,15 +10,12 @@
  
 </head>
 <body>
+
 	<h3>메인 페이지 입니다!</h3>
-	<form action="">
-		<input type="hidden" name="userid" value="봄봄봄">
-		<input type="hidden" name="adid" value="admin">
 		
 		<a href="noticelist.wd">공지 보기!</a><br>
 		<a href="reviewlist.wd">후기 보기!</a> <br>
 		
-	</form>
 <!-- 	지도 맵 만들기 -->
  <div id="map" style="width:70%;height:350px;"></div>
 

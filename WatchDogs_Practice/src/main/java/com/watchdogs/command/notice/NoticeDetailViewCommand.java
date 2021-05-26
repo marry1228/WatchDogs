@@ -18,7 +18,6 @@ public class NoticeDetailViewCommand implements BCommand {
 		System.out.println("NoticeDetailViewCommand 성공");
 		
 		String noid = request.getParameter("noid");
-		String adid = request.getParameter("adid");
 		int tempnoid = Integer.parseInt(noid);
 		
 		NoticeDao dao = new NoticeDao();

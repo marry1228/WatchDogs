@@ -23,61 +23,78 @@
 		}
 		form.submit();
 	}
-	
 </script>
+
+<style>
+	table{
+		border="0";
+		backgound-color:#eeeeee;
+		ext-align: center;
+		margin:0 auto;
+	}
+	 th, td {
+		text-align: center;
+	}
+	a { 
+	text-decoration:none
+	 } 
+	input:focus{
+		background-color:orange;
+		color:white;
+	}
+</style>
 </head>
 <body>
+
 <%//임시 id 
 String userid = "userhehe"; 
 session.setAttribute("userid", userid);
 
 %>
-	
+
+<!-- 오렌지색 줄 ---------------------------------------->	
 	<div style="width: 700px; height: 50px; background-color: orange; margin:0 auto;"></div>
-	
-	 <table width="700" cellspacing="0" cellpadding="5" border="0" style="background-color: #eeeeee; text-align: center; margin:0 auto;">
+<!-- 테이블시작 ---------------------------------------->
+<%--  			<input type="hidden" name="userid" value="${userid}">
+ --%> 
+	 <table width="700" style="background-color: #eeeeee">
 		<form name="writeForm"  action="review_write.wd" method="post" enctype="multipart/form-data">
 			<thead>
 				<tr>
-					<th colspan="2" style="background-color: #FFEBCD; text-align: center;">후기글 작성</th>
+					<th colspan="4" style="background-color: #FFEBCD; text-align: center;">후기글 작성</th>
 				</tr>
-			</thead>
-
-<%--  			<input type="hidden" name="userid" value="${userid}">
- --%> 			
-
-			<tr>
-				<td>제목</td>
-				<td><input type="text" name="retitle" placeholder="제목을 입력해주세요" size="70"></td>
-			
-			</tr>
-
-			<tr> 
-				<td>내용</td>
-				<td><textarea rows="10" cols="70" name="recontent" placeholder="내용을 입력해주세요"></textarea></td>
-			
-			</tr>
-			<tr>
-				<td>파일 첨부 : </td>
-				<td><input type="file" name="file"> 
-				
- 			</tr>
-			<tr>
-				
-				<td colspan="2"><input type="button" style="color:#F5DEB3; background:#FFA500; font-size:1em; border-radius:4px;"  
-				value="입력" onclick="check()"></td>
-	
-			</tr>
-			<tr>
-			<!-- 입력이 안됐을때 첫 화면으로 돌아가게 하기 위해서 하이퍼 링크 달아주기 -->
-				<td><a href = "reviewlist.wd">목록으로</a></td>
-			</tr>	
+			</thead>		
+			<tbody>
+					<tr>
+						<td>제목</td>
+						<td colspan="3"><input type="text"  name="retitle" size="74" placeholder="제목을 입력해주세요" ></td>
+					</tr>
+		
+					<tr> 
+						<td>내용</td>
+						<td colspan="3"><textarea rows="10" cols="64" name="recontent" placeholder="내용을 입력해주세요"></textarea></td>
+					</tr>
+					
+					<tr>
+						<td>파일 첨부 : </td>
+						<td colspan="3"><input type="file" name="file"> 
+		 			</tr>
+		 			
+					<tr>
+						<td></td>
+						<td colspan="3"><input type="button" style="color:#F5DEB3; background:#FFA500; font-size:15px; border-radius:4px;"  
+								value="입력" onclick="check()"></td>
+					</tr>
+					
+					<!-- 입력이 안됐을때 첫 화면으로 돌아가게 하기 위해서 하이퍼 링크 달아주기 -->
+					<tr>
+						<td colspan="3"></td>
+						<td><a href = "reviewlist.wd">목록으로</a></td>
+					</tr>	
+				</tbody>
 		</form>
 	</table>
 		
-
-
-
 
 </body>
 </html>

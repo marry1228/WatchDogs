@@ -85,10 +85,10 @@ a { text-decoration:none }
 	<colgroup>
     	<col width="5%"/>
     	<col width="10%"/>
-    	<col width="18%"/>
-    	<col width="32%"/>
-    	<col width="15%"/>
-    	<col width="8%"/>
+    	<col width="25%"/>
+    	<col width="30%"/>
+    	<col width="20%"/>
+    	<col width="10%"/>
      </colgroup>
 		<thead class="thead-light">
 			<tr>
@@ -104,12 +104,12 @@ a { text-decoration:none }
 			<c:forEach items = "${reviewlist }" var="ReviewDto" >
 			<c:if test="${empty ReviewDto.redeldate }">
 				<tr>
-					<td>${ReviewDto.reid}</td>
-					<td>${ReviewDto.userid}</td>
+					<td style="cursor: not-allowed">${ReviewDto.reid}</td>
+					<td style="cursor: not-allowed">${ReviewDto.userid}</td>
 					<td><a href="reviewdetail.wd?reid=${ReviewDto.reid}" >${ReviewDto.retitle}</a></td>
 					<td><a href="reviewdetail.wd?reid=${ReviewDto.reid}" >${ReviewDto.recontent}</a></td>
-					<td>${ReviewDto.redate}</td>
-					<td>${ReviewDto.rehit}</td>
+					<td style="cursor: not-allowed">${ReviewDto.redate}</td>
+					<td style="cursor: not-allowed">${ReviewDto.rehit}</td>
 			
 				</tr>
 			</c:if>

@@ -84,12 +84,12 @@ public class BFrontController extends HttpServlet {
 		/*
 		 * 2021.05.17 권효은
 		 * 후기 작성화면으로 넘어가기
+		 * 입력 화면만 띄우면 됨 (DB 갈 필요 없음)  입력전에 빈화면 띄우기
 		 */
 				
 	       case("/review.wd"):	
 				viewPage = "review_write.jsp";
 				break;
-			//입력 화면만 띄우면 됨 (DB 갈 필요 없음)  입력전에 빈화면 띄우기
 		/*
 		 * 2021.05.17 권효은
 		 * 후기 작성페이지 : 작성 후 목록에 바로 추가되면서 목록 보여줌
@@ -103,7 +103,7 @@ public class BFrontController extends HttpServlet {
 		/*
 		 * 2021.05.18 권효은
 		 * review에 detail 데이터 불러오기 (후기 상세 페이지)
-		 * list에서 detail로 보낼때 docid 보냄 
+		 * list에서 detail로 보낼때 reid 보냄 
 		 */
 			case("/reviewdetail.wd"):
 				command = new ReviewDetailViewCommand();

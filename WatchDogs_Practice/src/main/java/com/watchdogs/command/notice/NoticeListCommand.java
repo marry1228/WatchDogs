@@ -42,7 +42,6 @@ public class NoticeListCommand implements BCommand {
 		 */
 		String searchCategory = request.getParameter("searchCategory");  //검색목록 콤보박스 값 받아오기
 		String searchWord = request.getParameter("searchWord"); //입력받은 단어 받아오기
-		//session.getAttribute("curpage"); //현재 페이지 받아오기?! --->처리 필요한가?
 		if(searchCategory == null || searchCategory.isEmpty()) {
 			searchCategory = "all"; 
 		}

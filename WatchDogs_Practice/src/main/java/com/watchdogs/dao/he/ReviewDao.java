@@ -193,8 +193,6 @@ public class ReviewDao {
 				String recontent = resultSet.getString(6);
 				String refilepath = resultSet.getString(7);
 				
-				//timpstamp : string으로 변경 함(review쪽 불러오기에서)
-				//dto = new ReviewDto(docId, user_userid, docviews, doctitle, docdate, doccontent,filepath);
 				dto = new ReviewDto(reId, userid, rehit, retitle, redate, recontent,refilepath);
 				System.out.println("reviewDetail 데이터 로드 성공");
 				

@@ -10,15 +10,23 @@
 <title>공지 목록</title>
 
 <style>
-	li{
+li{
 	display: table;
 	margin-left: auto;
 	margin-right: auto;
 	color: orange;
 	}
-	th, td {
+th, td {
 	  text-align: center;
 	}
+b{
+	background-color: orange;	
+}
+a { text-decoration:none } 
+
+body{
+	cursor: url(images/aBack.cur),auto !important;
+}
 </style>
 
 </head>
@@ -58,10 +66,10 @@
 	<colgroup>
     	<col width="5%"/>
     	<col width="10%"/>
-    	<col width="18%"/>
-    	<col width="32%"/>
-    	<col width="15%"/>
-    	<col width="8%"/>
+    	<col width="25%"/>
+    	<col width="30%"/>
+    	<col width="20%"/>
+    	<col width="10%"/>
     </colgroup>
 		<thead class="thead-light">
 			<tr>
@@ -74,16 +82,16 @@
 			</tr>
 		</thead>
 		<tbody>
+<!-- 리스트 값 넣기 ---------------------------------------->
 			<c:forEach items = "${noticelist }" var="noticeDto" >
 			<c:if test="${empty noticeDto.nodeldate}">
 				<tr>
-					<td>${noticeDto.noid}</td>
-					<td>${noticeDto.adid}</td>
-					<td><a href="noticedetail.wd?noid=${noticeDto.noid}" >${noticeDto.notitle}</a></td>
-					<td><a href="noticedetail.wd?noid=${noticeDto.noid}" >${noticeDto.nocontent}</a></td>
-					<td>${noticeDto.nodate}</td>
-					<td>${noticeDto.nohit}</td>
-			
+					<td style="cursor: not-allowed">${noticeDto.noid}</td>
+					<td style="cursor: not-allowed">${noticeDto.adid}</td>
+					<td ><a href="noticedetail.wd?noid=${noticeDto.noid}" >${noticeDto.notitle}</a></td>
+					<td ><a href="noticedetail.wd?noid=${noticeDto.noid}" >${noticeDto.nocontent}</a></td>
+					<td style="cursor: not-allowed">${noticeDto.nodate}</td>
+					<td style="cursor: not-allowed">${noticeDto.nohit}</td>
 				</tr>
 		    </c:if>
 			</c:forEach>
