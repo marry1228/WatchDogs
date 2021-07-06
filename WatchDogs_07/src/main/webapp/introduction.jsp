@@ -192,68 +192,7 @@ $(document).ready(function() {
    			<img src="images/introduction.png" width="70%" height="400px" alt="banner" align="middle">
    		
    		</div>	
-				
-		
-		<div class="contents3">
-			혹시, <br><br>
-			길가의 강아지<br><br>
-			그냥 지나친 적 없으신가요?
-		</div>
-		
-		<div class="contents4">
-   			<img src="images/newsis.jpg" width="250px" height="400px" alt="유기동물 현황_1" >
-    		<img src="images/DailyVET.png" width="600px" height="400px" alt="유기동물 현황_2">
-   		</div>
-   		
-   		<div class="contents3">
-   			반려동물을 소유물이라고 생각하고 버리거나 학대하는 일이<br><br>
-   			끊임 없이 벌어지고 있습니다. 
-   		</div>
-		
-		<div class="blank"></div>
-		
-		<div class="contents3">
-   			<img src="images/dogicon.png" width="50px" height="50px" alt="dog_icon" ><br>
-   			모두의 <b>관심</b>이 필요합니다.<br><br>
-   			
-   			반려견들이 더이상 상처를 받지 않고<br>
-   			<font color="#ffad06">새롭게 시작할 수 있도록</font> <br><br>
-   			
-   			<b>저희 <font color="#ffad06">Watch Dogs</font>가 함께 합니다.</b>
-   		</div>
-		
-		<div class="contents5">
-			<img src="images/curved_arrow.png" width="30px" height="30px" alt="dog_icon" > &nbsp; 찾아 오시는 길 <br>
-		</div>	
-		
-		<div class="contents5">
-			<div id="map" style="width:90%;height:350px;"></div>
-		</div>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9fc6bb27417d985e141201e29ea4be94&libraries=services"></script>
-		<script>
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = { 
-		        center: new kakao.maps.LatLng(37.50216, 127.02529), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };
-		
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		
-			// 마커가 표시될 위치입니다 
-			var markerPosition  = new kakao.maps.LatLng(37.50216, 127.02529); 
-		
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-			    position: markerPosition
-			});
-		
-			// 마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);
-		
-			// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-			// marker.setMap(null);
-		</script>
-		
+	
 		<div class="contents5">
 			<img src="images/phone.png" width="30px" height="30px" alt="dog_icon" > &nbsp; 연락처. &nbsp;&nbsp; 010-1234-5678
 			<br><br>

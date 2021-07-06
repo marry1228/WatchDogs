@@ -7,7 +7,7 @@
 %>
 <!DOCTYPE html>
 
-<%
+ <%
 
     int pageNum;     // 현재 클릭한 페이지 
     int pageCount ; // 총 페이지 수
@@ -21,13 +21,39 @@
      endPage = (int)session.getAttribute("endPage");
   
 %>
-
 <html>
 <head>
-<meta charset="UTF-8">
-<title>훈련 카테고리</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 뷰포트 -->
+<meta name="viewport" content="width=device-width" initial-scale="1">
+<title>입양 카테고리</title>
 <link rel="stylesheet" href="http://dmshop.kr/theme/moon/css/default_shop.css?ver=12928">
 <link rel="stylesheet" href="http://dmshop.kr/theme/moon/skin/shop/basic/style.css?ver=12928">
+ <link href="category.css" rel="stylesheet" type="text/css">
+ <link rel="stylesheet" href="css/bootstrap.css"> 
+ <style type="text/css"> a { text-decoration:none } 
+ table{
+	border-collapse: collapse;
+}
+
+th, td {
+	text-align: center;
+	padding: 10px;	
+
+}	
+
+.line{
+border-bottom:1px solid #eeeeee;
+}
+
+a { 
+text-decoration:none ;
+} 
+
+a:hover{
+	color:orange;
+}
+</style> 
 <script>
 // 자바스크립트에서 사용하는 전역변수 선언
 var g5_url       = "http://dmshop.kr";
@@ -197,23 +223,20 @@ $(document).ready(function() {
 
 	<div id="container">
    		<br>
-<h1>입양 훈련 중 카테고리</h1> 
-
-         <br>
+          <br>
  <nav> 
     <ul> 
-       <th><a href="adoptproceeding.wd" style="color: black">입양 진행</th>&nbsp;&nbsp;&nbsp;
-      <th><a href="adopt.wd" style="color: black">입양 가능</a></th> &nbsp;&nbsp;&nbsp;
-      <th><a href="adoptcomplete.wd" style="color: black">입양 완료</a></th>&nbsp;&nbsp;&nbsp;
-      <th><a href="adopttraining.wd" style="color: black">훈련 중</a></th>&nbsp;&nbsp;&nbsp;
+      <th><a href="adoptproceeding.wd" style="color: black ">입양 진행&nbsp;&nbsp;&nbsp;</a></th>
+      <th><a href="adopt.wd" style="color: black">입양 가능 &nbsp;&nbsp;&nbsp;</a></th>
+      <th><a href="adoptcomplete.wd" style="color: black; ">입양 완료&nbsp;&nbsp;&nbsp;</a></th>
+      <th><a href="adopttraining.wd" style="color: black; font-weight: bold">훈련 중&nbsp;&nbsp;&nbsp;</a></th>
     </ul>
-   </nav>
-  
+  </nav>
  
- <form action="adopttrainingSearch.wd">
+ <form action="adoptcompleteSearch.wd">
+   <br>
     <br>
-    <br>
-       <center><select name = "searchtype">
+         <center><select name = "searchtype">
             <option value = "dogmf">성별</option>
             <option value = "dogtype" selected = "dogtype">견종</option>
          </select>  
@@ -222,52 +245,54 @@ $(document).ready(function() {
          <input type="submit" value = "검색"></center>
          
          
-          <input type = "hidden" name = "dogadoptst" value="훈련중">
+          <input type = "hidden" name = "dogadoptst" value="입양완료">
          
-         <br>
+         
     <br>
     <br>
-    </form>    
-       <table border="1" border="1" style="text-align:center;" >
-          <colgroup>
-       <col width="5%"/>
-       <col width="10%"/>
-       <col width="25%"/>
-       <col width="30%"/>
-       <col width="20%"/>
-       <col width="10%"/>
-    </colgroup>
+    </form>     
+   
+
+
+       <table border="1" style="text-align:center;" >
+	     <colgroup>
+		       <col width="5%"/>
+		       <col width="10%"/>
+		       <col width="25%"/>
+		       <col width="30%"/>
+		       <col width="20%"/>
+		       <col width="10%"/>
+	    </colgroup>
         <tr>
-        <th scope="col">이름</th>
-           <th scope="col">성별</th>
-           <th scope="col">나이</th>
-           <th scope="col">견종</th>
-           <th scope="col">등록 날짜</th>
-           <th scope="col">상태</th>
-           <th scope="col">사진</th>
+        <th scope="col" style = "background-color:#eeeeee; text-align:center;">이름</th>
+        <th scope="col" style = "background-color:#eeeeee; text-align:center;">성별</th>
+        <th scope="col" style = "background-color:#eeeeee; text-align:center;">나이</th>
+        <th scope="col" style = "background-color:#eeeeee; text-align:center;">견종</th>
+        <th scope="col" style = "background-color:#eeeeee; text-align:center;">등록 날짜</th>
+        <th scope="col" style = "background-color:#eeeeee; text-align:center;">상태</th>
+        <th scope="col" style = "background-color:#eeeeee; text-align:center;">사진</th>
         </tr>
         <c:forEach items="${adopt}" var="dto">
         <tr>
-         <td><a href="adopttraining_02.wd?dogid=${dto.dogid}">${dto.dogname}</a></td>        
+         <td><a href="adoptcomplete_02.wd?dogid=${dto.dogid}">${dto.dogname}</a></td>        
            <td>${dto.dogmf} </td>
          <td>${dto.dogage} </td>
          <td>${dto.dogtype} </td>
          <td>${dto.dogdate} </td>
          <td>${dto.dogadopttst} </td>
-          <td><img width="300" height="200" src="dog/${dto.dogfilepath}"></td>
+         <td><img width="200" height="200" src="dog/${dto.dogfilepath}"></td>
          </tr>
          </c:forEach>
-        
-         </table>
-         <br>
-    
-  <%for(int i = startPage; i<=endPage; i++){ %>
+        </table>
+          <br>
+          <div style="text-align:center;">
+          <%for(int i = startPage; i<=endPage; i++){ %>
          
-         <a href="adopt.wd?pageNum=<%=i%>">[<%=i%>]</a>&nbsp;&nbsp;&nbsp;   
+         <a href="adoptcomplete.wd?pageNum=<%=i%>">[<%=i%>]</a>&nbsp;&nbsp;&nbsp;   
           
                             
            <% } %>
-
+        </div>
    </div>
 
 </div>
@@ -276,7 +301,6 @@ $(document).ready(function() {
 
 
 <!-- 하단 시작 { -->
-</div>
 
 
 <style>

@@ -173,7 +173,7 @@ $(document).ready(function() {
         });
     });
     </script>
-</div>
+
 
 
 	<!-- 중간 내용 시작 -->

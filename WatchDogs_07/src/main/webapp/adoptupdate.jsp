@@ -76,7 +76,7 @@ var g5_theme_shop_url = "http://dmshop.kr/theme/moon/shop";
             <ul id="gnb_1dul">
          
 			<li class="gnb_1dli" style="z-index:999">
-			    <a href="" class="gnb_1da gnb_1dam">소개</a>
+				<a href="home.wd" class="gnb_1da gnb_1dam">소개</a>
 			    <div class="gnb_2dul gnb_2dli" style="z-index:999"><div class="gnb_2dul_left"><strong class="gnb_2ul_tit">소개</strong>      
 			  </div></div></li>
 			  
